@@ -7,6 +7,10 @@
 		raycast
 		docker
 		colima
+		xcode-install
+		telegram-desktop
+		discord
+		tree-sitter
 	];
 
 	imports = [
@@ -15,6 +19,7 @@
 		./programs/git.nix
 		./programs/nvim.nix
 		./programs/alacritty.nix
+		./programs/go.nix
 	];
 
 	programs.home-manager.enable = true;
