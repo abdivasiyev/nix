@@ -2,7 +2,15 @@
 {
 	nixpkgs.config.allowUnfree = true;
 
-	nix.settings.experimental-features = "nix-command flakes";
+	nix = {
+		settings = {
+			experimental-features = "nix-command flakes";
+		};
+		gc = {
+			automatic = true;
+			options = "--delete-older-than 14d";
+		};
+	};
 
 	system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
 	system.stateVersion = 6;
@@ -31,5 +39,18 @@
 				};
 			};
 		};
+		"com.apple.finder" = {
+			ShowExternalHardDrivesOnDesktop = false;
+			ShowHardDrivesOnDesktop = false;
+			ShowMountedServersOnDesktop = false;
+			ShowRemovableMediaOnDesktop = false;
+			_FXSortFoldersFirst = true;
+			# When performing a search, search the current folder by default
+			FXDefaultSearchScope = "SCcf";
+		};
 	};
+
+	fonts.packages = with pkgs; [
+		nerd-fonts.jetbrains-mono
+	];
 }
