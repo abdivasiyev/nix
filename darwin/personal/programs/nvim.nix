@@ -43,6 +43,7 @@
 			coc-yaml
 			coc-lua
 			coc-sh
+			coc-rust-analyzer
 			{
 				plugin = pkgs.vimUtils.buildVimPlugin {
 					pname = "cyberdream.nvim";
