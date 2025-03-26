@@ -7,10 +7,11 @@
 		raycast
 		docker
 		colima
-		xcode-install
 		telegram-desktop
 		discord
 		tree-sitter
+		utm
+		libgccjit
 	];
 
 	imports = [

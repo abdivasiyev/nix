@@ -25,10 +25,14 @@
 			nvim-coverage
 			## debugging
 			nvim-dap
-			nvim-dap-ui
 			nvim-nio
 			nvim-dap-virtual-text
 			nvim-dap-go
+			{
+				plugin = nvim-dap-ui;
+				type = "lua";
+				config = builtins.readFile(../nvim/dap.lua);
+			}
 			{
 				plugin = neotest;
 				type = "lua";

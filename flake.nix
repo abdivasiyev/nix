@@ -8,9 +8,11 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+	nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
 
-  outputs = inputs@{ self, nix-darwin, home-manager, nixpkgs }:
+  outputs = inputs@{ self, nix-darwin, nix-homebrew, home-manager, nixpkgs }:
   {
 	  darwinConfigurations = {
 		  personal = nix-darwin.lib.darwinSystem {
@@ -23,6 +25,15 @@
 						useGlobalPkgs = true;
 						useUserPackages = true;
 						users.abdivasiyev = import ./darwin/personal/home.nix;
+					};
+				}
+				nix-homebrew.darwinModules.nix-homebrew
+				{
+					nix-homebrew = {
+						enable = true;
+						enableRosetta = true;
+						user = "abdivasiyev";
+						autoMigrate = true;
 					};
 				}
 			  ];

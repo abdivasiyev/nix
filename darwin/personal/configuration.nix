@@ -53,4 +53,12 @@
 	fonts.packages = with pkgs; [
 		nerd-fonts.jetbrains-mono
 	];
+
+	homebrew = {
+		enable = true;
+		casks = [
+			"whisky"
+			"obs"
+		];
+	};
 }
