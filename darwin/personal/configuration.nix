@@ -59,6 +59,7 @@
 		casks = [
 			"whisky"
 			"obs"
+			"ccleaner"
 		];
 	};
 }

@@ -12,6 +12,7 @@
 		tree-sitter
 		utm
 		libgccjit
+		ripgrep
 	];
 
 	imports = [
