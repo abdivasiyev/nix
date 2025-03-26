@@ -11,12 +11,12 @@
 			{
 				plugin = telescope-nvim;
 				type = "lua";
-				config = builtins.readFile(../nvim/telescope.lua);
+				config = builtins.readFile(../dotfiles/nvim/telescope.lua);
 			}
 			{
 				plugin = nvim-tree-lua;
 				type = "lua";
-				config = builtins.readFile(../nvim/nvim-tree.lua);
+				config = builtins.readFile(../dotfiles/nvim/nvim-tree.lua);
 			}
 			nvim-treesitter
 			neotest-golang
@@ -31,12 +31,12 @@
 			{
 				plugin = nvim-dap-ui;
 				type = "lua";
-				config = builtins.readFile(../nvim/dap.lua);
+				config = builtins.readFile(../dotfiles/nvim/dap.lua);
 			}
 			{
 				plugin = neotest;
 				type = "lua";
-				config = builtins.readFile(../nvim/neotest.lua);
+				config = builtins.readFile(../dotfiles/nvim/neotest.lua);
 			}
 			coc-clangd
 			coc-go
@@ -95,7 +95,7 @@
 				config = "require(\"which-key\").setup{}";
 			}
 		];
-		extraLuaConfig = builtins.readFile(../nvim/base-config.lua);
+		extraLuaConfig = builtins.readFile(../dotfiles/nvim/base-config.lua);
 
 		coc = {
 			enable = true;

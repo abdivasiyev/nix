@@ -5,6 +5,7 @@
 		settings = {
 			window = {
 				startup_mode = "Fullscreen";
+				option_as_alt = "Both";
 			};
 			font = {
 				normal.family = "JetBrainsMono Nerd Font";

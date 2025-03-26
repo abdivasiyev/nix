@@ -26,6 +26,12 @@
 		remapCapsLockToEscape = true;
 	};
 
+	system.defaults.dock = {
+		show-recents = false;
+		tilesize = 48;
+		magnification = true;
+	};
+
 	system.defaults.CustomUserPreferences = {
 		"com.apple.symbolichotkeys" = {
 			AppleSymbolicHotKeys = {
