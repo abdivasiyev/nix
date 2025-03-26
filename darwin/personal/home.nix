@@ -11,8 +11,8 @@
 		discord
 		tree-sitter
 		utm
-		libgccjit
 		ripgrep
+		rustup
 	];
 
 	imports = [
@@ -22,6 +22,9 @@
 		./programs/nvim.nix
 		./programs/alacritty.nix
 		./programs/go.nix
+		./programs/eza.nix
+		./programs/bat.nix
+		./programs/carapace.nix
 	];
 
 	programs.home-manager.enable = true;

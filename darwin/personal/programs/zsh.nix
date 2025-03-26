@@ -7,6 +7,7 @@
 		syntaxHighlighting.enable = true;
 		shellAliases = {
 			vp = "vi .";
+			cat = "bat";
 		};
 		oh-my-zsh = {
 			enable = true;
