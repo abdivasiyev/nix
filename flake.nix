@@ -34,6 +34,7 @@
 						enableRosetta = true;
 						user = "abdivasiyev";
 						autoMigrate = true;
+						enableZshIntegration = true;
 					};
 				}
 			  ];

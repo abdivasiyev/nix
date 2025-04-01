@@ -66,6 +66,8 @@
 			"whisky"
 			"obs"
 			"ccleaner"
+			"crystalfetch" # windows iso fetcher for mac
+			"android-studio"
 		];
 	};
 }
