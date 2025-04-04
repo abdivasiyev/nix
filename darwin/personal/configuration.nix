@@ -1,73 +1,48 @@
-{config, pkgs, inputs, lib, ...}:
 {
-	nixpkgs.config.allowUnfree = true;
+  config,
+  pkgs,
+  inputs,
+  outputs,
+  lib,
+  ...
+}: {
+  # Import your modules here
+  imports = [
+    # Abstraction from repos
+    inputs.nix-homebrew.darwinModules.nix-homebrew
+    inputs.home-manager.darwinModules.home-manager
 
-	nix = {
-		settings = {
-			experimental-features = "nix-command flakes";
-		};
-		gc = {
-			automatic = true;
-			options = "--delete-older-than 14d";
-		};
-	};
+    # Personal modules
+    outputs.darwinModules.brew
+    outputs.darwinModules.users
+    outputs.darwinModules.system
+  ];
 
-	system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
-	system.stateVersion = 6;
-	nixpkgs.hostPlatform = "aarch64-darwin";
+  nix = {
+    settings = {
+      experimental-features = "nix-command flakes";
+    };
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 14d";
+    };
+  };
 
-	system.activationScripts.postUserActivation.text = ''
-		# Following line should allow us to avoid a logout/login cycle
-		/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-	'';
+  # Allow not open source packages
+  # E.g: google-chrome, jetbrains
+  nixpkgs.config.allowUnfree = true;
 
-	system.keyboard = {
-		enableKeyMapping = true;
-		remapCapsLockToEscape = true;
-	};
+  fonts.packages = with pkgs; [
+    jetbrains-mono
+  ];
 
-	system.defaults.dock = {
-		show-recents = false;
-		tilesize = 48;
-		magnification = true;
-	};
+  # Nix-darwin doing some shenanigans for stability of options
+  system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
 
-	system.defaults.CustomUserPreferences = {
-		"com.apple.symbolichotkeys" = {
-			AppleSymbolicHotKeys = {
-				# Disable 'Cmd + Space' for Spotlight Search
-				"64" = {
-					enabled = false;
-				};
-				# Disable 'Cmd + Alt + Space' for Finder search window
-				"65" = {
-					enabled = false;
-				};
-			};
-		};
-		"com.apple.finder" = {
-			ShowExternalHardDrivesOnDesktop = false;
-			ShowHardDrivesOnDesktop = false;
-			ShowMountedServersOnDesktop = false;
-			ShowRemovableMediaOnDesktop = false;
-			_FXSortFoldersFirst = true;
-			# When performing a search, search the current folder by default
-			FXDefaultSearchScope = "SCcf";
-		};
-	};
+  # Nix-darwin related stuff
+  # Change when you're ready to upgrade nix-darwin version
+  system.stateVersion = 5;
 
-	fonts.packages = with pkgs; [
-		nerd-fonts.jetbrains-mono
-	];
-
-	homebrew = {
-		enable = true;
-		casks = [
-			"whisky"
-			"obs"
-			"ccleaner"
-			"crystalfetch" # windows iso fetcher for mac
-			"android-studio"
-		];
-	};
+  # Indicate for what platform nix should derive packages
+  nixpkgs.hostPlatform = "aarch64-darwin";
 }
