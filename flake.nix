@@ -40,7 +40,7 @@
     # For configurations
     outputs = self;
 
-    # Temporary forEach implementation
+    # Simple manual forEach
     # If you want something fancy:
     # https://github.com/orzklv/nix/blob/master/flake.nix#L83-L96
     systems = [

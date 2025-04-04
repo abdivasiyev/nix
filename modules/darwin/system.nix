@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   config = {
     system = {
       activationScripts.postUserActivation.text = ''

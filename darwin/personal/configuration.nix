@@ -1,9 +1,7 @@
 {
-  config,
   pkgs,
   inputs,
   outputs,
-  lib,
   ...
 }: {
   # Import your modules here

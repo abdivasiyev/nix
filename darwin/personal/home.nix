@@ -1,8 +1,6 @@
 {
-  config,
   outputs,
   pkgs,
-  lib,
   ...
 }: {
   home.packages = with pkgs; [

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   config = {
     nix-homebrew = {
       enable = true;
