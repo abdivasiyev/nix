@@ -55,7 +55,7 @@
             owner = "scottmckendry";
             repo = "cyberdream.nvim";
             rev = "main";
-            sha256 = "sha256-ty7F9v2fm6lUsn+QiL31PWm5w4VVr4rFgNOMjLxyoeY=";
+            sha256 = "sha256-nM4Sdi5Q/P5kf7e4JMEgibNw1F1QBU4pG5Fs6lgHjvg=";
           };
         };
         type = "lua";
