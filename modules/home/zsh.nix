@@ -7,6 +7,7 @@
     shellAliases = {
       vp = "vi .";
       cat = "bat";
+	  top = "btop";
     };
     oh-my-zsh = {
       enable = true;
