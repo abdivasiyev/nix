@@ -94,6 +94,11 @@
         type = "lua";
         config = "require(\"which-key\").setup{}";
       }
+      {
+        plugin = lualine-nvim;
+        type = "lua";
+        config = builtins.readFile ./nvim/lualine.lua;
+      }
     ];
     extraLuaConfig = builtins.readFile ./nvim/base-config.lua;
 

@@ -14,7 +14,7 @@
     utm
     ripgrep
     rustup
-	btop
+    btop
   ];
 
   # Modules

@@ -32,7 +32,7 @@
 
   fonts.packages = with pkgs; [
     jetbrains-mono
-	(nerdfonts.override {fonts = ["JetBrainsMono"];})
+    (nerdfonts.override {fonts = ["JetBrainsMono"];})
   ];
 
   # Nix-darwin doing some shenanigans for stability of options
