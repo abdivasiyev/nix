@@ -43,6 +43,7 @@
       coc-lua
       coc-sh
       coc-rust-analyzer
+      coc-json
       {
         plugin = pkgs.vimUtils.buildVimPlugin {
           pname = "cyberdream.nvim";
@@ -51,18 +52,18 @@
             owner = "scottmckendry";
             repo = "cyberdream.nvim";
             rev = "main";
-            sha256 = "sha256-nM4Sdi5Q/P5kf7e4JMEgibNw1F1QBU4pG5Fs6lgHjvg=";
+            sha256 = "sha256-02V+u6ZFWRfgEBlAAsRR7zfl/sgP2n6abCK0grVr+I8=";
           };
         };
         type = "lua";
         config = "vim.cmd.colorscheme \"cyberdream\"";
       }
       undotree
-      {
-        plugin = copilot-lua;
-        type = "lua";
-        config = "require(\"copilot\").setup{}";
-      }
+      # {
+      #   plugin = copilot-lua;
+      #   type = "lua";
+      #   config = "require(\"copilot\").setup{}";
+      # }
       vim-wakatime
       vim-fugitive
       vim-visual-multi
@@ -104,6 +105,26 @@
 
     coc = {
       enable = true;
+      settings = {
+        "suggest.noselect" = true;
+        "suggest.enablePreview" = true;
+        "suggest.enablePreselect" = false;
+        "suggest.disableKind" = true;
+        languageserver = {
+          haskell = {
+            command = "haskell-language-server-wrapper";
+            args = ["--lsp"];
+            rootPatterns = [
+              "*.cabal"
+              "stack.yaml"
+              "cabal.project"
+              "package.yaml"
+              "hie.yaml"
+            ];
+            filetypes = ["haskell" "lhaskell"];
+          };
+        };
+      };
     };
   };
 }

@@ -5,7 +5,6 @@
 }: {
   home.packages = with pkgs; [
     jetbrains.datagrip
-    raycast
     docker
     colima
     telegram-desktop
@@ -15,6 +14,9 @@
     ripgrep
     rustup
     btop
+    ghc
+    haskellPackages.haskell-language-server
+    postman
   ];
 
   # Modules
@@ -35,5 +37,5 @@
 
   # Shift when nixpkgs and nix-darwin shifts
   # But be prepared to update lotta configs
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 }

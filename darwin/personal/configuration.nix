@@ -31,8 +31,7 @@
   nixpkgs.config.allowUnfree = true;
 
   fonts.packages = with pkgs; [
-    jetbrains-mono
-    (nerdfonts.override {fonts = ["JetBrainsMono"];})
+    nerd-fonts.jetbrains-mono
   ];
 
   # Nix-darwin doing some shenanigans for stability of options
