@@ -16,6 +16,7 @@
         "ccleaner"
         "crystalfetch" # windows iso fetcher for mac
         "android-studio"
+		"telegram"
       ];
     };
   };

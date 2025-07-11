@@ -5,6 +5,7 @@
 }: {
   home.packages = with pkgs; [
     jetbrains.datagrip
+	raycast
     docker
     colima
     telegram-desktop

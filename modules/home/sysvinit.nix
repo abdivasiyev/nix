@@ -1,0 +1,5 @@
+{...}: {
+  programs.sysvinit = {
+    enable = true;
+  };
+}
