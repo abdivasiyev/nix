@@ -11,12 +11,6 @@
     homebrew = {
       enable = true;
       casks = [
-        "whisky"
-        "obs"
-        "ccleaner"
-        "crystalfetch" # windows iso fetcher for mac
-        "android-studio"
-		"telegram"
       ];
     };
   };

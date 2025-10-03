@@ -5,7 +5,6 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
-      vp = "vi .";
       cat = "bat";
       top = "btop";
     };

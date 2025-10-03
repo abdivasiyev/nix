@@ -5,13 +5,11 @@
 # https://nix-community.github.io/home-manager/options.xhtml
 {
   # List your module files here
-  alacritty = import ./alacritty.nix;
   bat = import ./bat.nix;
-  carapace = import ./carapace.nix;
   eza = import ./eza.nix;
   git = import ./git.nix;
   go = import ./go.nix;
-  nvim = import ./nvim;
   tmux = import ./tmux;
   zsh = import ./zsh.nix;
+  kitty = import ./kitty.nix;
 }

@@ -1,23 +1,16 @@
 {
+  lib,
   outputs,
   pkgs,
   ...
 }: {
   home.packages = with pkgs; [
-    jetbrains.datagrip
-	raycast
     docker
     colima
     telegram-desktop
-    discord
-    tree-sitter
-    utm
-    ripgrep
-    rustup
     btop
-    ghc
-    haskellPackages.haskell-language-server
     postman
+    vscode
   ];
 
   # Modules
@@ -25,13 +18,19 @@
     outputs.homeModules.tmux
     outputs.homeModules.zsh
     outputs.homeModules.git
-    outputs.homeModules.nvim
-    outputs.homeModules.alacritty
+    outputs.homeModules.kitty
     outputs.homeModules.go
     outputs.homeModules.eza
     outputs.homeModules.bat
-    outputs.homeModules.carapace
   ];
+
+  # Link .app bundles into ~/Applications/Nix-Apps
+  home.activation.linkApps = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    mkdir -p ~/Applications/Nix-Apps
+    for app in $HOME/.nix-profile/Applications/*.app; do
+      ln -sf "$app" ~/Applications/Nix-Apps/
+    done
+  '';
 
   # Self installation of home-manager
   programs.home-manager.enable = true;
