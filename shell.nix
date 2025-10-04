@@ -32,9 +32,9 @@ pkgs.stdenv.mkDerivation {
     alejandra
   ];
 
-  shellHook = ''
-    zsh
-  '';
+  # shellHook = ''
+  #   zsh
+  # '';
 
   NIX_CONFIG = "extra-experimental-features = nix-command flakes";
 }

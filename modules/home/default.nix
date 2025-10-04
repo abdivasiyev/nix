@@ -13,4 +13,5 @@
   zsh = import ./zsh.nix;
   kitty = import ./kitty.nix;
   secret = import ./secret.nix;
+  vscode = import ./vscode.nix;
 }

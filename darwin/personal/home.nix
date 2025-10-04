@@ -28,6 +28,7 @@
     outputs.homeModules.eza
     outputs.homeModules.bat
     outputs.homeModules.secret
+    outputs.homeModules.vscode
   ];
 
   sops.secrets = {
@@ -58,7 +59,7 @@
   };
 
   # Install vpn configurations
-  home.activation.importSstpConfigOnce = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.importSstpConfigOnce = lib.hm.dag.entryAfter ["writeBoundary"] ''
     if [ ! -f "${config.home.homeDirectory}/.config/first_runs/.sstp_done" ]; then
       /usr/bin/open -a "SSTP Connect" "${config.home.homeDirectory}/.config/sstp/mobi.vpn"
       mkdir -p "${config.home.homeDirectory}/.config/first_runs"
