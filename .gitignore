@@ -1,0 +1,28 @@
+# Nix build results
+/result
+/result-*
+
+# Nix shell GC roots
+/nix-shell.*
+
+# direnv / lorri
+.direnv/
+.envrc
+.envrc.*
+
+# macOS junk
+.DS_Store
+
+# Editors
+*.swp
+*.swo
+.idea/
+.vscode/
+*.iml
+
+# Logs
+*.log
+
+# Cache / tmp
+.cache/
+tmp/

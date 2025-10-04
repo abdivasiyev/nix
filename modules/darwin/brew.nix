@@ -12,6 +12,12 @@
       enable = true;
       casks = [
       ];
+      brews = [
+        "mas"
+      ];
+      masApps = {
+        "SSTP Connect" = 1543667909;
+      };
     };
   };
 }

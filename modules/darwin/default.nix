@@ -8,4 +8,5 @@
   users = import ./users.nix;
   brew = import ./brew.nix;
   system = import ./system.nix;
+  secret = import ./secret.nix;
 }

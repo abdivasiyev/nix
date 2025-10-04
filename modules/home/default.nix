@@ -12,4 +12,5 @@
   tmux = import ./tmux;
   zsh = import ./zsh.nix;
   kitty = import ./kitty.nix;
+  secret = import ./secret.nix;
 }

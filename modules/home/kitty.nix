@@ -9,6 +9,6 @@
       name = "JetBrains Mono";
       size = 15;
     };
-    themeFile = "gruvbox_dark";
+    themeFile = "gruvbox-dark";
   };
 }

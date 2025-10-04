@@ -14,6 +14,7 @@
     outputs.darwinModules.brew
     outputs.darwinModules.users
     outputs.darwinModules.system
+    outputs.darwinModules.secret
   ];
 
   nix = {

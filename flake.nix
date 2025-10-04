@@ -4,9 +4,6 @@
   inputs = {
     # If your configurations are only for darwin system
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
-    # if not
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    # nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
 
     # Nix Darwin
     # Keep version same as your nixpkgs as much as possible
@@ -28,12 +25,19 @@
 
     # Collection of fancy nix stuff
     # flake-utils.url = "github:numtide/flake-utils";
+
+    # Sops encryption manager
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     nix-darwin,
     nixpkgs,
+    sops-nix,
     ...
   } @ inputs: let
     # Self reference

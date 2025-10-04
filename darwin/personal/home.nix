@@ -1,6 +1,7 @@
 {
   lib,
   outputs,
+  config,
   pkgs,
   ...
 }: {
@@ -11,6 +12,10 @@
     btop
     postman
     vscode
+    age
+    sops
+    kubectl
+    awscli2
   ];
 
   # Modules
@@ -22,7 +27,44 @@
     outputs.homeModules.go
     outputs.homeModules.eza
     outputs.homeModules.bat
+    outputs.homeModules.secret
   ];
+
+  sops.secrets = {
+    kubeconfig = {
+      sopsFile = ../../secrets/secrets.yaml;
+      format = "yaml";
+      path = "${config.home.homeDirectory}/.kube/config";
+      mode = "0400";
+    };
+    awsConfig = {
+      sopsFile = ../../secrets/secrets.yaml;
+      format = "yaml";
+      path = "${config.home.homeDirectory}/.aws/config";
+      mode = "0400";
+    };
+    awsCredentials = {
+      sopsFile = ../../secrets/secrets.yaml;
+      format = "yaml";
+      path = "${config.home.homeDirectory}/.aws/credentials";
+      mode = "0400";
+    };
+    mobiVpn = {
+      sopsFile = ../../secrets/secrets.yaml;
+      format = "yaml";
+      path = "${config.home.homeDirectory}/.config/sstp/mobi.vpn";
+      mode = "0400";
+    };
+  };
+
+  # Install vpn configurations
+  home.activation.importSstpConfigOnce = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    if [ ! -f "${config.home.homeDirectory}/.config/first_runs/.sstp_done" ]; then
+      /usr/bin/open -a "SSTP Connect" "${config.home.homeDirectory}/.config/sstp/mobi.vpn"
+      mkdir -p "${config.home.homeDirectory}/.config/first_runs"
+      touch "${config.home.homeDirectory}/.config/first_runs/.sstp_done"
+    fi
+  '';
 
   # Link .app bundles into ~/Applications/Nix-Apps
   home.activation.linkApps = lib.hm.dag.entryAfter ["writeBoundary"] ''

@@ -27,3 +27,9 @@ sudo darwin-rebuild switch --flake .#personal
 ```bash
 sudo darwin-rebuild check --flake .#personal
 ```
+
+# Add new secret into secrets.yaml
+
+```bash
+EDITOR=vim SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops --age -e secrets/secrets.yaml
+```
