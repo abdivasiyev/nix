@@ -29,6 +29,7 @@
     outputs.homeModules.bat
     outputs.homeModules.secret
     outputs.homeModules.vscode
+    outputs.homeModules.nvim
   ];
 
   sops.secrets = {
@@ -56,14 +57,29 @@
       path = "${config.home.homeDirectory}/.config/sstp/mobi.vpn";
       mode = "0400";
     };
+    mobiTunnelblick = {
+      sopsFile = ../../secrets/secrets.yaml;
+      format = "yaml";
+      path = "${config.home.homeDirectory}/.config/tunnelblick/mobi.ovpn";
+      mode = "0400";
+    };
   };
 
   # Install vpn configurations
   home.activation.importSstpConfigOnce = lib.hm.dag.entryAfter ["writeBoundary"] ''
     if [ ! -f "${config.home.homeDirectory}/.config/first_runs/.sstp_done" ]; then
-      /usr/bin/open -a "SSTP Connect" "${config.home.homeDirectory}/.config/sstp/mobi.vpn"
       mkdir -p "${config.home.homeDirectory}/.config/first_runs"
       touch "${config.home.homeDirectory}/.config/first_runs/.sstp_done"
+      /usr/bin/open -a "SSTP Connect" "${config.home.homeDirectory}/.config/sstp/mobi.vpn"
+    fi
+  '';
+
+  home.activation.importTunnelblickConfigOnce = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    if [ ! -f "${config.home.homeDirectory}/.config/first_runs/.tunnelblick_done" ]; then
+      /usr/bin/open -a "Tunnelblick" "${config.home.homeDirectory}/.config/tunnelblick/mobi.ovpn"
+      mkdir -p "${config.home.homeDirectory}/.config/first_runs"
+      touch "${config.home.homeDirectory}/.config/first_runs/.tunnelblick_done"
+      /usr/bin/open -a "Tunnelblick" "${config.home.homeDirectory}/.config/tunnelblick/mobi.ovpn"
     fi
   '';
 

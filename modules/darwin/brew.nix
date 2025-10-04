@@ -11,6 +11,9 @@
     homebrew = {
       enable = true;
       casks = [
+        "tunnelblick"
+        "jetbrains-toolbox"
+        "lens"
       ];
       brews = [
         "mas"

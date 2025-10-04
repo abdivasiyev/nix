@@ -11,8 +11,9 @@
             eamodio.gitlens
             pkief.material-icon-theme
             jnoortheen.nix-ide
+            asvetliakov.vscode-neovim
           ]
-          ++ pkgs.vscode-utils. extensionsFromVscodeMarketplace [
+          ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           ];
 
         userSettings = {
