@@ -16,6 +16,8 @@
     sops
     kubectl
     awscli2
+    inetutils
+    jq
   ];
 
   # Modules
@@ -62,6 +64,12 @@
       format = "yaml";
       path = "${config.home.homeDirectory}/.config/tunnelblick/mobi.ovpn";
       mode = "0400";
+    };
+    sshPrivateKey = {
+      sopsFile = ../../secrets/secrets.yaml;
+      format = "yaml";
+      path = "${config.home.homeDirectory}/.ssh/id_ed25519";
+      mode = "0600";
     };
   };
 

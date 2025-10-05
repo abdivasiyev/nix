@@ -14,5 +14,5 @@
   kitty = import ./kitty.nix;
   secret = import ./secret.nix;
   vscode = import ./vscode.nix;
-  nvim = import ./nvim.nix;
+  nvim = import ./nvim;
 }
