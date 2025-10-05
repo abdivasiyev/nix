@@ -29,7 +29,7 @@
             serverSettings = {
               "nixd" = {
                 "formatting" = {
-                  "command" = ["alejandra" "--stdin"];
+                  "command" = ["alejandra"];
                 };
               };
             };

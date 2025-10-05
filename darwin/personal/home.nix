@@ -1,23 +1,25 @@
 {
+  pkgs,
   lib,
   outputs,
   config,
-  pkgs,
   ...
 }: {
   home.packages = with pkgs; [
-    docker
-    colima
-    telegram-desktop
-    btop
-    postman
-    vscode
-    age
-    sops
-    kubectl
-    awscli2
-    inetutils
-    jq
+      docker
+      colima
+      telegram-desktop
+      btop
+      postman
+      vscode
+      age
+      sops
+      kubectl
+      awscli2
+      inetutils
+      jq
+      go
+      gopls
   ];
 
   # Modules
@@ -26,7 +28,6 @@
     outputs.homeModules.zsh
     outputs.homeModules.git
     outputs.homeModules.kitty
-    outputs.homeModules.go
     outputs.homeModules.eza
     outputs.homeModules.bat
     outputs.homeModules.secret

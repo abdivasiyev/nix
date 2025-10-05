@@ -8,7 +8,6 @@
   bat = import ./bat.nix;
   eza = import ./eza.nix;
   git = import ./git.nix;
-  go = import ./go.nix;
   tmux = import ./tmux;
   zsh = import ./zsh.nix;
   kitty = import ./kitty.nix;
