@@ -28,7 +28,7 @@
         "docker"
         "docker-compose"
       ];
-      theme = "robbyrussell";
+      theme = "lambda";
     };
   };
 }

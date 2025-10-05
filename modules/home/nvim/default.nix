@@ -20,6 +20,17 @@
           };
         };
         languageserver = {
+          haskell = {
+            command = "haskell-language-server-wrapper";
+            args = ["--lsp"];
+            rootPatterns = ["*.cabal" "stack.yaml" "cabal.project" "package.yaml" "hie.yaml"];
+            filetypes = ["haskell" "lhaskell"];
+            settings = {
+              haskell = {
+                formattingProvider = "fourmolu";
+              };
+            };
+          };
           gopls = {
             command = "gopls";
             filetypes = ["go"];
@@ -57,7 +68,7 @@
                 usePlaceholders = true;
                 completeUnimported = true;
                 staticcheck = true;
-                directoryFilters = [ "-.git" "-.vscode" "-.idea" "-.vscode-test" "-node_modules" ];
+                directoryFilters = ["-.git" "-.vscode" "-.idea" "-.vscode-test" "-node_modules"];
                 semanticTokens = true;
               };
             };
@@ -79,6 +90,34 @@
       };
     };
     plugins = with pkgs.vimPlugins; [
+      nvim-web-devicons
+      undotree
+      vim-visual-multi
+      vim-fugitive
+      vim-wakatime
+      coc-sumneko-lua
+      coc-yaml
+      coc-json
+      {
+        type = "lua";
+        plugin = gitsigns-nvim;
+        config = builtins.readFile ./lua/gitsigns.lua;
+      }
+      {
+        type = "lua";
+        plugin = nvim-ufo;
+        config = builtins.readFile ./lua/nvim-ufo.lua;
+      }
+      {
+        type = "lua";
+        plugin = telescope-nvim;
+        config = builtins.readFile ./lua/telescope.lua;
+      }
+      {
+        type = "lua";
+        plugin = nvim-tree-lua;
+        config = builtins.readFile ./lua/nvim-tree.lua;
+      }
       {
         type = "lua";
         plugin = gruvbox-material-nvim;

@@ -4,22 +4,29 @@
   outputs,
   config,
   ...
-}: {
+}: let
+  hpkgs = pkgs.haskell.packages."ghc910";
+in {
   home.packages = with pkgs; [
-      docker
-      colima
-      telegram-desktop
-      btop
-      postman
-      vscode
-      age
-      sops
-      kubectl
-      awscli2
-      inetutils
-      jq
-      go
-      gopls
+    docker
+    colima
+    telegram-desktop
+    btop
+    postman
+    vscode
+    age
+    sops
+    kubectl
+    awscli2
+    inetutils
+    jq
+    go
+    gopls
+    hpkgs.ghc
+    hpkgs.cabal-install
+    hpkgs.cabal-add
+    hpkgs.fourmolu
+    hpkgs.haskell-language-server
   ];
 
   # Modules
