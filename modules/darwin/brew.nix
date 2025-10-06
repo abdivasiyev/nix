@@ -14,6 +14,7 @@
         "tunnelblick"
         "jetbrains-toolbox"
         "lens"
+        "redis-insight"
       ];
       brews = [
         "mas"
