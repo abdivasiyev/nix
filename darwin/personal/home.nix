@@ -28,6 +28,8 @@ in {
 	hpkgs.cabal-fmt
     hpkgs.fourmolu
     hpkgs.haskell-language-server
+	nixd
+	alejandra
   ];
 
   # Modules
