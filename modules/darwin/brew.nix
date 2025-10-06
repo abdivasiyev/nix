@@ -10,11 +10,17 @@
 
     homebrew = {
       enable = true;
+      onActivation = {
+        cleanup = "zap";
+        autoUpdate = true;
+        upgrade = true;
+      };
       casks = [
         "tunnelblick"
         "jetbrains-toolbox"
         "lens"
         "redis-insight"
+        "macs-fan-control"
       ];
       brews = [
         "mas"
