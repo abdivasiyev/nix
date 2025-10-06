@@ -20,6 +20,26 @@
           };
         };
         languageserver = {
+          lua = {
+            command = "lua-language-server";
+            filetypes = ["lua"];
+            settings = {
+              Lua = {
+                "codeLens.enable" = true;
+                "hint.enable" = true;
+                "hint.setType" = true;
+                "completion.callSnippet" = "Replace";
+                "diagnostics.disable" = ["lowercase-global"];
+                "workspace" = {
+                  "library" = [
+                    "${pkgs.neovim-unwrapped}/share/nvim/runtime"
+                    "$HOME/.config/nvim"
+                    "$HOME/.local/share/nvim/site"
+                  ];
+                };
+              };
+            };
+          };
           haskell = {
             command = "haskell-language-server-wrapper";
             args = ["--lsp"];
@@ -95,9 +115,6 @@
       vim-visual-multi
       vim-fugitive
       vim-wakatime
-      coc-sumneko-lua
-      coc-yaml
-      coc-json
       {
         type = "lua";
         plugin = gitsigns-nvim;

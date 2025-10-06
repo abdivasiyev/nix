@@ -30,6 +30,8 @@ in {
     hpkgs.haskell-language-server
     nixd
     alejandra
+    lua-language-server
+    ripgrep
   ];
 
   # Modules

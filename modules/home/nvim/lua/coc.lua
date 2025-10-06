@@ -14,13 +14,14 @@ vim.keymap.set("n", "gr", "<Plug>(coc-references)", { silent = true, desc = "Go 
 
 -- Show documentation on hover
 function _G.show_docs()
-  local cw = vim.fn.expand("<cword>")
-  if vim.fn.CocAction("hasProvider", "hover") then
-    vim.fn.CocActionAsync("doHover")
-  else
-    vim.cmd("!" .. vim.o.keywordprg .. " " .. cw)
-  end
+	local cw = vim.fn.expand("<cword>")
+	if vim.fn.CocAction("hasProvider", "hover") then
+		vim.fn.CocActionAsync("doHover")
+	else
+		vim.cmd("!" .. vim.o.keywordprg .. " " .. cw)
+	end
 end
+
 vim.keymap.set("n", "K", _G.show_docs, { silent = true, desc = "Hover documentation" })
 
 -- Symbol renaming
@@ -50,11 +51,11 @@ vim.keymap.set("n", "<leader>r", ":CocList references<CR>", { silent = true, des
 
 -- Scroll floating windows (like docs, code actions)
 vim.keymap.set("n", "<C-f>", function()
-  return vim.fn["coc#float#has_scroll"]() == 1 and "<C-r>=coc#float#scroll(1)<CR>" or "<C-f>"
+	return vim.fn["coc#float#has_scroll"]() == 1 and "<C-r>=coc#float#scroll(1)<CR>" or "<C-f>"
 end, { silent = true, expr = true })
 
 vim.keymap.set("n", "<C-b>", function()
-  return vim.fn["coc#float#has_scroll"]() == 1 and "<C-r>=coc#float#scroll(0)<CR>" or "<C-b>"
+	return vim.fn["coc#float#has_scroll"]() == 1 and "<C-r>=coc#float#scroll(0)<CR>" or "<C-b>"
 end, { silent = true, expr = true })
 
 -- Trigger completion (like VSCode Ctrl-Space)
@@ -62,35 +63,35 @@ vim.keymap.set("i", "<C-Space>", "coc#refresh()", { expr = true, silent = true, 
 
 -- Helper function to check for words before cursor
 local function check_back_space()
-  local col = vim.fn.col('.') - 1
-  return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+	local col = vim.fn.col('.') - 1
+	return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
 end
 
 -- Tab: next completion item or insert tab
 vim.keymap.set("i", "<Tab>", function()
-  if vim.fn.pumvisible() == 1 then
-    return vim.fn["coc#_select_confirm"]() == 0 and "<C-n>" or "<C-n>"
-  elseif check_back_space() then
-    return "<Tab>"
-  else
-    return vim.fn["coc#refresh"]()
-  end
+	if vim.fn.pumvisible() == 1 then
+		return vim.fn["coc#_select_confirm"]() == 0 and "<C-n>" or "<C-n>"
+	elseif check_back_space() then
+		return "<Tab>"
+	else
+		return vim.fn["coc#refresh"]()
+	end
 end, { expr = true, silent = true })
 
 -- Shift-Tab: previous completion item
 vim.keymap.set("i", "<S-Tab>", function()
-  if vim.fn.pumvisible() == 1 then
-    return "<C-p>"
-  else
-    return "<C-h>"
-  end
+	if vim.fn.pumvisible() == 1 then
+		return "<C-p>"
+	else
+		return "<C-h>"
+	end
 end, { expr = true, silent = true })
 
 -- Enter: confirm selected item or fallback
 vim.keymap.set("i", "<CR>", function()
-  if vim.fn.pumvisible() == 1 then
-    return vim.fn["coc#pum#confirm"]()
-  else
-    return "<CR>"
-  end
+	if vim.fn.pumvisible() == 1 then
+		return vim.fn["coc#pum#confirm"]()
+	else
+		return "<CR>"
+	end
 end, { expr = true, silent = true })
