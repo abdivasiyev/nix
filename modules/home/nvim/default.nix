@@ -59,14 +59,8 @@
               gopls = {
                 gofumpt = false;
                 codelenses = {
-                  gc_details = true;
-                  generate = true;
-                  regenerate_cgo = true;
-                  run_govulncheck = true;
+                  vulncheck = true;
                   test = true;
-                  tidy = true;
-                  upgrade_dependency = true;
-                  vendor = true;
                 };
                 hints = {
                   assignVariableTypes = true;
@@ -78,18 +72,15 @@
                   rangeVariableTypes = true;
                 };
                 analyses = {
-                  nilness = true;
-                  unusedparams = true;
-                  unusedwrite = true;
-                  useany = true;
                   shadow = true;
-                  unusedvariable = true;
                 };
                 usePlaceholders = true;
                 completeUnimported = true;
                 staticcheck = true;
                 directoryFilters = ["-.git" "-.vscode" "-.idea" "-.vscode-test" "-node_modules"];
                 semanticTokens = true;
+                diagnosticsTrigger = "Save";
+                symbolMatcher = "Fuzzy";
               };
             };
           };
@@ -115,6 +106,11 @@
       vim-visual-multi
       vim-fugitive
       vim-wakatime
+      {
+        type = "lua";
+        plugin = lualine-nvim;
+        config = builtins.readFile ./lua/lualine.lua;
+      }
       {
         type = "lua";
         plugin = gitsigns-nvim;

@@ -44,25 +44,33 @@ vim.keymap.set("n", "<leader>s", ":CocList -I symbols<CR>", { silent = true, des
 
 -- Helper function to check backspace
 local function check_back_space()
+	local col = vim.fn.col('.') - 1
+	return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+end
+
+-- Convert string into termcodes
+local function replace_termcodes(str)
+	return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
 -- Select next item on <Tab>
 vim.keymap.set('i', "<Tab>", function()
 	if vim.fn["coc#pum#visible"]() == 1 then
-		return vim.fn
+		return vim.fn["coc#pum#next"](1)
 	elseif check_back_space() then
-		return "<Tab>"
+		return replace_termcodes("<Tab>")
 	else
-		return vim.fn["coc#refresh"]()
+		vim.fn["coc#refresh"]()
+		return ""
 	end
 end, { expr = true, silent = true })
 
 -- Select prev item on <S-Tab>
 vim.keymap.set('i', "<S-Tab>", function()
 	if vim.fn["coc#pum#visible"]() == 1 then
-		return vim.fn
+		return vim.fn["coc#pum#prev"](1)
 	else
-		return "<C-h>"
+		return replace_termcodes("<C-h>")
 	end
 end, { expr = true, silent = true })
 
@@ -71,6 +79,6 @@ vim.keymap.set('i', "<CR>", function()
 	if vim.fn["coc#pum#visible"]() == 1 then
 		return vim.fn["coc#pum#confirm"]()
 	else
-		return "<CR>"
+		return replace_termcodes("<CR>")
 	end
 end, { expr = true, silent = true })

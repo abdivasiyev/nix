@@ -27,11 +27,14 @@
       enable = true;
       plugins = [
         "git"
-        "golang"
+        "vi-mode"
+        "web-search"
+        "timer"
+        "nats"
         "docker"
         "docker-compose"
+        "kubectl"
       ];
-      theme = "lambda";
     };
   };
 

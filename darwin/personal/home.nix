@@ -9,6 +9,7 @@
 in {
   home.packages = with pkgs; [
     docker
+    docker-compose
     colima
     telegram-desktop
     btop
@@ -32,6 +33,7 @@ in {
     alejandra
     lua-language-server
     ripgrep
+    natscli
   ];
 
   # Modules
@@ -45,6 +47,7 @@ in {
     outputs.homeModules.secret
     outputs.homeModules.vscode
     outputs.homeModules.nvim
+    outputs.homeModules.starship
   ];
 
   sops.secrets = {
