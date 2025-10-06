@@ -4,6 +4,9 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    initContent = ''
+      export GITHUB_TOKEN=$(cat ~/.config/nix/github_token)
+    '';
     shellAliases = {
       cat = "bat";
       top = "btop";

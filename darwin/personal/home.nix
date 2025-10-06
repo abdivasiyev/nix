@@ -25,11 +25,11 @@ in {
     hpkgs.ghc
     hpkgs.cabal-install
     hpkgs.cabal-add
-	hpkgs.cabal-fmt
+    hpkgs.cabal-fmt
     hpkgs.fourmolu
     hpkgs.haskell-language-server
-	nixd
-	alejandra
+    nixd
+    alejandra
   ];
 
   # Modules
@@ -81,6 +81,12 @@ in {
       format = "yaml";
       path = "${config.home.homeDirectory}/.ssh/id_ed25519";
       mode = "0600";
+    };
+    githubToken = {
+      sopsFile = ../../secrets/secrets.yaml;
+      format = "yaml";
+      path = "${config.home.homeDirectory}/.config/nix/github_token";
+      mode = "0400";
     };
   };
 
