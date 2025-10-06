@@ -12,6 +12,9 @@
             pkief.material-icon-theme
             jnoortheen.nix-ide
             asvetliakov.vscode-neovim
+            golang.go
+            haskell.haskell
+            justusadam.language-haskell
           ]
           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           ];
@@ -23,6 +26,7 @@
           "extensions.autoCheckUpdates" = false;
           "workbench.colorTheme" = "Gruvbox Dark Hard";
           "github.copilot.nextEditSuggestions.enabled" = true;
+          "haskell.manageHLS" = "PATH";
           nix = {
             enableLanguageServer = true;
             serverPath = "nixd";

@@ -25,6 +25,7 @@ in {
     hpkgs.ghc
     hpkgs.cabal-install
     hpkgs.cabal-add
+	hpkgs.cabal-fmt
     hpkgs.fourmolu
     hpkgs.haskell-language-server
   ];
