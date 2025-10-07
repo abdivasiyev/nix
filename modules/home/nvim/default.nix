@@ -48,6 +48,7 @@
             settings = {
               haskell = {
                 formattingProvider = "fourmolu";
+                cabalFormattingProvider = "cabal-fmt";
               };
             };
           };
@@ -106,6 +107,8 @@
       vim-visual-multi
       vim-fugitive
       vim-wakatime
+      coc-yaml
+      coc-json
       {
         type = "lua";
         plugin = lualine-nvim;
