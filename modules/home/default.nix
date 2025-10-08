@@ -12,7 +12,7 @@
   zsh = import ./zsh.nix;
   kitty = import ./kitty.nix;
   secret = import ./secret.nix;
-  vscode = import ./vscode.nix;
+  vscode = import ./vscode;
   nvim = import ./nvim;
   starship = import ./starship.nix;
 }
