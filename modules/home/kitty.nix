@@ -4,7 +4,6 @@
     shellIntegration = {
       enableZshIntegration = true;
     };
-    enableGitIntegration = true;
     font = {
       name = "JetBrains Mono";
       size = 15;
