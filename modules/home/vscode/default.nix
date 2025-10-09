@@ -17,6 +17,9 @@
             haskell.haskell
             justusadam.language-haskell
             ms-python.python
+            wakatime.vscode-wakatime
+            timonwong.shellcheck
+            usernamehw.errorlens
           ]
           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           ];
