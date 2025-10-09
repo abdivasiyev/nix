@@ -12,6 +12,7 @@
             pkief.material-icon-theme
             pkief.material-product-icons
             jnoortheen.nix-ide
+            mkhl.direnv
             asvetliakov.vscode-neovim
             golang.go
             haskell.haskell
