@@ -32,6 +32,10 @@ vim.keymap.set("n", "<leader>ca", "<Plug>(coc-codeaction)", { silent = true, des
 vim.keymap.set("x", "<leader>ca", "<Plug>(coc-codeaction-selected)", { silent = true, desc = "Code action (selected)" })
 vim.keymap.set("n", "<leader>qf", "<Plug>(coc-fix-current)", { silent = true, desc = "Quick fix" })
 
+-- Code lenses
+vim.keymap.set("n", "<leader>cc", "<Plug>(coc-codelens-action)", { silent = true, desc = "Perform codelens" })
+vim.keymap.set("x", "<leader>cc", "<Plug>(coc-codelens-action)", { silent = true, desc = "Perform codelens" })
+
 -- Refactorings
 vim.keymap.set("n", "<leader>re", "<Plug>(coc-refactor)", { silent = true, desc = "Refactor" })
 

@@ -11,7 +11,6 @@ in {
     docker
     docker-compose
     colima
-    telegram-desktop
     btop
     postman
     vscode
@@ -96,31 +95,27 @@ in {
     };
   };
 
-  # Install vpn configurations
-  home.activation.importSstpConfigOnce = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    if [ ! -f "${config.home.homeDirectory}/.config/first_runs/.sstp_done" ]; then
-      mkdir -p "${config.home.homeDirectory}/.config/first_runs"
-      touch "${config.home.homeDirectory}/.config/first_runs/.sstp_done"
-      /usr/bin/open -a "SSTP Connect" "${config.home.homeDirectory}/.config/sstp/mobi.vpn"
-    fi
-  '';
+  # TODO:
+  # Decryption not worked for fresh installation
+  # couldn't solve yet
 
-  home.activation.importTunnelblickConfigOnce = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    if [ ! -f "${config.home.homeDirectory}/.config/first_runs/.tunnelblick_done" ]; then
-      /usr/bin/open -a "Tunnelblick" "${config.home.homeDirectory}/.config/tunnelblick/mobi.ovpn"
-      mkdir -p "${config.home.homeDirectory}/.config/first_runs"
-      touch "${config.home.homeDirectory}/.config/first_runs/.tunnelblick_done"
-      /usr/bin/open -a "Tunnelblick" "${config.home.homeDirectory}/.config/tunnelblick/mobi.ovpn"
-    fi
-  '';
-
-  # Link .app bundles into ~/Applications/Nix-Apps
-  home.activation.linkApps = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    mkdir -p ~/Applications/Nix-Apps
-    for app in $HOME/.nix-profile/Applications/*.app; do
-      ln -sf "$app" ~/Applications/Nix-Apps/
-    done
-  '';
+  # # Install vpn configurations
+  # home.activation.importSstpConfigOnce = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  #   if [ ! -f "${config.home.homeDirectory}/.config/first_runs/.sstp_done" ]; then
+  #     mkdir -p "${config.home.homeDirectory}/.config/first_runs"
+  #     touch "${config.home.homeDirectory}/.config/first_runs/.sstp_done"
+  #     /usr/bin/open -a "SSTP Connect" "${config.home.homeDirectory}/.config/sstp/mobi.vpn"
+  #   fi
+  # '';
+  #
+  # home.activation.importTunnelblickConfigOnce = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  #   if [ ! -f "${config.home.homeDirectory}/.config/first_runs/.tunnelblick_done" ]; then
+  #     /usr/bin/open -a "Tunnelblick" "${config.home.homeDirectory}/.config/tunnelblick/mobi.ovpn"
+  #     mkdir -p "${config.home.homeDirectory}/.config/first_runs"
+  #     touch "${config.home.homeDirectory}/.config/first_runs/.tunnelblick_done"
+  #     /usr/bin/open -a "Tunnelblick" "${config.home.homeDirectory}/.config/tunnelblick/mobi.ovpn"
+  #   fi
+  # '';
 
   # Self installation of home-manager
   programs.home-manager.enable = true;

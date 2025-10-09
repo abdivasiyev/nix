@@ -19,6 +19,12 @@
             "source.organizeImports" = true;
           };
         };
+        codeLens = {
+          enable = true;
+        };
+        colors = {
+          enable = true;
+        };
         languageserver = {
           lua = {
             command = "lua-language-server";
