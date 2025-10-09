@@ -34,6 +34,7 @@ in {
     lua-language-server
     ripgrep
     natscli
+    werf
   ];
 
   # Modules

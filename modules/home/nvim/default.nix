@@ -139,6 +139,21 @@
         plugin = gruvbox-material-nvim;
         config = builtins.readFile ./lua/colorscheme.lua;
       }
+      {
+        type = "lua";
+        plugin = pkgs.vimUtils.buildVimPlugin {
+          pname = "error-lens.nvim";
+          version = "main";
+          src = pkgs.fetchFromGitHub {
+            owner = "chikko80";
+            repo = "error-lens.nvim";
+            rev = "e13b966dfd42517a92df1eb5d73fd14905e483a6";
+            sha256 = "sha256-Zxj0qq0UZLc37KQT9c9J05iAMty1fxclfQrqdFbO1BI=";
+          };
+          doCheck = false;
+        };
+        config = builtins.readFile ./lua/error-lens.lua;
+      }
     ];
     extraLuaConfig = builtins.concatStringsSep "\n" [
       (builtins.readFile ./lua/options.lua)
