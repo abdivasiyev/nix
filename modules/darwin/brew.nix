@@ -22,6 +22,8 @@
         "redis-insight"
         "macs-fan-control"
         "telegram-desktop"
+        "utm"
+        "vlc"
       ];
       brews = [
         "mas"

@@ -32,6 +32,7 @@
             "/Applications/Telegram Desktop.app"
             "${pkgs.kitty}/Applications/kitty.app"
             "${pkgs.vscode}/Applications/Visual Studio Code.app"
+            "${pkgs.postman}/Applications/Postman.app"
           ];
         };
 
@@ -79,7 +80,6 @@
             WarnAboutFraudulentWebsites = true;
             WebKitJavaEnabled = false;
             WebKitJavaScriptCanOpenWindowsAutomatically = false;
-            WebKitDeveloperExtrasEnabledPreferenceKey = true;
             "com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks" = true;
             "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" = true;
             "com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled" = false;
