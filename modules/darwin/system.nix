@@ -55,38 +55,6 @@
             QLEnableTextSelection = true;
             FXPreferredViewStyle = "clmv";
           };
-          "com.apple.Safari" = {
-            # Privacy: don’t send search queries to Apple
-            UniversalSearchEnabled = false;
-            SuppressSearchSuggestions = true;
-            # Press Tab to highlight each item on a web page
-            WebKitTabToLinksPreferenceKey = true;
-            ShowFullURLInSmartSearchField = true;
-
-            ShowOverlayStatusBar = true;
-            AlwaysRestoreSessionAtLaunch = true;
-            AutoOpenSafeDownloads = false;
-            IncludeDevelopMenu = true;
-            IncludeInternalDebugMenu = true;
-            HomePage = "about:blank";
-
-            ShowFavoritesBar = false;
-            WebKitDeveloperExtrasEnabledPreferenceKey = true;
-            WebContinuousSpellCheckingEnabled = true;
-            WebAutomaticSpellingCorrectionEnabled = false;
-            AutoFillFromAddressBook = false;
-            AutoFillCreditCardData = false;
-            AutoFillMiscellaneousForms = false;
-            WarnAboutFraudulentWebsites = true;
-            WebKitJavaEnabled = false;
-            WebKitJavaScriptCanOpenWindowsAutomatically = false;
-            "com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks" = true;
-            "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" = true;
-            "com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled" = false;
-            "com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled" = false;
-            "com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles" = false;
-            "com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically" = false;
-          };
           "com.apple.AdLib" = {
             allowApplePersonalizedAdvertising = false;
           };

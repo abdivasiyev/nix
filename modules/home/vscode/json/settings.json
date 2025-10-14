@@ -19,6 +19,40 @@
             }
         }
     },
+    "go.lintTool": "golangci-lint-v2",
+    "go.coverMode": "atomic",
+    "go.useLanguageServer": true,
+    "gopls": {
+        "codelenses": {
+            "vulncheck": true,
+            "test": true
+        },
+        "hints": {
+            "assignVariableTypes": true,
+            "compositeLiteralFields": true,
+            "compositeLiteralTypes": true,
+            "constantValues": true,
+            "functionTypeParameters": true,
+            "parameterNames": true,
+            "rangeVariableTypes": true
+        },
+        "analyses": {
+            "shadow": true
+        },
+        "usePlaceholders": true,
+        "completeUnimported": true,
+        "staticcheck": true,
+        "directoryFilters": [
+            "-.git",
+            "-.vscode",
+            "-.idea",
+            "-.vscode-test",
+            "-node_modules"
+        ],
+        "semanticTokens": true,
+        "diagnosticsTrigger": "Save",
+        "symbolMatcher": "Fuzzy"
+    },
     "workbench.colorTheme": "Gruvbox Dark Hard",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.productIconTheme": "material-product-icons",
