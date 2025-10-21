@@ -24,6 +24,8 @@
         "telegram-desktop"
         "utm"
         "vlc"
+        "tla+-toolbox"
+        "zotero"
       ];
       brews = [
         "mas"
