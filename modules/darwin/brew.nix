@@ -26,6 +26,7 @@
         "vlc"
         "tla+-toolbox"
         "zotero"
+        "tor-browser"
       ];
       brews = [
         "mas"
