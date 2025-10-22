@@ -1,6 +1,8 @@
 {
     "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
+    "editor.inlayHints.enabled": "off",
+    "editor.fontSize": 15,
     "[json]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
@@ -26,7 +28,6 @@
     "workbench.colorTheme": "Gruvbox Dark Hard",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.productIconTheme": "material-product-icons",
-    "editor.fontSize": 15,
     "telemetry.editStats.details.enabled": false,
     "telemetry.editStats.enabled": false,
     "telemetry.editStats.showDecorations": false,

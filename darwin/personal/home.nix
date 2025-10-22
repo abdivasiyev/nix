@@ -34,6 +34,7 @@ in {
     ripgrep
     natscli
     werf
+    jdk23
   ];
 
   # Modules

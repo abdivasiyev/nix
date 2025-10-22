@@ -13,7 +13,6 @@
             pkief.material-product-icons
             jnoortheen.nix-ide
             mkhl.direnv
-            asvetliakov.vscode-neovim
             golang.go
             haskell.haskell
             justusadam.language-haskell
@@ -23,6 +22,12 @@
             usernamehw.errorlens
           ]
           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+            {
+              name = "vscode-ide";
+              publisher = "tlaplus";
+              version = "2025.10.210006";
+              sha256 = "sha256-xFFyxTNwv1/Qb9F/8x0UN4WUKQrZdoCDb5b89pDJ5W0=";
+            }
           ];
 
         userSettings = builtins.fromJSON (builtins.readFile ./json/settings.json);

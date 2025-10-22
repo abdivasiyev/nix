@@ -24,7 +24,6 @@
         "telegram-desktop"
         "utm"
         "vlc"
-        "tla+-toolbox"
         "zotero"
         "tor-browser"
       ];
