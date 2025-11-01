@@ -28,6 +28,12 @@
               version = "2025.10.210006";
               sha256 = "sha256-xFFyxTNwv1/Qb9F/8x0UN4WUKQrZdoCDb5b89pDJ5W0=";
             }
+            {
+              name = "vscode-leetcode";
+              publisher = "leetcode";
+              version = "0.18.4";
+              sha256 = "sha256-iiGK+XmTf9ROaSIksd71AHEJtatipebxmXI4v5r9nP8=";
+            }
           ];
 
         userSettings = builtins.fromJSON (builtins.readFile ./json/settings.json);

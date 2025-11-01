@@ -38,5 +38,7 @@
         "plaintext": false,
         "markdown": false,
         "scminput": false
-    }
+    },
+    "leetcode.workspaceFolder": "~/Desktop/Development/github.com/abdivasiyev/leetcode",
+    "leetcode.allowReportData": false
 }
