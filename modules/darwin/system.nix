@@ -33,6 +33,7 @@
             "${pkgs.kitty}/Applications/kitty.app"
             "${pkgs.vscode}/Applications/Visual Studio Code.app"
             "${pkgs.postman}/Applications/Postman.app"
+            "/Applications/Zotero.app"
           ];
         };
 

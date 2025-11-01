@@ -7,7 +7,6 @@
         "editor.defaultFormatter": "vscode.json-language-features"
     },
     "extensions.autoCheckUpdates": false,
-    "github.copilot.nextEditSuggestions.enabled": true,
     "haskell.manageHLS": "PATH",
     "nix": {
         "enableLanguageServer": true,
@@ -33,5 +32,11 @@
     "telemetry.editStats.showDecorations": false,
     "telemetry.editStats.showStatusBar": false,
     "telemetry.feedback.enabled": false,
-    "telemetry.telemetryLevel": "off"
+    "telemetry.telemetryLevel": "off",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    }
 }
