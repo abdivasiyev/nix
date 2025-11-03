@@ -34,6 +34,12 @@
               version = "0.18.4";
               sha256 = "sha256-iiGK+XmTf9ROaSIksd71AHEJtatipebxmXI4v5r9nP8=";
             }
+            {
+              name = "dbcode";
+              publisher = "dbcode";
+              version = "1.17.27";
+              sha256 = "sha256-wAkJUfEqPM6znmd0JolIJmLD3kibDB+Eypg7WTBvM38=";
+            }
           ];
 
         userSettings = builtins.fromJSON (builtins.readFile ./json/settings.json);
