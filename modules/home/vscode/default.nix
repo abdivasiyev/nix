@@ -20,6 +20,7 @@
             wakatime.vscode-wakatime
             timonwong.shellcheck
             usernamehw.errorlens
+            asvetliakov.vscode-neovim
           ]
           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
             {
@@ -35,10 +36,10 @@
               sha256 = "sha256-iiGK+XmTf9ROaSIksd71AHEJtatipebxmXI4v5r9nP8=";
             }
             {
-              name = "dbcode";
-              publisher = "dbcode";
-              version = "1.17.27";
-              sha256 = "sha256-wAkJUfEqPM6znmd0JolIJmLD3kibDB+Eypg7WTBvM38=";
+              name = "vscode-pull-request-github";
+              publisher = "github";
+              version = "0.120.2";
+              sha256 = "sha256-XY98UQ2XuVhObfaRiVlwiV+thNH9biPN0aDYG1c7xrM=";
             }
           ];
 

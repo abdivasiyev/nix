@@ -40,5 +40,8 @@
         "scminput": false
     },
     "leetcode.allowReportData": false,
-    "leetcode.hint.configWebviewMarkdown": false
+    "leetcode.hint.configWebviewMarkdown": false,
+    "dbcode.connections": [],
+    "dbcode.color.applyToActiveTabBorder": false,
+    "workbench.colorCustomizations": {}
 }
