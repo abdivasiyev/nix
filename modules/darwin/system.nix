@@ -59,6 +59,9 @@
           "com.apple.AdLib" = {
             allowApplePersonalizedAdvertising = false;
           };
+          "com.microsoft.VSCode" = {
+            ApplePressAndHoldEnabled = false;
+          };
         };
       };
     };

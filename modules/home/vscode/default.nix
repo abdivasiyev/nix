@@ -20,7 +20,7 @@
             wakatime.vscode-wakatime
             timonwong.shellcheck
             usernamehw.errorlens
-            asvetliakov.vscode-neovim
+            vscodevim.vim
           ]
           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
             {
