@@ -44,6 +44,7 @@
           ];
 
         userSettings = builtins.fromJSON (builtins.readFile ./json/settings.json);
+        keybindings = builtins.fromJSON (builtins.readFile ./json/keybindings.json);
       };
     };
   };
