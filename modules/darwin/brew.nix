@@ -26,6 +26,7 @@
         "vlc"
         "zotero"
         "tor-browser"
+        "linear-linear"
       ];
       brews = [
         "mas"

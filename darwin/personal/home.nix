@@ -22,6 +22,7 @@ in {
     jq
     go
     gopls
+    delve
     hpkgs.ghc
     hpkgs.cabal-install
     hpkgs.cabal-add
