@@ -20,7 +20,6 @@
             wakatime.vscode-wakatime
             timonwong.shellcheck
             usernamehw.errorlens
-            vscodevim.vim
           ]
           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
             {
@@ -34,6 +33,12 @@
               publisher = "leetcode";
               version = "0.18.4";
               sha256 = "sha256-iiGK+XmTf9ROaSIksd71AHEJtatipebxmXI4v5r9nP8=";
+            }
+            {
+              name = "inline-sql-syntax";
+              publisher = "qufiwefefwoyn";
+              version = "2.16.0";
+              sha256 = "sha256-QAbYWwA6xlRfyqA/JBEUlxVt9q7RGbm0bLBkb4szYcA=";
             }
           ];
 

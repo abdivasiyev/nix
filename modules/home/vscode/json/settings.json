@@ -46,18 +46,5 @@
     "leetcode.hint.configWebviewMarkdown": false,
     "dbcode.connections": [],
     "dbcode.color.applyToActiveTabBorder": false,
-    "workbench.colorCustomizations": {},
-    "vim.easymotion": true,
-    "vim.incsearch": true,
-    "vim.useSystemClipboard": true,
-    "vim.useCtrlKeys": true,
-    "vim.hlsearch": true,
-    "vim.leader": "<space>",
-    "vim.handleKeys": {
-        "<C-a>": false,
-        "<C-f>": false
-    },
-    "extensions.experimental.affinity": {
-        "vscodevim.vim": 1
-    }
+    "workbench.colorCustomizations": {}
 }
