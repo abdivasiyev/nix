@@ -35,12 +35,6 @@
               version = "0.18.4";
               sha256 = "sha256-iiGK+XmTf9ROaSIksd71AHEJtatipebxmXI4v5r9nP8=";
             }
-            {
-              name = "vscode-pull-request-github";
-              publisher = "github";
-              version = "0.120.2";
-              sha256 = "sha256-XY98UQ2XuVhObfaRiVlwiV+thNH9biPN0aDYG1c7xrM=";
-            }
           ];
 
         userSettings = builtins.fromJSON (builtins.readFile ./json/settings.json);

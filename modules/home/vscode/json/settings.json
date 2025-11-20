@@ -6,6 +6,8 @@
     "[json]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 100,
     "extensions.autoCheckUpdates": false,
     "haskell.manageHLS": "PATH",
     "nix": {
@@ -39,6 +41,7 @@
         "markdown": false,
         "scminput": false
     },
+    "chat.disableAIFeatures": true,
     "leetcode.allowReportData": false,
     "leetcode.hint.configWebviewMarkdown": false,
     "dbcode.connections": [],
