@@ -34,7 +34,7 @@
             "${pkgs.vscode}/Applications/Visual Studio Code.app"
             "${pkgs.postman}/Applications/Postman.app"
             "/Applications/Linear.app"
-            "/Applications/Zotero.app"
+            "/System/Applications/Books.app"
           ];
         };
 
