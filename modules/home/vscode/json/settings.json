@@ -2,13 +2,13 @@
     "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
     "editor.inlayHints.enabled": "off",
-    "editor.fontSize": 15,
+    "editor.fontSize": 18,
     "[json]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 100,
-    "extensions.autoCheckUpdates": false,
+    "extensions.autoCheckUpdates": true,
     "haskell.manageHLS": "PATH",
     "nix": {
         "enableLanguageServer": true,
@@ -35,13 +35,6 @@
     "telemetry.editStats.showStatusBar": false,
     "telemetry.feedback.enabled": false,
     "telemetry.telemetryLevel": "off",
-    "github.copilot.enable": {
-        "*": false,
-        "plaintext": false,
-        "markdown": false,
-        "scminput": false
-    },
-    "chat.disableAIFeatures": true,
     "leetcode.allowReportData": false,
     "leetcode.hint.configWebviewMarkdown": false,
     "dbcode.connections": [],
