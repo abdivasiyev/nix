@@ -24,7 +24,6 @@
         "telegram-desktop"
         "utm"
         "vlc"
-        "tor-browser"
         "linear-linear"
       ];
       brews = [
