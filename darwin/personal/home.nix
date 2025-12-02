@@ -50,6 +50,7 @@ in {
     outputs.homeModules.vscode
     outputs.homeModules.nvim
     outputs.homeModules.starship
+    outputs.homeModules.halloy
   ];
 
   sops.secrets = {

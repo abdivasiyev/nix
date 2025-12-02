@@ -15,4 +15,5 @@
   vscode = import ./vscode;
   nvim = import ./nvim;
   starship = import ./starship.nix;
+  halloy = import ./halloy.nix;
 }
