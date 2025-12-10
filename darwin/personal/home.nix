@@ -1,11 +1,11 @@
 {
   pkgs,
-  lib,
+  # lib,
   outputs,
   config,
   ...
 }: let
-  hpkgs = pkgs.haskell.packages."ghc910";
+  # hpkgs = pkgs.haskell.packages."ghc910";
 in {
   home.packages = with pkgs; [
     docker
@@ -22,13 +22,6 @@ in {
     jq
     go
     gopls
-    delve
-    hpkgs.ghc
-    hpkgs.cabal-install
-    hpkgs.cabal-add
-    hpkgs.cabal-fmt
-    hpkgs.fourmolu
-    hpkgs.haskell-language-server
     nixd
     alejandra
     lua-language-server
@@ -36,6 +29,8 @@ in {
     natscli
     werf
     jdk23
+    shellcheck
+    python3
   ];
 
   # Modules

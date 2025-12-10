@@ -36,8 +36,5 @@
     "telemetry.feedback.enabled": false,
     "telemetry.telemetryLevel": "off",
     "leetcode.allowReportData": false,
-    "leetcode.hint.configWebviewMarkdown": false,
-    "dbcode.connections": [],
-    "dbcode.color.applyToActiveTabBorder": false,
-    "workbench.colorCustomizations": {}
+    "leetcode.hint.configWebviewMarkdown": false
 }
