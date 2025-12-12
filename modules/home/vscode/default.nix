@@ -2,11 +2,9 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
-    mutableExtensionsDir = false;
+    mutableExtensionsDir = true;
     profiles = {
       default = {
-        enableUpdateCheck = false;
-        enableExtensionUpdateCheck = false;
         extensions = with pkgs.vscode-extensions;
           [
             jdinhlife.gruvbox
