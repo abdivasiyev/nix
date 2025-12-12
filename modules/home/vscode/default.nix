@@ -76,6 +76,12 @@
               version = "0.1.0";
               sha256 = "ML3linlHH/GnsoxDHa0/6R7EEh27rjMp0PcNWDmB8Qw=";
             }
+            {
+              name = "vscode-containers";
+              publisher = "ms-azuretools";
+              version = "2.3.0";
+              sha256 = "sha256-zrEZpd2geX2G4u6LkIk3d6C7vhwZZ4lwHGQR3Z0OWY4=";
+            }
           ];
 
         userSettings = builtins.fromJSON (builtins.readFile ./json/settings.json);
