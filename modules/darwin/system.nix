@@ -67,5 +67,11 @@
         };
       };
     };
+
+    services = {
+      openssh = {
+        enable = true;
+      };
+    };
   };
 }

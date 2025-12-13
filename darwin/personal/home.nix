@@ -31,6 +31,7 @@ in {
     jdk23
     shellcheck
     python3
+    cloudflared
   ];
 
   # Modules
