@@ -116,26 +116,6 @@ in {
   #   fi
   # '';
 
-  launchd.agents.colima = {
-    enable = true;
-
-    config = {
-      Label = "org.nix-community.colima";
-
-      ProgramArguments = [
-        "${pkgs.colima}/bin/colima"
-        "start"
-        "--foreground"
-      ];
-
-      RunAtLoad = true;
-      KeepAlive = false;
-
-      StandardOutPath = "/tmp/colima.out.log";
-      StandardErrorPath = "/tmp/colima.err.log";
-    };
-  };
-
   # Self installation of home-manager
   programs.home-manager.enable = true;
 
