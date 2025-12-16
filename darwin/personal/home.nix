@@ -22,6 +22,7 @@ in {
     jq
     go
     gopls
+    delve
     nixd
     alejandra
     lua-language-server
