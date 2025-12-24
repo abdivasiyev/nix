@@ -80,12 +80,6 @@
               version = "2.3.0";
               sha256 = "sha256-zrEZpd2geX2G4u6LkIk3d6C7vhwZZ4lwHGQR3Z0OWY4=";
             }
-            {
-              name = "oracle-java";
-              publisher = "oracle";
-              version = "25.0.0";
-              sha256 = "sha256-e0DO+42+3CyMP3+25gj0kLDFK53vkv4UqD2pQhXmqng=";
-            }
           ];
 
         userSettings = builtins.fromJSON (builtins.readFile ./json/settings.json);

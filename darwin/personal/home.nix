@@ -6,6 +6,9 @@
   ...
 }: let
   # hpkgs = pkgs.haskell.packages."ghc910";
+  migrate = pkgs.go-migrate.overrideAttrs (oldAttrs: {
+    tags = ["postgres"];
+  });
 in {
   home.packages = with pkgs; [
     docker
@@ -23,6 +26,8 @@ in {
     go
     gopls
     delve
+    go-swag
+    migrate
     nixd
     alejandra
     lua-language-server
