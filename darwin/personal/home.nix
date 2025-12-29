@@ -53,7 +53,6 @@ in {
     outputs.homeModules.nvim
     outputs.homeModules.starship
     outputs.homeModules.halloy
-    outputs.homeModules.emacs
   ];
 
   sops.secrets = {
