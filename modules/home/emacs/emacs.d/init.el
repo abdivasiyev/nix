@@ -2,6 +2,7 @@
 (scroll-bar-mode 0)
 (setq inhibit-splash-screen t)
 (setq use-file-dialog nil)
+(setq ring-bell-function 'ignore)
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -26,8 +27,16 @@
 ;; Load the environment from system
 (use-package exec-path-from-shell
   :ensure t
-  :config
+  :init
   (exec-path-from-shell-initialize))
+
+(when (memq window-system '(mac ns x))
+  (use-package exec-path-from-shell
+    :ensure t
+    :init
+    (setq exec-path-from-shell-arguments '("-l"))
+    :config
+    (exec-path-from-shell-initialize)))
 
 (use-package emacs
   :init
@@ -114,32 +123,49 @@
 (global-set-key (kbd "C-c m s") 'magit-status)
 (global-set-key (kbd "C-c m l") 'magit-log)
 
-;; Magic for environment
+;; Magic of environment
 (use-package envrc
-  :hook (after-init . envrc-global-mode))
+  :init
+  (envrc-global-mode))
 
-;; MiniBuffer
-(use-package ido-completing-read+
+;; disable autosave for tramp buffers
+(setq tramp-auto-save-directory "/tmp")
+
+;; yasnippet
+(use-package yasnippet
+  :init
+  (yas-global-mode 1)
   :config
-  (ido-mode 1)
-  (ido-everywhere 1)
-  (ido-ubiquitous-mode 1))
+  (setq yas/triggers-in-field nil)
+  (setq yas-snippet-dirs '("~/.emacs.d/snippets/")))
 
-(use-package smex
-  :config
-  (global-set-key (kbd "M-x") 'smex)
-  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command))
+;; company mode
+(use-package company
+  :init
+  (add-hook 'after-init-hook 'global-company-mode))
 
-(use-package paredit)
+;; auto format hook
+(defun my/lsp-auto-format-on-save ()
+  (add-hook 'before-save-hook #'lsp-format-buffer nil t))
 
-(defun rc/turn-on-paredit ()
-  (interactive)
-  (paredit-mode 1))
+;; auto import hook
+(defun my/lsp-auto-import-on-save ()
+  (add-hook 'before-save-hook #'lsp-organize-imports nil t))
 
-;; Multiline editing
-(use-package multiple-cursors)
+;; lsp mode
+(use-package lsp-mode
+  :commands lsp lsp-deferred
+  :init
+  (setq lsp-prefer-flymake nil
+        lsp-completion-provider :capf)
+  (add-hook 'lsp-mode-hook #'my/lsp-auto-format-on-save)
+  (add-hook 'lsp-mode-hook #'my/lsp-auto-import-on-save))
 
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(use-package flycheck
+  :init (global-flycheck-mode))
+
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode))
+
+(use-package go-mode
+  :hook (go-mode . lsp-deferred))
