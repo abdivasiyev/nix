@@ -214,9 +214,18 @@
 
 ;; haskell mode for .hs, .lhs files
 (use-package haskell-mode
+  :ensure t
   :hook (haskell-mode . lsp-deferred)
+  :hook (literate-haskell-mode . lsp-deferred)
   :mode ("\\.hs\\'" . haskell-mode)
         ("\\.lhs\\'" . literate-haskell-mode))
+
+(use-package lsp-haskell
+  :after lsp-mode
+  :config
+  (setq lsp-haskell-server-path "haskell-language-server-wrapper"
+        lsp-haskell-server-args nil
+        lsp-haskell-formatting-provider "fourmolu")) ;; or "brittany"/"ormolu"
 
 ;; yaml mode for .yml, .yaml files
 (use-package yaml-mode
