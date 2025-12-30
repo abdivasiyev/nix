@@ -26,6 +26,8 @@
 (use-package emacs
   :init
   (setq initial-scratch-message nil)
+  (setq confirm-kill-emacs 'yes-or-no-p)
+
   (defun display-startup-echo-area-message ()
     (message "")))
 
@@ -81,7 +83,12 @@
 
 (use-package doom-modeline
   :ensure t
-  :init (doom-modeline-mode 1))
+  :init
+  (doom-modeline-mode 1)
+  (column-number-mode 1)
+  :config
+  (setq doom-modeline-height 18)
+  (setq doom-modeline-total-line-number t))
 
 (use-package nerd-icons)
 
@@ -91,3 +98,7 @@
   (setq which-key-idle-delay 0.5) ; Open after .5s instead of 1s
   :config
   (which-key-mode))
+
+;; Magic of magit
+(use-package magit
+  :ensure t)
