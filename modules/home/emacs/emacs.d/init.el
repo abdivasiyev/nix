@@ -134,10 +134,3 @@
 (defun rc/turn-on-paredit ()
   (interactive)
   (paredit-mode 1))
-
-(add-hook 'emacs-lisp-mode-hook  'rc/turn-on-paredit)
-(add-hook 'emacs-lisp-mode-hook
-          '(lambda ()
-             (local-set-key (kbd "C-c C-j")
-                            (quote eval-print-last-sexp))))
-(add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
