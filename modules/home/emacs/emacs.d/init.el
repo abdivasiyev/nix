@@ -1,3 +1,8 @@
+;; init.el --- Emacs configuration file -*- lexical-binding: t; -*-
+;;; Commentary:
+;; This is the main Emacs configuration file.
+;;; Code:
+;; Disable GUI elements
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 (setq inhibit-splash-screen t)
@@ -20,6 +25,7 @@
     (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+;; Use use-package for package management
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
 (setq use-package-always-defer t)
@@ -118,6 +124,26 @@
   :config
   (which-key-mode))
 
+;; MiniBuffer
+(use-package ido-completing-read+
+  :config
+  (ido-mode 1)
+  (ido-everywhere 1)
+  (ido-ubiquitous-mode 1))
+
+(use-package smex
+  :config
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command))
+
+;; Multiline editing
+(use-package multiple-cursors)
+
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
 ;; Magic of magit
 (use-package magit
   :ensure t
@@ -137,9 +163,52 @@
   (global-diff-hl-mode))
 
 ;; Magic of environment
-(use-package envrc
+(use-package direnv
+  :ensure t
+  :config
+  (direnv-mode))
+
+;; Project files
+(use-package treemacs
+  :ensure t
+  :defer t
   :init
-  (envrc-global-mode))
+  (setq treemacs-is-never-other-window t)
+  :config
+  (treemacs-follow-mode t)
+  (treemacs-filewatch-mode t)
+  (treemacs-git-commit-diff-mode t))
+
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :config
+  (setq projectile-completion-system 'default
+        projectile-enable-caching t
+        projectile-indexing-method 'alien
+        projectile-project-search-path '("~/Development/"))
+  :bind-keymap
+  ("C-c p" . projectile-command-map))
+
+(use-package dashboard
+  :ensure t
+  :init
+  (setq initial-buffer-choice 'dashboard-open)
+  :config
+  (setq dashboard-startup-banner 'official
+        dashboard-items '((recents  . 10)
+                          (projects . 10))
+        dashboard-banner-logo-title ""
+        dashboard-startup-banner 1
+        dashboard-center-content t
+        dashboard-vertically-center-content t
+        dashboard-display-icons-p t
+        dashboard-icon-type 'nerd-icons
+        dashboard-set-heading-icons t
+        dashboard-set-file-icons t
+        dashboard-projects-backend 'projectile)
+  (dashboard-setup-startup-hook))
 
 ;; disable autosave for tramp buffers
 (setq tramp-auto-save-directory "/tmp")
@@ -181,9 +250,14 @@
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
-  :init
-  (setq lsp-ui-sideline-enable t
-        lsp-ui-sideline-show-diagnostics t))
+  :custom
+  (lsp-ui-doc-show-with-cursor t)
+  (lsp-ui-doc-show-with-mouse t)
+  (lsp-ui-sideline-show-diagnostics t)
+  (lsp-ui-sideline-show-code-actions t))
+
+(use-package lsp-treemacs
+    :after lsp)
 
 (use-package go-mode
   :hook (go-mode . lsp-deferred)
@@ -268,25 +342,6 @@
     (term (getenv "SHELL"))))  ; uses default shell
 
 (global-set-key (kbd "C-c t") #'my/open-term)
-
-
-(use-package dashboard
-  :ensure t
-  :init
-  (setq initial-buffer-choice 'dashboard-open)
-  :config
-  (setq dashboard-startup-banner 'official
-        dashboard-items '((recents  . 10)
-                          (projects . 10))
-        dashboard-banner-logo-title ""
-        dashboard-startup-banner 1
-        dashboard-center-content t
-        dashboard-vertically-center-content t
-        dashboard-display-icons-p t
-        dashboard-icon-type 'nerd-icons
-        dashboard-set-heading-icons t
-        dashboard-set-file-icons t)
-  (dashboard-setup-startup-hook))
 
 (provide 'init)
 ;;; init.el ends here
