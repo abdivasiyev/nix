@@ -4,5 +4,6 @@
     package = pkgs.emacs-gtk;
   };
 
-  home.file.".emacs.d".source = ./emacs.d;
+  home.file.".emacs.d/early-init.el".source = ./emacs.d/early-init.el;
+  home.file.".emacs.d/init.el".source = ./emacs.d/init.el;
 }
