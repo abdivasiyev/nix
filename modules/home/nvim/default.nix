@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   programs.neovim = {
-    enable = true;
-    defaultEditor = true;
+    enable = false;
+    defaultEditor = false;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;

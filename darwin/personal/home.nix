@@ -39,6 +39,7 @@ in {
     python3
     cloudflared
     copilot-language-server
+    pandoc
   ];
 
   # Modules

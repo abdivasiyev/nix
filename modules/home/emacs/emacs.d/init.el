@@ -245,5 +245,48 @@
 (use-package docker-compose-mode
   :hook (docker-compose-mode . lsp-deferred))
 
+;; markdown mode for .md files
+(use-package markdown-mode
+  :ensure t
+  :mode (("\\.md\\'" . gfm-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init
+  (setq markdown-command "pandoc")
+  :config
+  (setq markdown-fontify-code-blocks-natively t))
+
+;; end of LSP configurations
+
+;; Open a term buffer in a given shell
+(defun my/open-term ()
+  "Open a terminal in the current project or default directory."
+  (interactive)
+  (let ((default-directory
+          (if-let ((proj (project-current)))
+              (project-root proj)
+            default-directory)))
+    (term (getenv "SHELL"))))  ; uses default shell
+
+(global-set-key (kbd "C-c t") #'my/open-term)
+
+
+(use-package dashboard
+  :ensure t
+  :init
+  (setq initial-buffer-choice 'dashboard-open)
+  :config
+  (setq dashboard-startup-banner 'official
+        dashboard-items '((recents  . 10)
+                          (projects . 10))
+        dashboard-banner-logo-title ""
+        dashboard-startup-banner 1
+        dashboard-center-content t
+        dashboard-vertically-center-content t
+        dashboard-display-icons-p t
+        dashboard-icon-type 'nerd-icons
+        dashboard-set-heading-icons t
+        dashboard-set-file-icons t)
+  (dashboard-setup-startup-hook))
+
 (provide 'init)
 ;;; init.el ends here
