@@ -109,9 +109,10 @@
 (use-package magit
   :ensure t
   :config
-  (setq magit-auto-revert-mode nil)
-  (global-set-key (kbd "C-c m s") 'magit-status)
-  (global-set-key (kbd "C-c m l") 'magit-log))
+  (setq magit-auto-revert-mode nil))
+
+(global-set-key (kbd "C-c m s") 'magit-status)
+(global-set-key (kbd "C-c m l") 'magit-log)
 
 ;; Magic for environment
 (use-package envrc
