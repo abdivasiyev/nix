@@ -33,6 +33,7 @@
             "${pkgs.halloy}/Applications/Halloy.app"
             "${pkgs.kitty}/Applications/kitty.app"
             "${pkgs.vscode}/Applications/Visual Studio Code.app"
+            "${pkgs.emacs-gtk}/Applications/Emacs.app"
             "${pkgs.postman}/Applications/Postman.app"
             "/Applications/Linear.app"
             "/System/Applications/Books.app"

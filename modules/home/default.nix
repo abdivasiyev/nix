@@ -16,4 +16,5 @@
   nvim = import ./nvim;
   starship = import ./starship.nix;
   halloy = import ./halloy.nix;
+  emacs = import ./emacs/default.nix;
 }
