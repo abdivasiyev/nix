@@ -30,14 +30,6 @@
   :init
   (exec-path-from-shell-initialize))
 
-(when (memq window-system '(mac ns x))
-  (use-package exec-path-from-shell
-    :ensure t
-    :init
-    (setq exec-path-from-shell-arguments '("-l"))
-    :config
-    (exec-path-from-shell-initialize)))
-
 (use-package emacs
   :init
   (setq initial-scratch-message nil)
@@ -81,6 +73,10 @@
     :font "JetBrainsMono Nerd Font"
     :height 160))
 
+(use-package emacs
+  :config
+  (setq backup-directory-alist `(("." . ,"~/.emacs.d/backups"))))
+
 ;; Gruvbox theme
 (use-package gruvbox-theme
   :demand
@@ -95,6 +91,14 @@
     (display-line-numbers-mode)
     (setq display-line-numbers 'relative))
   (add-hook 'prog-mode-hook #'ab/enable-line-numbers))
+
+(use-package emacs
+  :init
+  (setq-default fill-column 120)
+  (set-face-attribute 'fill-column-indicator nil
+                      :foreground "#717C7C" ; katana-gray
+                      :background "transparent")
+  (global-display-fill-column-indicator-mode 1))
 
 (use-package doom-modeline
   :ensure t
@@ -122,6 +126,15 @@
 
 (global-set-key (kbd "C-c m s") 'magit-status)
 (global-set-key (kbd "C-c m l") 'magit-log)
+
+;; Diff highlight
+(use-package diff-hl
+  :demand t
+  :init
+  (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  :config
+  (global-diff-hl-mode))
 
 ;; Magic of environment
 (use-package envrc
@@ -157,7 +170,9 @@
   :commands lsp lsp-deferred
   :init
   (setq lsp-prefer-flymake nil
-        lsp-completion-provider :capf)
+        lsp-completion-provider :capf
+        lsp-keymap-prefix "C-c l"
+        lsp-eldoc-render-all t)
   (add-hook 'lsp-mode-hook #'my/lsp-auto-format-on-save)
   (add-hook 'lsp-mode-hook #'my/lsp-auto-import-on-save))
 
@@ -165,7 +180,61 @@
   :init (global-flycheck-mode))
 
 (use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode))
+  :hook (lsp-mode . lsp-ui-mode)
+  :init
+  (setq lsp-ui-sideline-enable t
+        lsp-ui-sideline-show-diagnostics t))
 
 (use-package go-mode
-  :hook (go-mode . lsp-deferred))
+  :hook (go-mode . lsp-deferred)
+  :mode "\\.go\\'"
+  :config
+  (setq lsp-gopls-analyses
+      '((unusedparams . t)
+        (unusedwrite . t)
+        (nilness . t)
+        (shadow . t)
+        (unusedvariable . t))))
+
+(use-package nix-mode
+  :hook (nix-mode . lsp-deferred)
+  :mode "\\.nix\\'")
+
+(use-package copilot
+  :ensure t
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . copilot-accept-completion)
+              ("C-<tab>" . copilot-accept-completion-by-word)
+              ("C-c C-c" . copilot-accept-completion)))
+(setq copilot-disable-predicates '(company--active-p))
+;; disable copilot warnings
+(setq copilot-indent-offset-warning-disabled t)
+(setq copilot-indent-offset-warning-disable t)
+
+;; haskell mode for .hs, .lhs files
+(use-package haskell-mode
+  :hook (haskell-mode . lsp-deferred)
+  :mode ("\\.hs\\'" . haskell-mode)
+        ("\\.lhs\\'" . literate-haskell-mode))
+
+;; yaml mode for .yml, .yaml files
+(use-package yaml-mode
+  :hook (yaml-mode . lsp-deferred))
+
+;; json mode for .json files
+(use-package json-mode
+  :hook (json-mode . lsp-deferred)
+  :mode "\\.json\\'")
+
+;; dockerfile mode for Dockerfile files
+(use-package dockerfile-mode
+  :hook (dockerfile-mode . lsp-deferred)
+  :mode "Dockerfile\\'")
+
+;; docker-compose mode
+(use-package docker-compose-mode
+  :hook (docker-compose-mode . lsp-deferred))
+
+(provide 'init)
+;;; init.el ends here

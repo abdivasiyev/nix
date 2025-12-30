@@ -38,6 +38,7 @@ in {
     shellcheck
     python3
     cloudflared
+    copilot-language-server
   ];
 
   # Modules
