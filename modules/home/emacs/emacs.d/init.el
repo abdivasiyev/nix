@@ -23,6 +23,12 @@
 (setq straight-use-package-by-default t)
 (setq use-package-always-defer t)
 
+;; Load the environment from system
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
+
 (use-package emacs
   :init
   (setq initial-scratch-message nil)
@@ -101,4 +107,37 @@
 
 ;; Magic of magit
 (use-package magit
-  :ensure t)
+  :ensure t
+  :config
+  (setq magit-auto-revert-mode nil)
+  (global-set-key (kbd "C-c m s") 'magit-status)
+  (global-set-key (kbd "C-c m l") 'magit-log))
+
+;; Magic for environment
+(use-package envrc
+  :hook (after-init . envrc-global-mode))
+
+;; MiniBuffer
+(use-package ido-completing-read+
+  :config
+  (ido-mode 1)
+  (ido-everywhere 1)
+  (ido-ubiquitous-mode 1))
+
+(use-package smex
+  :config
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command))
+
+(use-package paredit)
+
+(defun rc/turn-on-paredit ()
+  (interactive)
+  (paredit-mode 1))
+
+(add-hook 'emacs-lisp-mode-hook  'rc/turn-on-paredit)
+(add-hook 'emacs-lisp-mode-hook
+          '(lambda ()
+             (local-set-key (kbd "C-c C-j")
+                            (quote eval-print-last-sexp))))
+(add-to-list 'auto-mode-alist '("Cask" . emacs-lisp-mode))
