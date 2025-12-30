@@ -30,12 +30,6 @@
 (setq straight-use-package-by-default t)
 (setq use-package-always-defer t)
 
-;; Load the environment from system
-(use-package exec-path-from-shell
-  :ensure t
-  :init
-  (exec-path-from-shell-initialize))
-
 (use-package emacs
   :init
   (setq initial-scratch-message nil)
@@ -251,13 +245,13 @@
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
   :custom
-  (lsp-ui-doc-show-with-cursor t)
+  (lsp-ui-doc-show-with-cursor f)
   (lsp-ui-doc-show-with-mouse t)
   (lsp-ui-sideline-show-diagnostics t)
   (lsp-ui-sideline-show-code-actions t))
 
 (use-package lsp-treemacs
-    :after lsp)
+  :after lsp)
 
 (use-package go-mode
   :hook (go-mode . lsp-deferred)
