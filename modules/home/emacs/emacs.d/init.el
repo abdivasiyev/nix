@@ -190,6 +190,8 @@
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t)
   (treemacs-git-commit-diff-mode t)
+  (treemacs-project-follow-mode t)
+  (treemacs-icons-dired-mode t)
   :bind
   ("s-P" . treemacs))
 
