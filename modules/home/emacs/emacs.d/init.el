@@ -89,6 +89,7 @@
   (doom-themes-treemacs-config))
 
 ;; Auto switch between dark and light mode
+(setq custom-safe-themes t) ; Trust all themes
 (use-package auto-dark
   :ensure t
   :custom
