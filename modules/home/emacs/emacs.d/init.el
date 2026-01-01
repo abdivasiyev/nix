@@ -76,7 +76,8 @@
 
 (use-package emacs
   :config
-  (setq backup-directory-alist `(("." . ,"~/.emacs.d/backups"))))
+  (setq backup-directory-alist `(("." . ,"~/.emacs.d/backups")))
+  (setq auto-save-file-name-transforms `((".*" ,"~/.emacs.d/auto-saves" t))))
 
 ;; Gruvbox theme
 (use-package gruvbox-theme
@@ -203,6 +204,18 @@
         projectile-project-search-path '("~/Development/"))
   :bind-keymap
   ("C-c p" . projectile-command-map))
+
+(use-package treemacs-projectile
+  :after (treemacs projectile)
+  :ensure t)
+
+(use-package treemacs-icons-dired
+  :hook (dired-mode . treemacs-icons-dired-enable-once)
+  :ensure t)
+
+(use-package treemacs-magit
+    :after (treemacs magit)
+    :ensure t)
 
 (use-package dashboard
   :ensure t
