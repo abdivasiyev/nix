@@ -8,6 +8,7 @@
 (setq inhibit-splash-screen t)
 (setq use-file-dialog nil)
 (setq ring-bell-function 'ignore)
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -79,9 +80,22 @@
 
 ;; Gruvbox theme
 (use-package gruvbox-theme
-  :demand
+  :ensure t)
+
+(use-package doom-themes
+  :ensure t
   :config
-  (load-theme 'gruvbox-dark-medium t))
+  (doom-themes-org-config)
+  (doom-themes-treemacs-config))
+
+;; Auto switch between dark and light mode
+(use-package auto-dark
+  :ensure t
+  :custom
+  (auto-dark-themes '((doom-gruvbox) (doom-bluloco-light)))
+  (auto-dark-polling-interval-seconds 2)
+  (auto-dark-allow-osascript t)
+  :init (auto-dark-mode))
 
 (use-package emacs
   :init
@@ -160,7 +174,9 @@
 (use-package direnv
   :ensure t
   :config
-  (direnv-mode))
+  (direnv-mode)
+  :bind-keymap
+  ("C-c r" . direnv-update-environment))
 
 ;; Project files
 (use-package treemacs
@@ -171,7 +187,9 @@
   :config
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t)
-  (treemacs-git-commit-diff-mode t))
+  (treemacs-git-commit-diff-mode t)
+  :bind-keymap
+  ("C-c C-p" . treemacs-))
 
 (use-package projectile
   :ensure t
