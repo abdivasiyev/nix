@@ -188,8 +188,8 @@
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t)
   (treemacs-git-commit-diff-mode t)
-  :bind-keymap
-  ("C-c C-p" . treemacs-))
+  :bind
+  ("s-P" . treemacs))
 
 (use-package projectile
   :ensure t
