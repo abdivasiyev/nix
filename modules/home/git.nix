@@ -8,5 +8,26 @@
     lfs.enable = true;
     userName = "Asliddin Abdivasiyev";
     userEmail = "asliddin.abdivasiyev@gmail.com";
+    ignores = [
+      ".DS_Store"
+      ".vscode/"
+      "node_modules/"
+      "dist/"
+      "result/"
+      "*.log"
+      ".env"
+      ".idea"
+      "*.swp"
+      "*~"
+      "*#"
+      ".#*"
+    ];
+
+    settings = {
+      init.defaultBranch = "master";
+      pull.rebase = true;
+      rebase.autoStash = true;
+      push.autoSetupRemote = true;
+    };
   };
 }
