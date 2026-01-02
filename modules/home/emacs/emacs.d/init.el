@@ -243,9 +243,12 @@
   :ensure t
   :config
   (add-hook 'kill-emacs-hook #'persp-state-save)
+  (add-hook 'emacs-startup-hook (lambda ()
+                                  (when (file-exists-p persp-state-default-file)
+                                    (persp-state-load persp-state-default-file))))
   :custom
   (persp-mode-prefix-key (kbd "C-x x"))
-  (setq persp-state-default-file (expand-file-name "persp-state" user-emacs-directory))
+  (persp-state-default-file (expand-file-name "persp-state" user-emacs-directory))
   :init
   (persp-mode))
 
