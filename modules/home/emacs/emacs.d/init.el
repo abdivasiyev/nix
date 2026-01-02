@@ -9,6 +9,7 @@
 (setq use-file-dialog nil)
 (setq ring-bell-function 'ignore)
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file 'noerror 'nomessage)
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -59,6 +60,7 @@
   :init
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 2)
+  (setq-default global-auto-revert-non-file-buffers t)
   (global-auto-revert-mode 1))
 
 (use-package emacs
@@ -237,6 +239,16 @@
         dashboard-set-file-icons t
         dashboard-projects-backend 'projectile)
   (dashboard-setup-startup-hook))
+
+;; Perspective
+(use-package perspective
+  :ensure t
+  :config
+  (add-hook 'kill-emacs-hook #'persp-state-save)
+  :custom
+  (persp-mode-prefix-key (kbd "C-x x"))
+  :init
+  (persp-mode))
 
 ;; disable autosave for tramp buffers
 (setq tramp-auto-save-directory "/tmp")
