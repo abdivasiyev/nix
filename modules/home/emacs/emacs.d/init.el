@@ -385,5 +385,15 @@
 
 (global-set-key (kbd "C-c t") #'my/open-term)
 
+;; rainbow delimiters
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+;; tracking coding time
+(use-package wakatime-mode
+  :ensure t
+  :init
+  (global-wakatime-mode))
+
 (provide 'init)
 ;;; init.el ends here
