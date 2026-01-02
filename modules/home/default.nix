@@ -17,4 +17,5 @@
   starship = import ./starship.nix;
   halloy = import ./halloy.nix;
   emacs = import ./emacs/default.nix;
+  xdg = import ./xdg.nix;
 }

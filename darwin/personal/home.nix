@@ -58,6 +58,7 @@ in {
     outputs.homeModules.starship
     outputs.homeModules.halloy
     outputs.homeModules.emacs
+    outputs.homeModules.xdg
   ];
 
   sops.secrets = {
