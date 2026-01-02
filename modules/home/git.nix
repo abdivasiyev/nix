@@ -22,12 +22,5 @@
       "*#"
       ".#*"
     ];
-
-    settings = {
-      init.defaultBranch = "master";
-      pull.rebase = true;
-      rebase.autoStash = true;
-      push.autoSetupRemote = true;
-    };
   };
 }
