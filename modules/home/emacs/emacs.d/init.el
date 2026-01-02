@@ -69,8 +69,8 @@
 
 (use-package emacs
   :config
-  (setq backup-directory-alist `(("." . ,"~/.emacs.d/backups")))
-  (setq auto-save-file-name-transforms `((".*" ,"~/.emacs.d/auto-saves" t))))
+  (setq backup-directory-alist `(("." . ,"~/.config/emacs/backups")))
+  (setq auto-save-file-name-transforms `((".*" ,"~/.config/emacs/auto-saves" t))))
 
 ;; Gruvbox theme
 (use-package gruvbox-theme
@@ -258,7 +258,7 @@
   (yas-global-mode 1)
   :config
   (setq yas/triggers-in-field nil)
-  (setq yas-snippet-dirs '("~/.emacs.d/snippets/")))
+  (setq yas-snippet-dirs '("~/.config/emacs/snippets/")))
 
 ;; company mode
 (use-package company
