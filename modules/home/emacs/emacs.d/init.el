@@ -2,15 +2,6 @@
 ;;; Commentary:
 ;; This is the main Emacs configuration file.
 ;;; Code:
-;; Disable GUI elements
-(tool-bar-mode 0)
-(scroll-bar-mode 0)
-(setq inhibit-splash-screen t)
-(setq use-file-dialog nil)
-(setq ring-bell-function 'ignore)
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load custom-file 'noerror 'nomessage)
-
 (defvar bootstrap-version)
 (let ((bootstrap-file
     (expand-file-name
@@ -156,6 +147,13 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+;; Move lines up and down
+(use-package move-text
+  :ensure t
+  :bind
+    (("M-p" . move-text-up)
+     ("M-n" . move-text-down)))
+
 ;; Magic of magit
 (use-package magit
   :ensure t
@@ -247,6 +245,7 @@
   (add-hook 'kill-emacs-hook #'persp-state-save)
   :custom
   (persp-mode-prefix-key (kbd "C-x x"))
+  (setq persp-state-default-file (expand-file-name "persp-state" user-emacs-directory))
   :init
   (persp-mode))
 

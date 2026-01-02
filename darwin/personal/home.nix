@@ -40,6 +40,8 @@ in {
     cloudflared
     copilot-language-server
     pandoc
+    yaml-language-server
+    vscode-langservers-extracted
   ];
 
   # Modules
