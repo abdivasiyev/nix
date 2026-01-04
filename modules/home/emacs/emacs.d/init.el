@@ -205,7 +205,7 @@
         projectile-indexing-method 'alien
         projectile-project-search-path '("~/Development/"))
   :bind-keymap
-  ("C-c p" . projectile-command-map))
+  ("C-x p" . projectile-command-map))
 
 (use-package treemacs-projectile
   :after (treemacs projectile)
