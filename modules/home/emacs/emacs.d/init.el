@@ -215,6 +215,11 @@
   :hook (dired-mode . treemacs-icons-dired-enable-once)
   :ensure t)
 
+(use-package treemacs-all-the-icons
+  :ensure t
+  :config
+  (treemacs-load-theme "all-the-icons"))
+
 (use-package treemacs-magit
     :after (treemacs magit)
     :ensure t)
