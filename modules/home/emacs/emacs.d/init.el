@@ -177,7 +177,7 @@
   :ensure t
   :config
   (direnv-mode)
-  :bind-keymap
+  :bind
   ("C-c r" . direnv-update-environment))
 
 ;; Project files
