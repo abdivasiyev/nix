@@ -51,15 +51,27 @@
   :init
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 2)
+  (setq-default show-trailing-whitespace t)
+  (setq-default whitespace-style '(face tabs trailing tab-mark spaces space-mark))
+  (add-hook 'prog-mode-hook 'whitespace-mode)
+  (add-hook 'before-save-hook 'whitespace-cleanup)
+  (setq-default require-final-newline t)
   (setq-default global-auto-revert-non-file-buffers t)
   (global-auto-revert-mode 1))
 
 (use-package emacs
   :init
-	(when (eq system-type 'darwin)
-		(setq mac-command-modifier 'super)
-		(setq mac-option-modifier 'meta)
-		(setq mac-control-modifier 'control)))
+  (setq-default scroll-margin 8)
+  (setq-default scroll-conservatively 101)
+  (setq-default scroll-preserve-screen-position t)
+  (setq-default auto-window-vscroll nil))
+
+(use-package emacs
+  :init
+  (when (eq system-type 'darwin)
+    (setq mac-command-modifier 'super)
+    (setq mac-option-modifier 'meta)
+    (setq mac-control-modifier 'control)))
 
 (use-package emacs
   :init
@@ -71,26 +83,6 @@
   :config
   (setq backup-directory-alist `(("." . ,"~/.config/emacs/backups")))
   (setq auto-save-file-name-transforms `((".*" ,"~/.config/emacs/auto-saves" t))))
-
-;; Gruvbox theme
-(use-package gruvbox-theme
-  :ensure t)
-
-(use-package doom-themes
-  :ensure t
-  :config
-  (doom-themes-org-config)
-  (doom-themes-treemacs-config))
-
-;; Auto switch between dark and light mode
-(setq custom-safe-themes t) ; Trust all themes
-(use-package auto-dark
-  :ensure t
-  :custom
-  (auto-dark-themes '((doom-gruvbox) (doom-bluloco-light)))
-  (auto-dark-polling-interval-seconds 2)
-  (auto-dark-allow-osascript t)
-  :init (auto-dark-mode))
 
 (use-package emacs
   :init
@@ -107,7 +99,24 @@
   (set-face-attribute 'fill-column-indicator nil
                       :foreground "#717C7C" ; katana-gray
                       :background "transparent")
-  (global-display-fill-column-indicator-mode 1))
+  (global-display-fill-column-indicator-mode 1)
+  (global-hl-line-mode 1))
+
+(use-package doom-themes
+  :ensure t
+  :config
+  (doom-themes-org-config)
+  (doom-themes-treemacs-config))
+
+;; Auto switch between dark and light mode
+(setq custom-safe-themes t) ; Trust all themes
+(use-package auto-dark
+  :ensure t
+  :custom
+  (auto-dark-themes '((doom-gruvbox) (doom-bluloco-light)))
+  (auto-dark-polling-interval-seconds 2)
+  (auto-dark-allow-osascript t)
+  :init (auto-dark-mode))
 
 (use-package doom-modeline
   :ensure t
@@ -158,10 +167,13 @@
 (use-package magit
   :ensure t
   :config
-  (setq magit-auto-revert-mode nil))
+  (setq magit-auto-revert-mode nil)
+  :bind
+  (("C-x g" . magit-status)))
 
-(global-set-key (kbd "C-c m s") 'magit-status)
-(global-set-key (kbd "C-c m l") 'magit-log)
+(use-package treemacs-magit
+    :after (treemacs magit)
+    :ensure t)
 
 ;; Diff highlight
 (use-package diff-hl
@@ -180,6 +192,24 @@
   :bind
   ("C-c r" . direnv-update-environment))
 
+;; Perspective
+(use-package perspective
+  :ensure t
+  :config
+  (add-hook 'kill-emacs-hook #'persp-state-save)
+  (add-hook 'emacs-startup-hook (lambda ()
+                                  (when (file-exists-p persp-state-default-file)
+                                    (persp-state-load persp-state-default-file))))
+  :custom
+  (persp-mode-prefix-key (kbd "C-x x"))
+  (persp-state-default-file (expand-file-name "persp-state" user-emacs-directory))
+  :init
+  (persp-mode))
+
+(use-package treemacs-perspective
+  :ensure t
+  :after (treemacs perspective))
+
 ;; Project files
 (use-package treemacs
   :ensure t
@@ -194,6 +224,15 @@
   (treemacs-icons-dired-mode t)
   :bind
   ("s-P" . treemacs))
+
+(use-package treemacs-icons-dired
+  :hook (dired-mode . treemacs-icons-dired-enable-once)
+  :ensure t)
+
+(use-package treemacs-all-the-icons
+  :ensure t
+  :config
+  (treemacs-load-theme "all-the-icons"))
 
 (use-package projectile
   :ensure t
@@ -210,19 +249,6 @@
 (use-package treemacs-projectile
   :after (treemacs projectile)
   :ensure t)
-
-(use-package treemacs-icons-dired
-  :hook (dired-mode . treemacs-icons-dired-enable-once)
-  :ensure t)
-
-(use-package treemacs-all-the-icons
-  :ensure t
-  :config
-  (treemacs-load-theme "all-the-icons"))
-
-(use-package treemacs-magit
-    :after (treemacs magit)
-    :ensure t)
 
 (use-package dashboard
   :ensure t
@@ -242,20 +268,6 @@
         dashboard-set-file-icons t
         dashboard-projects-backend 'projectile)
   (dashboard-setup-startup-hook))
-
-;; Perspective
-(use-package perspective
-  :ensure t
-  :config
-  (add-hook 'kill-emacs-hook #'persp-state-save)
-  (add-hook 'emacs-startup-hook (lambda ()
-                                  (when (file-exists-p persp-state-default-file)
-                                    (persp-state-load persp-state-default-file))))
-  :custom
-  (persp-mode-prefix-key (kbd "C-x x"))
-  (persp-state-default-file (expand-file-name "persp-state" user-emacs-directory))
-  :init
-  (persp-mode))
 
 ;; disable autosave for tramp buffers
 (setq tramp-auto-save-directory "/tmp")
@@ -376,6 +388,12 @@
   :config
   (setq markdown-fontify-code-blocks-natively t))
 
+;; Enable native emacs-lisp-mode
+(use-package emacs-lisp-mode
+  :ensure nil
+  :straight nil
+  :mode "\\.el\\'")
+
 ;; end of LSP configurations
 
 ;; Open a term buffer in a given shell
@@ -402,3 +420,4 @@
 
 (provide 'init)
 ;;; init.el ends here
+
