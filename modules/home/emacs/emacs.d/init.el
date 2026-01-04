@@ -301,6 +301,8 @@
         lsp-completion-provider :capf
         lsp-keymap-prefix "C-c l"
         lsp-eldoc-render-all t)
+  :custom
+  (lsp-headerline-breadcrumb-segments '(project file symbols))
   (add-hook 'lsp-mode-hook #'my/lsp-auto-format-on-save)
   (add-hook 'lsp-mode-hook #'my/lsp-auto-import-on-save))
 
