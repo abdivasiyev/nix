@@ -182,7 +182,8 @@
   (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
   :config
-  (global-diff-hl-mode))
+  (global-diff-hl-mode)
+  (diff-hl-flydiff-mode))
 
 ;; Magic of environment
 (use-package direnv
@@ -215,7 +216,8 @@
   :ensure t
   :defer t
   :init
-  (setq treemacs-is-never-other-window t)
+  (setq treemacs-is-never-other-window t
+        treemacs--project-follow-delay 0.001)
   :config
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t)
