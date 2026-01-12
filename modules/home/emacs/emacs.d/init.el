@@ -99,8 +99,18 @@
   (set-face-attribute 'fill-column-indicator nil
                       :foreground "#717C7C" ; katana-gray
                       :background "transparent")
-  (global-display-fill-column-indicator-mode 1)
-  (global-hl-line-mode 1))
+  (global-display-fill-column-indicator-mode 1))
+
+;; highlight guides
+(use-package highlight-indent-guides
+  :ensure t
+  :custom
+  (setq highlight-indent-guides-method 'character
+        highlight-indent-guides-auto-character-face-perc 50)
+
+  :hook
+  (prog-mode . hl-line-mode)
+  (prog-mode . highlight-indent-guides-mode))
 
 (use-package doom-themes
   :ensure t
