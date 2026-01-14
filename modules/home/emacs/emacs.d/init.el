@@ -27,9 +27,9 @@
   :init
   (setq initial-scratch-message nil)
   (setq confirm-kill-emacs 'yes-or-no-p)
-
-  (defun display-startup-echo-area-message ()
-    (message "")))
+  :custom
+  (display-buffer-base-action '((display-buffer-reuse-window display-buffer-same-window)
+                                (reusable-frames . visible))))
 
 (use-package emacs
   :init
@@ -160,6 +160,11 @@
 
 ;; Multiline editing
 (use-package multiple-cursors)
+;; auto close parens
+(use-package paredit
+  :ensure t
+  :hook
+  (prog-mode . #'enable-paredit-mode))
 
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
