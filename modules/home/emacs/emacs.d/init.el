@@ -118,5 +118,15 @@
   :bind
   (("C-c r" . 'envrc-reload)))
 
+;; enable dired-extra
+(use-package dired-x
+  :ensure nil
+  :init
+  (setq dired-omit-files
+        (concat dired-omit-files "\\|^\\..+$")
+        dired-listing-switches "-lah"
+        dired-mouse-drag-files t)
+  (setq-default dired-dwim-target t))
+
 (provide 'init)
 ;;; init.el ends here
