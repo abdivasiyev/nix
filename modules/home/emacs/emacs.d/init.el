@@ -42,6 +42,8 @@
         backup-directory-alist `(("." . ,"~/.config/emacs/backups"))
         ;; auto-save directory
         auto-save-file-name-transforms `((".*" ,"~/.config/emacs/auto-saves" t))
+        ;; tramp
+        tramp-auto-save-directory "/tmp"
         display-line-numbers-type t
         display-line-numbers-width-start t)
   ;; aliases
@@ -126,6 +128,35 @@
         (concat dired-omit-files "\\|^\\..+$")
         dired-listing-switches "-lah")
   (setq-default dired-dwim-target t))
+
+;; I don't know which key does what
+(use-package which-key
+  :init
+  (setq which-key-idle-delay 0.5)
+  (which-key-mode))
+
+;; organizing projects
+(use-package project
+  :ensure nil)
+
+;; featured dashboard
+(use-package nerd-icons)
+(use-package dashboard
+  :init
+  (setq initial-buffer-choice 'dashboard-open)
+  :config
+  (setq dashboard-startup-banner 'official
+        dashboard-items '((recents  . 10)
+                          (projects . 10))
+        dashboard-banner-logo-title ""
+        dashboard-startup-banner 1
+        dashboard-center-content t
+        dashboard-vertically-center-content t
+        dashboard-display-icons-p t
+        dashboard-icon-type 'nerd-icons
+        dashboard-set-heading-icons t
+        dashboard-set-file-icons t)
+  (dashboard-setup-startup-hook))
 
 (provide 'init)
 ;;; init.el ends here
