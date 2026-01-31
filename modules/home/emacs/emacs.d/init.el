@@ -103,5 +103,20 @@
   :bind
   (("C-x g" . magit)))
 
+;; Highlight differences on buffer
+(use-package diff-hl
+  :init
+  (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  (global-diff-hl-mode)
+  (diff-hl-flydiff-mode))
+
+;; load .envrc
+(use-package envrc
+  :init
+  (add-hook 'after-init-hook 'envrc-global-mode)
+  :bind
+  (("C-c r" . 'envrc-reload)))
+
 (provide 'init)
 ;;; init.el ends here
