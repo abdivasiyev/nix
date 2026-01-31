@@ -24,7 +24,6 @@
         "telegram-desktop"
         "utm"
         "vlc"
-        "linear-linear"
       ];
       brews = [
         "mas"

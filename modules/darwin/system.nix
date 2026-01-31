@@ -35,7 +35,6 @@
             "${pkgs.vscode}/Applications/Visual Studio Code.app"
             "${pkgs.emacs-macport}/Applications/Emacs.app"
             "${pkgs.postman}/Applications/Postman.app"
-            "/Applications/Linear.app"
             "/System/Applications/Books.app"
           ];
         };
