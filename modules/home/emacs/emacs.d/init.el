@@ -121,11 +121,10 @@
 ;; enable dired-extra
 (use-package dired-x
   :ensure nil
-  :init
+  :config
   (setq dired-omit-files
         (concat dired-omit-files "\\|^\\..+$")
-        dired-listing-switches "-lah"
-        dired-mouse-drag-files t)
+        dired-listing-switches "-lah")
   (setq-default dired-dwim-target t))
 
 (provide 'init)
