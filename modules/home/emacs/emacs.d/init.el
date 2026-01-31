@@ -158,5 +158,18 @@
         dashboard-set-file-icons t)
   (dashboard-setup-startup-hook))
 
+;; dev tools for real engineers
+(use-package yasnippet
+  :init
+  (yas-global-mode)
+  (yas-reload-all))
+
+(use-package yasnippet-snippets
+  :after 'yasnippet)
+
+(use-package company
+  :init
+  (add-hook 'after-init-hook 'global-company-mode))
+
 (provide 'init)
 ;;; init.el ends here
