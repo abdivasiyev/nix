@@ -119,6 +119,19 @@
   :config
   (difftastic-bindings-mode))
 
+;; magically undo changes
+(use-package vundo
+  :custom
+  (setq vundo-compact-display t
+        vundo-glyph-alist vundo-unicode-symbols
+        undo-limit (* 80 1024 1024)
+        undo-strong-limit (* 120 1024 1024)
+        undo-outer-limit (* 360 1024 1024))
+  :init
+  (add-hook 'prog-mode-hook 'vundo-popup-mode)
+  :bind
+  (("C-M-/" . 'vundo)))
+
 ;; load .envrc
 (use-package envrc
   :init
