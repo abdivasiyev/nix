@@ -120,6 +120,9 @@
   :bind
   (("C-c r" . 'envrc-reload)))
 
+;; inherit environment into temporary buffers also when envrc loads them up
+(use-package inheritenv)
+
 ;; enable dired-extra
 (use-package dired-x
   :ensure nil
