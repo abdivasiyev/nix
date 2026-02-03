@@ -114,6 +114,11 @@
   (global-diff-hl-mode)
   (diff-hl-flydiff-mode))
 
+(use-package difftastic-bindings
+  :ensure difftastic
+  :config
+  (difftastic-bindings-mode))
+
 ;; load .envrc
 (use-package envrc
   :init
