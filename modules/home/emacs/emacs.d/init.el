@@ -110,6 +110,7 @@
   :init
   (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
   (global-diff-hl-mode)
   (diff-hl-flydiff-mode))
 
@@ -123,14 +124,19 @@
 ;; inherit environment into temporary buffers also when envrc loads them up
 (use-package inheritenv)
 
+;; show git info on dired
+(use-package dired-git-info)
+
 ;; enable dired-extra
 (use-package dired-x
   :ensure nil
   :config
   (setq dired-omit-files
         (concat dired-omit-files "\\|^\\..+$")
+        dgi-auto-hide-details-p nil
         dired-listing-switches "-lah")
-  (setq-default dired-dwim-target t))
+  (setq-default dired-dwim-target t)
+  (add-hook 'dired-after-readin-hook 'dired-git-info-auto-enable))
 
 ;; I don't know which key does what
 (use-package which-key
