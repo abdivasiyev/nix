@@ -180,5 +180,106 @@
   :init
   (add-hook 'after-init-hook 'global-company-mode))
 
+;; a real devil
+(use-package lsp-mode
+  :commands lsp lsp-deferred
+  :init
+  (setq lsp-prefer-flymake nil
+        lsp-completion-provider :capf
+        lsp-keymap-prefix "C-c l"
+        lsp-eldoc-render-all t)
+  (defun lsp/auto-format-on-save ()
+    (add-hook 'before-save-hook #'lsp-format-buffer nil t))
+
+  (defun lsp/organize-imports-on-save ()
+    (add-hook 'before-save-hook #'lsp-organize-imports nil t))
+  (add-hook 'lsp-mode-hook #'lsp/auto-format-on-save)
+  (add-hook 'lsp-mode-hook #'lsp/organize-imports-on-save))
+
+(use-package dap-mode
+  :after lsp-mode
+  :init
+  (dap-mode 1)
+  (dap-ui-mode 1)
+  (dap-ui-controls-mode 1)
+  (setq dap-print-io t)
+  (add-hook 'dap-stopped-hook (lambda (arg) (call-interactively #'dap-hydra))))
+
+(use-package flycheck
+  :init
+  (global-flycheck-mode t))
+
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-show-with-cursor nil)
+  (lsp-ui-doc-show-with-mouse t)
+  (lsp-ui-sideline-show-diagnostics t)
+  (lsp-ui-sideline-show-code-actions t))
+
+;; Enable native emacs-lisp-mode
+(use-package emacs-lisp-mode
+  :ensure nil
+  :mode "\\.el\\'")
+
+(use-package go-mode
+  :hook (go-mode . lsp-deferred)
+  :mode "\\.go\\'"
+  :config
+  (require 'dap-dlv-go)
+  (setq lsp-gopls-analyses
+        '((unusedparams . t)
+          (unusedwrite . t)
+          (nilness . t)
+          (shadow . t)
+          (unusedvariable . t))))
+
+(use-package nix-mode
+  :hook (nix-mode . lsp-deferred)
+  :mode "\\.nix\\'")
+
+;; haskell mode for .hs, .lhs files
+(use-package haskell-mode
+  :ensure t
+  :hook (haskell-mode . lsp-deferred)
+  :hook (literate-haskell-mode . lsp-deferred)
+  :mode ("\\.hs\\'" . haskell-mode)
+        ("\\.lhs\\'" . literate-haskell-mode))
+
+(use-package lsp-haskell
+  :after lsp-mode
+  :config
+  (setq lsp-haskell-server-path "haskell-language-server-wrapper"
+        lsp-haskell-server-args nil
+        lsp-haskell-formatting-provider "fourmolu")) ;; or "brittany"/"ormolu"
+
+;; yaml mode for .yml, .yaml files
+(use-package yaml-mode
+  :hook (yaml-mode . lsp-deferred))
+
+;; json mode for .json files
+(use-package json-mode
+  :hook (json-mode . lsp-deferred)
+  :mode "\\.json\\'")
+
+;; dockerfile mode for Dockerfile files
+(use-package dockerfile-mode
+  :hook (dockerfile-mode . lsp-deferred)
+  :mode "Dockerfile\\'")
+
+;; docker-compose mode
+(use-package docker-compose-mode
+  :hook (docker-compose-mode . lsp-deferred))
+
+;; markdown mode for .md files
+(use-package markdown-mode
+  :ensure t
+  :mode (("\\.md\\'" . gfm-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init
+  (setq markdown-command "pandoc")
+  :config
+  (setq markdown-fontify-code-blocks-natively t))
+
 (provide 'init)
 ;;; init.el ends here
