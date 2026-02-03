@@ -281,5 +281,21 @@
   :config
   (setq markdown-fontify-code-blocks-natively t))
 
+;; hacker mode
+(use-package vterm
+  :init
+  (setq vterm-max-scrollback 1000000)
+  (add-hook 'vterm-mode-hook (lambda ()
+                               (display-fill-column-indicator-mode -1)
+                               (setq show-trailing-whitespace nil)))
+  :custom
+  (setq vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes"))
+
+(use-package vterm-toggle
+  :init
+  (setq vterm-toggle-scope 'project)
+  :bind
+  (("C-c t" . #'vterm-toggle)))
+
 (provide 'init)
 ;;; init.el ends here

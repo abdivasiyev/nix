@@ -27,6 +27,7 @@
       ];
       brews = [
         "mas"
+        "libvterm"
       ];
       masApps = {
         "SSTP Connect" = 1543667909;

@@ -42,6 +42,8 @@ in {
     pandoc
     yaml-language-server
     vscode-langservers-extracted
+    cmake
+    glibtool
   ];
 
   # Modules
