@@ -45,7 +45,9 @@
         ;; tramp
         tramp-auto-save-directory "/tmp"
         display-line-numbers-type t
-        display-line-numbers-width-start t)
+        display-line-numbers-width-start t
+        ;; deleting files into trash
+        delete-by-moving-to-trash t)
   ;; aliases
   (defalias 'yes-or-no-p 'y-or-n-p)
   ;; hooks
