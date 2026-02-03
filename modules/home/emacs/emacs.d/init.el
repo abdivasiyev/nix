@@ -161,6 +161,12 @@
         dashboard-set-file-icons t)
   (dashboard-setup-startup-hook))
 
+;; tracking coding time
+(use-package wakatime-mode
+  :ensure t
+  :init
+  (global-wakatime-mode))
+
 ;; dev tools for real engineers
 (use-package yasnippet
   :init
