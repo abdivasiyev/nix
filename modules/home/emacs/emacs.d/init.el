@@ -323,5 +323,16 @@
   :bind
   (("C-c t" . #'vterm-toggle)))
 
+;; highlight todos
+(use-package hl-todo
+  :init
+  (setq hl-todo-keyword-faces
+      '(("TODO" . (:inherit warning :inverse-video t))
+        ("WARNING" . (:inherit warning :inverse-video t))
+        ("FIXME" . (:inherit error :inverse-video t))
+        ("HACK" . (:inherit font-lock-constant-face :inverse-video t))
+        ("NOTE" . (:inherit success :inverse-video t))))
+  (add-hook 'prog-mode-hook 'hl-todo-mode))
+
 (provide 'init)
 ;;; init.el ends here
