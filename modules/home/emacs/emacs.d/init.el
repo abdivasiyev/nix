@@ -145,7 +145,10 @@
 (use-package inheritenv)
 
 ;; show git info on dired
-(use-package dired-git-info)
+(use-package dired-git-info
+  :config
+  (setq dgi-auto-hide-details-p nil)
+  (add-hook 'dired-after-readin-hook 'dired-git-info-auto-enable))
 
 ;; enable dired-extra
 (use-package dired-x
@@ -153,10 +156,25 @@
   :config
   (setq dired-omit-files
         (concat dired-omit-files "\\|^\\..+$")
-        dgi-auto-hide-details-p nil
         dired-listing-switches "-lah")
-  (setq-default dired-dwim-target t)
-  (add-hook 'dired-after-readin-hook 'dired-git-info-auto-enable))
+  (setq-default dired-dwim-target t))
+
+(use-package dired-toggle
+  :bind (("s-p" . #'dired-toggle)
+         :map dired-mode-map
+         ("q" . #'dired-toggle-quit)
+         ([remap dired-find-file] . #'dired-toggle-find-file)
+         ([remap dired-up-directory] . #'dired-toggle-up-directory))
+  :config
+  (setq dired-toggle-window-size 80)
+  (setq dired-toggle-window-side 'right)
+
+  ;; Optional, enable =visual-line-mode= for our narrow dired buffer:
+  (add-hook 'dired-toggle-mode-hook
+            (lambda () (interactive)
+              (visual-line-mode 1)
+              (setq-local visual-line-fringe-indicators '(nil right-curly-arrow))
+              (setq-local word-wrap nil))))
 
 ;; I don't know which key does what
 (use-package which-key
