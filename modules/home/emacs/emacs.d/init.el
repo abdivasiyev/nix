@@ -47,7 +47,9 @@
         display-line-numbers-type t
         display-line-numbers-width-start t
         ;; deleting files into trash
-        delete-by-moving-to-trash t)
+        delete-by-moving-to-trash t
+        ;; auto save session timeout
+        desktop-auto-save-timeout 3)
   ;; aliases
   (defalias 'yes-or-no-p 'y-or-n-p)
   ;; hooks
@@ -56,6 +58,7 @@
   (add-hook 'prog-mode-hook 'global-display-fill-column-indicator-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup)
   (global-auto-revert-mode t)
+  (desktop-save-mode 1)
   ;; set font
   (set-face-attribute 'default nil
                       :font "JetBrainsMono Nerd Font"
