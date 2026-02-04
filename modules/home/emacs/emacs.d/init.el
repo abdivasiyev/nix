@@ -68,6 +68,30 @@
                       :foreground "#717C7C"
                       :background "transparent"))
 
+;; line highlighting pulsation
+(use-package pulse
+  :ensure nil
+  :init
+  (defun pulse-line (&rest _)
+    "Pulse the current line."
+    (pulse-momentary-highlight-one-line (point)))
+  (defun pulse-copy (orig-fn &rest args)
+    "Pulse the region after copy/yank."
+    (apply orig-fn args)
+    (pulse-momentary-highlight-region (region-beginning) (region-end)))
+  (dolist (command '(scroll-up-command
+                     scroll-down-command
+                     windmove-left
+                     windmove-right
+                     windmove-up
+                     windmove-down
+                     move-to-window-line-top-bottom
+                     recenter-top-bottom
+                     other-window
+                     ))
+    (advice-add command :after #'pulse-line))
+  (advice-add 'kill-ring-save :around #'pulse-copy))
+
 ;; move lines up and down
 (use-package move-text
   :bind
