@@ -59,6 +59,7 @@
   (add-hook 'before-save-hook 'whitespace-cleanup)
   (global-auto-revert-mode t)
   (desktop-save-mode 1)
+  (global-hl-line-mode 1)
   ;; set font
   (set-face-attribute 'default nil
                       :font "JetBrainsMono Nerd Font"
