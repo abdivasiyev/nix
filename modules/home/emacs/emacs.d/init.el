@@ -55,6 +55,8 @@
   ;; disable mouse scrolling and sliding buffers
   (mouse-wheel-mode 0)
   (mac-mouse-wheel-mode 0)
+  ;; enable electric pairs
+  (electric-pair-mode 1)
   (global-set-key [wheel-up] 'ignore)
   (global-set-key [wheel-down] 'ignore)
   (global-set-key [wheel-left] 'ignore)
