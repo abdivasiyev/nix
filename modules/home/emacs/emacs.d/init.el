@@ -39,7 +39,7 @@
         auto-save-file-name-transforms `((".*" ,"~/.config/emacs/auto-saves" t))
         ;; tramp
         tramp-auto-save-directory "/tmp"
-        display-line-numbers-type t
+        display-line-numbers-type 'relative
         display-line-numbers-width-start t
         ;; deleting files into trash
         delete-by-moving-to-trash t
@@ -85,9 +85,7 @@
     "Pulse the region after copy/yank."
     (apply orig-fn args)
     (pulse-momentary-highlight-region (region-beginning) (region-end)))
-  (dolist (command '(scroll-up-command
-                     scroll-down-command
-                     windmove-left
+  (dolist (command '(windmove-left
                      windmove-right
                      windmove-up
                      windmove-down
