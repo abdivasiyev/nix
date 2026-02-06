@@ -27,11 +27,6 @@
                 indent-tabs-mode nil
                 global-auto-revert-non-file-buffer t ;; auto update non file buffers
                 whitespace-style '(face tabs trailing tab-mark spaces space-mark)
-                ;; scroll defaults
-                scroll-margin 8
-                scroll-conservatively 101
-                scroll-preserve-screen-position t
-                auto-window-vscroll nil
                 ;; fill column
                 fill-column 120)
   ;; global emacs variables
@@ -57,6 +52,17 @@
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
   (add-hook 'prog-mode-hook 'global-display-fill-column-indicator-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup)
+  ;; disable mouse scrolling and sliding buffers
+  (mouse-wheel-mode 0)
+  (global-set-key [wheel-up] 'ignore)
+  (global-set-key [wheel-down] 'ignore)
+  (global-set-key [wheel-left] 'ignore)
+  (global-set-key [wheel-right] 'ignore)
+  (global-set-key [double-wheel-up] 'ignore)
+  (global-set-key [double-wheel-down] 'ignore)
+  (global-set-key [double-wheel-left] 'ignore)
+  (global-set-key [double-wheel-right] 'ignore)
+
   (global-auto-revert-mode t)
   (desktop-save-mode 1)
   (global-hl-line-mode 1)
