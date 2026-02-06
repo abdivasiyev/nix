@@ -10,12 +10,10 @@
   git = import ./git.nix;
   tmux = import ./tmux;
   zsh = import ./zsh.nix;
-  kitty = import ./kitty.nix;
   secret = import ./secret.nix;
   vscode = import ./vscode;
   nvim = import ./nvim;
   starship = import ./starship.nix;
-  halloy = import ./halloy.nix;
   emacs = import ./emacs/default.nix;
   xdg = import ./xdg.nix;
 }
