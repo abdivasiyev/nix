@@ -54,6 +54,7 @@
   (add-hook 'before-save-hook 'whitespace-cleanup)
   ;; disable mouse scrolling and sliding buffers
   (mouse-wheel-mode 0)
+  (mac-mouse-wheel-mode 0)
   (global-set-key [wheel-up] 'ignore)
   (global-set-key [wheel-down] 'ignore)
   (global-set-key [wheel-left] 'ignore)
