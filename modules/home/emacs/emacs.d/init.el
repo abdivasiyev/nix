@@ -172,12 +172,6 @@
 ;; inherit environment into temporary buffers also when envrc loads them up
 (use-package inheritenv)
 
-;; show git info on dired
-(use-package dired-git-info
-  :config
-  (setq dgi-auto-hide-details-p nil)
-  (add-hook 'dired-after-readin-hook 'dired-git-info-auto-enable))
-
 ;; enable dired-extra
 (use-package dired-x
   :ensure nil
