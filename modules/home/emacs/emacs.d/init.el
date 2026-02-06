@@ -315,8 +315,11 @@
   :ensure t
   :hook (haskell-mode . lsp-deferred)
   :hook (literate-haskell-mode . lsp-deferred)
+  :hook (interactive-haskell-mode . lsp-deferred)
   :mode ("\\.hs\\'" . haskell-mode)
-        ("\\.lhs\\'" . literate-haskell-mode))
+        ("\\.lhs\\'" . literate-haskell-mode)
+        ("\\.hs\\'" . interactive-haskell-mode)
+        ("\\.lhs'" . interactive-haskell-mode))
 
 (use-package lsp-haskell
   :after lsp-mode
