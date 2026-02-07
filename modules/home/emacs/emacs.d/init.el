@@ -75,7 +75,9 @@
                       :height 160)
   (set-face-attribute 'fill-column-indicator nil
                       :foreground "#717C7C"
-                      :background "transparent"))
+                      :background "transparent")
+  :bind
+  (("s-n" . duplicate-line)))
 
 ;; line highlighting pulsation
 (use-package pulse
