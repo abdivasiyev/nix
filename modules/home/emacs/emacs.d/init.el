@@ -77,7 +77,10 @@
                       :foreground "#717C7C"
                       :background "transparent")
   :bind
-  (("s-n" . duplicate-line)))
+  (("s-n" . duplicate-line)
+   ("M-&" . 'project-async-shell-command)
+   ("M-!" . 'project-shell-command)
+   ("C-x c" . 'project-compile)))
 
 ;; line highlighting pulsation
 (use-package pulse
