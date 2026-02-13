@@ -389,5 +389,12 @@
         ("NOTE" . (:inherit success :inverse-video t))))
   (add-hook 'prog-mode-hook 'hl-todo-mode))
 
+;; auto-save file buffers
+(use-package super-save
+  :init
+  (setq super-save-auto-save-when-idle t
+        super-save-idle-duration 1)
+  (super-save-mode 1))
+
 (provide 'init)
 ;;; init.el ends here
