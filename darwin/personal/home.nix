@@ -39,7 +39,6 @@ in {
     shellcheck
     python3
     cloudflared
-    copilot-language-server
     pandoc
     yaml-language-server
     vscode-langservers-extracted
