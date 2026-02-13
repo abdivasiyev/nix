@@ -28,7 +28,12 @@
                 global-auto-revert-non-file-buffer t ;; auto update non file buffers
                 whitespace-style '(face tabs trailing tab-mark spaces space-mark)
                 ;; fill column
-                fill-column 120)
+                fill-column 120
+                ;; mouse scrolling defaults
+                scroll-margin 8
+                scroll-conservatively 101
+                scroll-preserve-screen-position t
+                auto-window-vscroll nil)
   ;; global emacs variables
   (setq initial-scratch-message nil
         confirm-kill-emacs 'yes-or-no-p
@@ -52,19 +57,8 @@
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
   (add-hook 'prog-mode-hook 'global-display-fill-column-indicator-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup)
-  ;; disable mouse scrolling and sliding buffers
-  (mouse-wheel-mode 0)
-  (mac-mouse-wheel-mode 0)
   ;; enable electric pairs
   (electric-pair-mode 1)
-  (global-set-key [wheel-up] 'ignore)
-  (global-set-key [wheel-down] 'ignore)
-  (global-set-key [wheel-left] 'ignore)
-  (global-set-key [wheel-right] 'ignore)
-  (global-set-key [double-wheel-up] 'ignore)
-  (global-set-key [double-wheel-down] 'ignore)
-  (global-set-key [double-wheel-left] 'ignore)
-  (global-set-key [double-wheel-right] 'ignore)
 
   (global-auto-revert-mode t)
   (desktop-save-mode 1)
