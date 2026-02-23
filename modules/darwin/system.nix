@@ -31,7 +31,7 @@
             "/System/Cryptexes/App/System/Applications/Safari.app"
             "/Applications/Telegram Desktop.app"
             # "${pkgs.vscode}/Applications/Visual Studio Code.app"
-            "${pkgs.emacs-macport}/Applications/Emacs.app"
+            "/Applications/Emacs.app"
             "${pkgs.postman}/Applications/Postman.app"
             "/System/Applications/Books.app"
           ];

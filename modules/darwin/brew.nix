@@ -24,6 +24,7 @@
         "telegram-desktop"
         "utm"
         "vlc"
+        "emacs-app"
       ];
       brews = [
         "mas"
