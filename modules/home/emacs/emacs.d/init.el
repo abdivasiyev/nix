@@ -383,5 +383,92 @@
         ("NOTE" . (:inherit success :inverse-video t))))
   (add-hook 'prog-mode-hook 'hl-todo-mode))
 
+;; org mode
+(use-package org
+  :hook
+  (org-mode . visual-line-mode)
+  (org-mode . org-indent-mode)
+
+  :custom
+  (org-directory "~/Documents/notes")
+  (org-agenda-files '("~/Documents/notes/inbox.org"
+                      "~/Documents/notes/todo.org"
+                      "~/Documents/notes/someday.org"
+                      "~/Documents/notes/verb.org"))
+  (org-default-notes-file "~/Documents/notes/inbox.org")
+  ;; TODO workflow
+  (org-todo-keywords
+   '((sequence "TODO(t)" "IN-PROGRESS(i!)" "WAITING(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
+  (org-log-done 'time)               ; timestamp when DONE
+  (org-log-into-drawer t)            ; keep log tidy in :LOGBOOK:
+
+  ;; Editing behavior
+  (org-return-follows-link t)        ; RET opens links
+  (org-hide-emphasis-markers t)      ; hide *bold* markers
+  (org-pretty-entities t)            ; render LaTeX symbols
+  (org-ellipsis " ▾")               ; nicer collapsed heading indicator
+  (org-startup-folded 'content)      ; open files showing headings only
+
+  ;; Refile
+  (org-refile-targets '((org-agenda-files :maxlevel . 3)))
+  (org-refile-use-outline-path t)
+  (org-outline-path-complete-in-steps nil)
+
+  ;; Agenda
+  (org-agenda-start-on-weekday 1)    ; week starts Monday
+  (org-agenda-span 'day)             ; default to day view
+  (org-agenda-window-setup 'current-window)
+
+  :bind
+  (("C-c a" . org-agenda)
+   ("C-c c" . org-capture)
+   ("C-c l" . org-store-link))
+
+  :config
+  ;; Capture templates
+  (setq org-capture-templates
+        '(("t" "Task" entry
+           (file+headline "~/Documents/notes/inbox.org" "Inbox")
+           "* TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n%a"
+           :empty-lines 1)
+
+          ("n" "Note" entry
+           (file+headline "~/Documents/notes/notes.org" "Notes")
+           "* %? :note:\n:PROPERTIES:\n:CREATED: %U\n:END:"
+           :empty-lines 1)
+
+          ("j" "Journal" entry
+           (file+datetree "~/Documents/notes/journal.org")
+           "* %<%H:%M> %?\n"
+           :empty-lines 1)
+
+          ("s" "Someday" entry
+           (file+headline "~/Documents/notes/someday.org" "Someday")
+           "* %?\n:PROPERTIES:\n:CREATED: %U\n:END:"
+           :empty-lines 1)))
+
+  ;; Save org buffers after refiling
+  (advice-add 'org-refile :after #'org-save-all-org-buffers))
+
+(use-package verb
+  :ensure t
+  :after org
+  :config
+  ;; set verb command map
+  (define-key org-mode-map (kbd "C-c C-r") verb-command-map))
+
+;; Visually distinguish src blocks from prose
+(use-package org-modern
+  :ensure t                             ; modern alternative to org-bullets
+  :hook (org-mode . org-modern-mode)
+  :custom
+  (org-modern-star '("◉" "○" "◈" "◇" "✸"))
+  (org-modern-table nil))            ; disable if you don't like table styling
+
+;; Structured template expansion (e.g. <s TAB → src block)
+(use-package org-tempo
+  :ensure nil                        ; built-in, no install needed
+  :after org)
+
 (provide 'init)
 ;;; init.el ends here
