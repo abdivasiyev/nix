@@ -182,9 +182,6 @@
 (use-package dired-x
   :ensure nil
   :config
-  (setq dired-omit-files
-        (concat dired-omit-files "\\|^\\..+$")
-        dired-listing-switches "-lah")
   (setq-default dired-dwim-target t))
 
 (use-package dired-toggle
