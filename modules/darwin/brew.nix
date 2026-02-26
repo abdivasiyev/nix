@@ -29,6 +29,7 @@
       brews = [
         "mas"
         "libvterm"
+        "coreutils"
       ];
       masApps = {
         "SSTP Connect" = 1543667909;

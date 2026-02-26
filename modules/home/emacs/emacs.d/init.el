@@ -184,6 +184,9 @@
   :config
   (setq-default dired-dwim-target t))
 
+(when (eq system-type 'darwin)
+  (setq insert-directory-program "/opt/homebrew/bin/gls"))
+
 (use-package dired-toggle
   :bind (("s-p" . #'dired-toggle)
          :map dired-mode-map
