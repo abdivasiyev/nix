@@ -25,6 +25,7 @@
         "utm"
         "vlc"
         "emacs-app"
+        "zen"
       ];
       brews = [
         "mas"
