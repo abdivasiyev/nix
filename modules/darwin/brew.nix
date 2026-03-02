@@ -26,11 +26,13 @@
         "vlc"
         "emacs-app"
         "zen"
+        "claude-code"
       ];
       brews = [
         "mas"
         "libvterm"
         "coreutils"
+        "sleepwatcher"
       ];
       masApps = {
         "SSTP Connect" = 1543667909;
