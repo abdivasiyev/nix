@@ -76,6 +76,15 @@
    ("M-!" . 'project-shell-command)
    ("C-x c" . 'project-compile)))
 
+;; move between window splits
+(use-package windmove-mode
+  :ensure nil
+  :bind
+  (("M-h" . 'windmove-left)
+   ("M-l" . 'windmove-right)
+   ("M-k" . 'windmove-up)
+   ("M-j" . 'windmove-down)))
+
 ;; line highlighting pulsation
 (use-package pulse
   :ensure nil
