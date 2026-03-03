@@ -480,5 +480,19 @@
   :ensure nil                        ; built-in, no install needed
   :after org)
 
+;; news feed for programming
+(use-package newsticker
+  :ensure nil
+  :init
+  (setq-default newsticker-url-list-defaults '(("kun.uz" "https://kun.uz/news/rss" nil 3600)
+                                               ("dev.to" "https://dev.to/feed" nil 3600)
+                                               ("Github" "https://githubengineering.com/atom.xml" nil 3600)
+                                               ("Stripe" "https://stripe.com/blog/feed.rss" nil 3600)
+                                               ("Netflix" "https://medium.com/feed/netflix-techblog" nil 3600)
+                                               ("Slack" "https://slack.engineering/feed/" nil 3600)
+                                               ("Meta" "https://code.facebook.com/posts/rss" nil 3600)
+                                               ("Google" "https://developers.googleblog.com/feeds/posts/default" nil 3600)
+                                               ("Lexi-Lambda" "https://lexi-lambda.github.io/feeds/all.rss.xml" nil 3600))))
+
 (provide 'init)
 ;;; init.el ends here
