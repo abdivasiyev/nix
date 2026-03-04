@@ -23,7 +23,6 @@
         "utm"
         "vlc"
         "emacs-app"
-        "zen"
         "claude-code"
       ];
       brews = [
