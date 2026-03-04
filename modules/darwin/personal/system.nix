@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   config = {
     system = {
       activationScripts.script.text = ''
@@ -30,7 +26,7 @@
             "/System/Applications/Calendar.app"
             "/Applications/Redis Insight.app"
             "/System/Cryptexes/App/System/Applications/Safari.app"
-            "${inputs.zen-browser.packages."aarch64-darwin".twilight}/Applications/Zen Browser (Twilight).app"
+            "/Applications/Zen.app"
             "/Applications/Telegram Desktop.app"
             # "${pkgs.vscode}/Applications/Visual Studio Code.app"
             "/Applications/Emacs.app"

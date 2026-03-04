@@ -16,5 +16,4 @@
   starship = import ./starship.nix;
   emacs = import ./emacs/default.nix;
   xdg = import ./xdg.nix;
-  zen = import ./zen.nix;
 }
