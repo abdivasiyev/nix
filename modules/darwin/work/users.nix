@@ -25,7 +25,7 @@
       useUserPackages = true;
 
       users = {
-        abdivasiyev = import ../../darwin/personal/home.nix;
+        abdivasiyev = import ../../../darwin/work/home.nix;
       };
 
       extraSpecialArgs = {

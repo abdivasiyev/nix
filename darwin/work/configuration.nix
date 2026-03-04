@@ -11,10 +11,10 @@
     inputs.home-manager.darwinModules.home-manager
 
     # Personal modules
-    outputs.darwinPersonalModules.brew
-    outputs.darwinPersonalModules.users
-    outputs.darwinPersonalModules.system
-    outputs.darwinPersonalModules.secret
+    outputs.darwinWorkModules.brew
+    outputs.darwinWorkModules.users
+    outputs.darwinWorkModules.system
+    outputs.darwinWorkModules.secret
   ];
 
   nix = {

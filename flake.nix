@@ -65,7 +65,8 @@
 
     # Reusable darwin modules you might want to export
     # These are usually stuff you would upstream into nix-darwin
-    darwinModules = import ./modules/darwin;
+    darwinPersonalModules = import ./modules/darwin/personal;
+    darwinWorkModules = import ./modules/darwin/work;
 
     # Reusable home-manager modules you might want to export
     # These are usually stuff you would upstream into home-manager
@@ -76,6 +77,12 @@
       personal = nix-darwin.lib.darwinSystem {
         modules = [
           ./darwin/personal/configuration.nix
+        ];
+        specialArgs = {inherit inputs outputs;};
+      };
+      work = nix-darwin.lib.darwinSystem {
+        modules = [
+          ./darwin/work/configuration.nix
         ];
         specialArgs = {inherit inputs outputs;};
       };
