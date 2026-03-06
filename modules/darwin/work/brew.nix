@@ -27,6 +27,7 @@
         "emacs-app"
         "zen"
         "claude-code"
+        "betterdisplay"
       ];
       brews = [
         "mas"
