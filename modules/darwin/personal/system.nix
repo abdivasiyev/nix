@@ -32,6 +32,7 @@
             "/Applications/Emacs.app"
             "${pkgs.postman}/Applications/Postman.app"
             "/System/Applications/Books.app"
+            "/Applications/Blender.app"
           ];
         };
 

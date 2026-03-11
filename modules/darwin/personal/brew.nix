@@ -26,6 +26,7 @@
         "zen"
         "claude-code"
         "betterdisplay"
+        "blender"
       ];
       brews = [
         "mas"
