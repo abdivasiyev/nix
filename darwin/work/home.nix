@@ -38,6 +38,7 @@ in {
     vscode-langservers-extracted
     cmake
     glibtool
+    nodePackages.nodejs
   ];
 
   # Modules
