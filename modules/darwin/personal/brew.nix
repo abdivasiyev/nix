@@ -27,6 +27,7 @@
         "claude-code"
         "betterdisplay"
         "blender"
+        "protonvpn"
       ];
       brews = [
         "mas"

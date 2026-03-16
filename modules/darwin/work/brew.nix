@@ -28,6 +28,7 @@
         "zen"
         "claude-code"
         "betterdisplay"
+        "protonvpn"
       ];
       brews = [
         "mas"
