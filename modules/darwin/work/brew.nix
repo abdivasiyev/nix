@@ -35,6 +35,7 @@
         "libvterm"
         "coreutils"
         "sleepwatcher"
+        "gh"
       ];
       masApps = {
         "SSTP Connect" = 1543667909;
