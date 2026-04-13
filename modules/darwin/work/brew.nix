@@ -34,7 +34,6 @@
         "mas"
         "libvterm"
         "coreutils"
-        "sleepwatcher"
         "gh"
       ];
       masApps = {
