@@ -28,7 +28,7 @@
     "go.useLanguageServer": true,
     "workbench.colorTheme": "Gruvbox Dark Hard",
     "workbench.preferredDarkColorTheme": "Gruvbox Dark Hard",
-    "workbench.preferredLightColorTheme": "Default Light Modern",
+    "workbench.preferredLightColorTheme": "Light Modern",
     "window.autoDetectColorScheme": true,
     "workbench.iconTheme": "material-icon-theme",
     "workbench.productIconTheme": "material-product-icons",
