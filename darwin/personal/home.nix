@@ -42,7 +42,7 @@ in {
     outputs.homeModules.eza
     outputs.homeModules.bat
     outputs.homeModules.secret
-    # outputs.homeModules.vscode
+    outputs.homeModules.vscode
     outputs.homeModules.nvim
     outputs.homeModules.starship
     outputs.homeModules.emacs
