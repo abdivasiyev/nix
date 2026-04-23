@@ -19,10 +19,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Nix Homebrew repository
-    # (suggested to remove, nix-darwin already supports it)
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-
     # Collection of fancy nix stuff
     # flake-utils.url = "github:numtide/flake-utils";
 
