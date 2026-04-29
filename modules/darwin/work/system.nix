@@ -21,6 +21,7 @@
           persistent-apps = [
             "/System/Applications/Apps.app"
             "/System/Applications/Mail.app"
+            "/Applications/Microsoft Outlook.app"
             "/System/Applications/Photos.app"
             "/System/Applications/Messages.app"
             "/System/Applications/Calendar.app"
@@ -33,7 +34,7 @@
             "/Applications/Telegram Desktop.app"
             "${pkgs.vscode}/Applications/Visual Studio Code.app"
             "/Applications/Emacs.app"
-            "${pkgs.postman}/Applications/Postman.app"
+            "/Applications/Bruno.app"
             "/System/Applications/Books.app"
           ];
         };

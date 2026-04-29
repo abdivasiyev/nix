@@ -22,6 +22,7 @@
         "claude-code"
         "betterdisplay"
         "protonvpn"
+        "bruno"
       ];
       brews = [
         "mas"
@@ -32,6 +33,7 @@
       masApps = {
         "SSTP Connect" = 1543667909;
         "AWS Extend Switch Roles" = 1592710340;
+        "Microsoft Outlook" = 985367838;
       };
     };
   };

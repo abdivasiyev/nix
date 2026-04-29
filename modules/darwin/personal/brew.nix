@@ -26,6 +26,7 @@
         "mas"
         "libvterm"
         "coreutils"
+        "bruno"
       ];
       masApps = {
       };

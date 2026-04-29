@@ -30,7 +30,7 @@
             "/Applications/Telegram Desktop.app"
             "${pkgs.vscode}/Applications/Visual Studio Code.app"
             "/Applications/Emacs.app"
-            "${pkgs.postman}/Applications/Postman.app"
+            "/Applications/Bruno.app"
             "/System/Applications/Books.app"
             "/Applications/Blender.app"
           ];
