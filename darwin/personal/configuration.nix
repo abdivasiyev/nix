@@ -7,6 +7,7 @@
   # Import your modules here
   imports = [
     # Abstraction from repos
+    inputs.nix-homebrew.darwinModules.nix-homebrew
     inputs.home-manager.darwinModules.home-manager
 
     # Personal modules
@@ -22,7 +23,13 @@
 
   # Allow not open source packages
   # E.g: google-chrome, jetbrains
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowBroken = true;
+    };
+    overlays = outputs.overlays;
+  };
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono

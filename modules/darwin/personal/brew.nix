@@ -1,5 +1,13 @@
 {...}: {
   config = {
+    nix-homebrew = {
+      enable = true;
+      enableRosetta = true;
+      user = "abdivasiyev";
+      autoMigrate = true;
+      enableZshIntegration = true;
+    };
+
     homebrew = {
       enable = true;
       user = "abdivasiyev";
@@ -8,6 +16,8 @@
         autoUpdate = true;
         upgrade = true;
       };
+      taps = [
+      ];
       casks = [
         "jetbrains-toolbox"
         "redis-insight"
@@ -21,12 +31,12 @@
         "betterdisplay"
         "blender"
         "protonvpn"
+        "bruno"
       ];
       brews = [
         "mas"
         "libvterm"
         "coreutils"
-        "bruno"
       ];
       masApps = {
       };

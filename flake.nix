@@ -3,21 +3,24 @@
 
   inputs = {
     # If your configurations are only for darwin system
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
 
     # Nix Darwin
     # Keep version same as your nixpkgs as much as possible
     nix-darwin = {
-      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Home Manager
     # Keep version same as nixpkgs
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Nix Homebrew repository
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
     # Collection of fancy nix stuff
     # flake-utils.url = "github:numtide/flake-utils";
@@ -48,6 +51,9 @@
       "aarch64-darwin"
     ];
 
+    # Overlays for some packages
+    overlays = import ./overlays;
+
     # For every system... generate attributes...
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
@@ -58,6 +64,8 @@
     devShells = forAllSystems (system: {
       default = import ./shell.nix {pkgs = nixpkgs.legacyPackages.${system};};
     });
+
+    overlays = overlays;
 
     # Reusable darwin modules you might want to export
     # These are usually stuff you would upstream into nix-darwin
@@ -74,13 +82,13 @@
         modules = [
           ./darwin/personal/configuration.nix
         ];
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {inherit inputs outputs overlays;};
       };
       work = nix-darwin.lib.darwinSystem {
         modules = [
           ./darwin/work/configuration.nix
         ];
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {inherit inputs outputs overlays;};
       };
     };
   };

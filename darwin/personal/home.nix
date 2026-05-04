@@ -23,7 +23,7 @@ in {
     alejandra
     lua-language-server
     ripgrep
-    jdk23
+    jdk25
     shellcheck
     python3
     cloudflared

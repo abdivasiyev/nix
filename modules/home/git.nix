@@ -1,13 +1,13 @@
 {...}: {
   programs.git = {
     enable = true;
-    difftastic = {
-      enable = true;
-      enableAsDifftool = true;
-    };
     lfs.enable = true;
-    userName = "Asliddin Abdivasiyev";
-    userEmail = "asliddin.abdivasiyev@gmail.com";
+    settings = {
+      user = {
+        name = "Asliddin Abdivasiyev";
+        email = "asliddin.abdivasiyev@gmail.com";
+      };
+    };
     ignores = [
       ".DS_Store"
       ".vscode/"
@@ -22,5 +22,13 @@
       "*#"
       ".#*"
     ];
+  };
+
+  programs.difftastic = {
+    enable = true;
+    git = {
+      enable = true;
+      diffToolMode = true;
+    };
   };
 }

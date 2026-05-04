@@ -30,7 +30,7 @@ in {
     ripgrep
     natscli
     werf
-    jdk23
+    jdk25
     shellcheck
     python3
     pandoc
