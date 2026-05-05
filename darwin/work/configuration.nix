@@ -15,6 +15,9 @@
     outputs.darwinWorkModules.users
     outputs.darwinWorkModules.system
     outputs.darwinWorkModules.secret
+
+    # Services
+    inputs.telegram-teams-server.darwinModules.default
   ];
 
   nix = {
@@ -23,7 +26,13 @@
 
   # Allow not open source packages
   # E.g: google-chrome, jetbrains
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowBroken = true;
+    };
+    overlays = outputs.overlays;
+  };
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono

@@ -30,6 +30,11 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Telegram -> Microsoft Teams bridge
+    telegram-teams-server = {
+      url = "github:abdivasiyev/telegram-teams-server";
+    };
   };
 
   outputs = {

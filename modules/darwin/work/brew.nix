@@ -39,8 +39,9 @@
         "gh"
       ];
       masApps = {
-        "SSTP Connect" = 1543667909;
-        "AWS Extend Switch Roles" = 1592710340;
+        # TODO: uncomment when homebrew fixes mas version
+        # "SSTP Connect" = 1543667909;
+        # "AWS Extend Switch Roles" = 1592710340;
       };
     };
   };

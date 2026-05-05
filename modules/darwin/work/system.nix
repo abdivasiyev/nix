@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   config = {
     system = {
       activationScripts.script.text = ''
@@ -70,6 +74,14 @@
     services = {
       openssh = {
         enable = true;
+      };
+
+      telegram-teams-server = {
+        enable = true;
+        user = "abdivasiyev";
+        apiIdFile = "${config.sops.secrets.telegramApiId.path}";
+        apiHashFile = "${config.sops.secrets.telegramApiHash.path}";
+        webhookUrlFile = "${config.sops.secrets.telegramBridgeWebhook.path}";
       };
     };
   };
