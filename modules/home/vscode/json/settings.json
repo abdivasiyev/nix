@@ -6,6 +6,8 @@
     "[json]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
+    "extensions.autoUpdate": false,
+    "update.mode": "none",
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 100,
     "extensions.autoCheckUpdates": true,
