@@ -77,7 +77,7 @@
       };
 
       telegram-teams-server = {
-        enable = true;
+        enable = false;
         user = "abdivasiyev";
         apiIdFile = "${config.sops.secrets.telegramApiId.path}";
         apiHashFile = "${config.sops.secrets.telegramApiHash.path}";
