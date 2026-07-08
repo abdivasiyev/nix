@@ -32,6 +32,7 @@ in {
     vscode-langservers-extracted
     cmake
     glibtool
+    asciinema
   ];
 
   # Modules
