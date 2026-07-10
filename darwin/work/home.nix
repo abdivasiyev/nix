@@ -39,6 +39,8 @@ in {
     cmake
     glibtool
     nodePackages.nodejs
+    localstack
+    bun
   ];
 
   # Modules
