@@ -325,30 +325,29 @@
   :hook (haskell-mode . lsp-deferred)
   :hook (literate-haskell-mode . lsp-deferred)
   :hook (interactive-haskell-mode . lsp-deferred)
-  :mode ("\\.hs\\'" . haskell-mode)
-        ("\\.lhs\\'" . literate-haskell-mode)
-        ("\\.hs\\'" . interactive-haskell-mode)
-        ("\\.lhs'" . interactive-haskell-mode))
+  :mode (("\\.hs\\'" . haskell-mode)
+         ("\\.lhs\\'" . haskell-literate-mode)))
 
 (use-package lsp-haskell
   :after lsp-mode
   :config
-  (setq lsp-haskell-server-path "haskell-language-server-wrapper"
+  (setq lsp-haskell-server-path "haskell-language-server"
         lsp-haskell-server-args nil
+   		lsp-log-io nil
         lsp-haskell-formatting-provider "fourmolu")) ;; or "brittany"/"ormolu"
 
 ;; yaml mode for .yml, .yaml files
-(use-package yaml-mode
-  :hook (yaml-mode . lsp-deferred))
+(use-package yaml-ts-mode
+  :hook (yaml-ts-mode . lsp-deferred))
 
 ;; json mode for .json files
-(use-package json-mode
-  :hook (json-mode . lsp-deferred)
+(use-package json-ts-mode
+  :hook (json-ts-mode . lsp-deferred)
   :mode "\\.json\\'")
 
 ;; dockerfile mode for Dockerfile files
-(use-package dockerfile-mode
-  :hook (dockerfile-mode . lsp-deferred)
+(use-package dockerfile-ts-mode
+  :hook (dockerfile-ts-mode . lsp-deferred)
   :mode "Dockerfile\\'")
 
 ;; docker-compose mode

@@ -9,6 +9,8 @@
   migrate = pkgs.go-migrate.overrideAttrs (oldAttrs: {
     tags = ["postgres"];
   });
+
+  hpkgs = pkgs.haskell.packages."ghc912";
 in {
   home.packages = with pkgs; [
     docker_29
@@ -41,6 +43,15 @@ in {
     nodePackages.nodejs
     localstack
     bun
+
+    # Haskell stuff
+    hpkgs.cabal-install
+    hpkgs.cabal-add
+    hpkgs.cabal-gild
+    hpkgs.haskell-language-server
+    hpkgs.fourmolu
+    hpkgs.ghc
+    hpkgs.ghcide
   ];
 
   # Modules
