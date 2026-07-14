@@ -17,7 +17,7 @@
     outputs.darwinWorkModules.secret
 
     # Services
-    inputs.telegram-teams-server.darwinModules.default
+    # inputs.telegram-teams-server.darwinModules.default
   ];
 
   nix = {
