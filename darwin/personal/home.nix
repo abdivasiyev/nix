@@ -4,15 +4,13 @@
   config,
   ...
 }: let
+  hpkgs = pkgs.haskell.packages."ghc912";
 in {
   home.packages = with pkgs; [
     docker_29
     docker-compose
     colima
     btop
-    postman
-    # disabled, becuase I migrated to Emacs
-    # vscode
     age
     sops
     kubectl
@@ -33,6 +31,15 @@ in {
     cmake
     glibtool
     asciinema
+
+    # Haskell stuff
+    hpkgs.cabal-install
+    hpkgs.cabal-add
+    hpkgs.cabal-gild
+    hpkgs.haskell-language-server
+    hpkgs.fourmolu
+    hpkgs.ghc
+    hpkgs.ghcide
   ];
 
   # Modules
