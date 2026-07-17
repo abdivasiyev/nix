@@ -327,7 +327,8 @@
   :hook (literate-haskell-mode . lsp-deferred)
   :hook (interactive-haskell-mode . lsp-deferred)
   :mode (("\\.hs\\'" . haskell-mode)
-         ("\\.lhs\\'" . haskell-literate-mode)))
+         ("\\.lhs\\'" . haskell-literate-mode)
+         ("\\.cabal\\'" . haskell-cabal-mode)))
 
 (use-package lsp-haskell
   :after lsp-mode
