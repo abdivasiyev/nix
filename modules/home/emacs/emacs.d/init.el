@@ -316,6 +316,7 @@
           (unusedvariable . t))))
 
 (use-package nix-mode
+  :ensure t
   :hook (nix-mode . lsp-deferred)
   :mode "\\.nix\\'")
 
