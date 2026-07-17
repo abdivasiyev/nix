@@ -335,7 +335,7 @@
   :config
   (setq lsp-haskell-server-path "haskell-language-server"
         lsp-haskell-server-args nil
-   		lsp-log-io nil
+   		  lsp-log-io nil
         lsp-haskell-formatting-provider "fourmolu"
         lsp-haskell-plugin-fourmolu-config-external t)) ;; or "brittany"/"ormolu"
 
