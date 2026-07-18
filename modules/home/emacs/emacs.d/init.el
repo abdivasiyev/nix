@@ -46,6 +46,7 @@
         tramp-auto-save-directory "/tmp"
         display-line-numbers-type 'relative
         display-line-numbers-width-start t
+        column-number-mode t
         ;; deleting files into trash
         delete-by-moving-to-trash t
         ;; auto save session timeout
