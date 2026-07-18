@@ -114,10 +114,10 @@
   (("M-p" . move-text-up)
    ("M-n" . move-text-down)))
 
-;; load the nerds' theme
-(use-package gruber-darker-theme)
+;; load the best theme
+(use-package gruvbox-theme)
 
-(load-theme 'gruber-darker t)
+(load-theme 'gruvbox-dark-hard t)
 
 ;; ido mode
 (use-package ido-completing-read+
