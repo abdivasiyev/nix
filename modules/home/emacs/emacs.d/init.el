@@ -15,6 +15,42 @@
 (setq use-package-always-defer t
       use-package-always-ensure t)
 
+;; font ligatures
+(dolist (char/ligature-re
+         `((?-  . ,(rx (or (or "-->" "-<<" "->>" "-|" "-~" "-<" "->") (+ "-"))))
+           (?/  . ,(rx (or (or "/==" "/=" "/>" "/**" "/*") (+ "/"))))
+           (?*  . ,(rx (or (or "*>" "*/") (+ "*"))))
+           (?<  . ,(rx (or (or "<<=" "<<-" "<|||" "<==>" "<!--" "<=>" "<||" "<|>" "<-<"
+                               "<==" "<=<" "<-|" "<~>" "<=|" "<~~" "<$>" "<+>" "</>"
+                               "<*>" "<->" "<=" "<|" "<:" "<>"  "<$" "<-" "<~" "<+"
+                               "</" "<*")
+                           (+ "<"))))
+           (?:  . ,(rx (or (or ":?>" "::=" ":>" ":<" ":?" ":=") (+ ":"))))
+           (?=  . ,(rx (or (or "=>>" "==>" "=/=" "=!=" "=>" "=:=") (+ "="))))
+           (?!  . ,(rx (or (or "!==" "!=") (+ "!"))))
+           (?>  . ,(rx (or (or ">>-" ">>=" ">=>" ">]" ">:" ">-" ">=") (+ ">"))))
+           (?&  . ,(rx (+ "&")))
+           (?|  . ,(rx (or (or "|->" "|||>" "||>" "|=>" "||-" "||=" "|-" "|>"
+                               "|]" "|}" "|=")
+                           (+ "|"))))
+           (?.  . ,(rx (or (or ".?" ".=" ".-" "..<") (+ "."))))
+           (?+  . ,(rx (or "+>" (+ "+"))))
+           (?\[ . ,(rx (or "[<" "[|")))
+           (?\{ . ,(rx "{|"))
+           (?\? . ,(rx (or (or "?." "?=" "?:") (+ "?"))))
+           (?#  . ,(rx (or (or "#_(" "#[" "#{" "#=" "#!" "#:" "#_" "#?" "#(")
+                           (+ "#"))))
+           (?\; . ,(rx (+ ";")))
+           (?_  . ,(rx (or "_|_" "__")))
+           (?~  . ,(rx (or "~~>" "~~" "~>" "~-" "~@")))
+           (?$  . ,(rx "$>"))
+           (?^  . ,(rx "^="))
+           (?\] . ,(rx "]#"))))
+  (let ((char (car char/ligature-re))
+        (ligature-re (cdr char/ligature-re)))
+    (set-char-table-range composition-function-table char
+                          `([,ligature-re 0 font-shape-gstring]))))
+
 (use-package emacs
   :init
   ;; mappings for darwin
@@ -60,6 +96,10 @@
   (add-hook 'before-save-hook 'whitespace-cleanup)
   ;; enable electric pairs
   (electric-pair-mode 1)
+
+  ;; disable global composition
+  (add-hook 'prog-mode-hook 'auto-composition-mode)
+  (global-auto-composition-mode -1)
 
   (global-auto-revert-mode t)
   (desktop-save-mode 1)
