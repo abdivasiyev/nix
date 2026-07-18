@@ -155,7 +155,8 @@
    ("M-n" . move-text-down)))
 
 ;; load the best theme
-(use-package gruvbox-theme)
+(use-package gruvbox-theme
+  :ensure t)
 
 (load-theme 'gruvbox-dark-hard t)
 
