@@ -146,6 +146,7 @@
 
 ;; Magit(c) - magic of the Git
 (use-package magit
+  :ensure t
   :init
   (setq magit-auto-revert-mode t)
   :bind
@@ -159,11 +160,6 @@
   (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
   (global-diff-hl-mode)
   (diff-hl-flydiff-mode))
-
-(use-package difftastic-bindings
-  :ensure difftastic
-  :config
-  (difftastic-bindings-mode))
 
 ;; magically undo changes
 (use-package vundo
@@ -187,6 +183,11 @@
 
 ;; inherit environment into temporary buffers also when envrc loads them up
 (use-package inheritenv)
+
+;; editorconfig
+(use-package editorconfig
+  :ensure t
+  :config (editorconfig-mode t))
 
 ;; enable dired-extra
 (use-package dired-x
@@ -226,6 +227,9 @@
 
 ;; featured dashboard
 (use-package nerd-icons)
+(use-package nerd-icons-dired
+  :hook (dired-mode . nerd-icons-dired-mode))
+
 (use-package dashboard
   :init
   (setq initial-buffer-choice 'dashboard-open)
@@ -487,15 +491,7 @@
 (use-package newsticker
   :ensure nil
   :init
-  (setq-default newsticker-url-list-defaults '(("kun.uz" "https://kun.uz/news/rss" nil 3600)
-                                               ("dev.to" "https://dev.to/feed" nil 3600)
-                                               ("Github" "https://githubengineering.com/atom.xml" nil 3600)
-                                               ("Stripe" "https://stripe.com/blog/feed.rss" nil 3600)
-                                               ("Netflix" "https://medium.com/feed/netflix-techblog" nil 3600)
-                                               ("Slack" "https://slack.engineering/feed/" nil 3600)
-                                               ("Meta" "https://code.facebook.com/posts/rss" nil 3600)
-                                               ("Google" "https://developers.googleblog.com/feeds/posts/default" nil 3600)
-                                               ("Lexi-Lambda" "https://lexi-lambda.github.io/feeds/all.rss.xml" nil 3600))))
+  (setq-default newsticker-url-list-defaults '(("kun.uz" "https://kun.uz/news/rss" nil 3600))))
 
 (provide 'init)
 ;;; init.el ends here
