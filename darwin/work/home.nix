@@ -65,7 +65,7 @@ in {
     outputs.homeModules.starship
     outputs.homeModules.emacs
     outputs.homeModules.xdg
-    outputs.homeModules.vscode
+    # outputs.homeModules.vscode
   ];
 
   sops.secrets = {

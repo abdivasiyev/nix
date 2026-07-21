@@ -27,7 +27,6 @@
         "vlc"
         "emacs-app"
         "zen"
-        "claude-code"
         "betterdisplay"
         "protonvpn"
         "bruno"
