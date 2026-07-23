@@ -5,6 +5,9 @@
   ...
 }: let
   hpkgs = pkgs.haskell.packages."ghc912";
+  migrate = pkgs.go-migrate.overrideAttrs (oldAttrs: {
+    tags = ["postgres"];
+  });
 in {
   home.packages = with pkgs; [
     docker_29
@@ -31,6 +34,13 @@ in {
     cmake
     glibtool
     asciinema
+
+    # golang
+    go
+    gopls
+    delve
+    go-swag
+    migrate
 
     # Haskell stuff
     hpkgs.cabal-install
