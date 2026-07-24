@@ -43,6 +43,7 @@ in {
     nodePackages.nodejs
     localstack
     bun
+    gitlogue
 
     # Haskell stuff
     hpkgs.cabal-install
