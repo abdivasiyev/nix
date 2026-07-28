@@ -413,6 +413,18 @@
   :config
   (setq markdown-fontify-code-blocks-natively t))
 
+;; c mode
+(use-package c-mode
+  :ensure nil
+  :mode "\\.c\\'"
+  :hook (c-mode . lsp-deferred))
+
+;; c++ mode
+(use-package c++-mode
+  :ensure nil
+  :mode "\\.cpp\\'"
+  :hook (c++-mode . lsp-deferred))
+
 ;; hacker mode
 (use-package vterm
   :init
