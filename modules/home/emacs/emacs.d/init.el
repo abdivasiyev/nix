@@ -425,6 +425,10 @@
   :mode "\\.cpp\\'"
   :hook (c++-mode . lsp-deferred))
 
+;; theorem provers mode
+(use-package proof-general
+  :ensure t)
+
 ;; hacker mode
 (use-package vterm
   :init
