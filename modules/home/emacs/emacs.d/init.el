@@ -303,6 +303,10 @@
 (use-package yasnippet-snippets
   :after 'yasnippet)
 
+(use-package company-coq
+  :ensure t
+  :hook (coq-mode . company-coq-mode))
+
 (use-package company
   :init
   (add-hook 'after-init-hook 'global-company-mode))
