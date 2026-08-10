@@ -31,6 +31,7 @@
         "blender"
         "protonvpn"
         "bruno"
+        "discord"
       ];
       brews = [
         "mas"

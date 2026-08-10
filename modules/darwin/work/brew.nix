@@ -24,12 +24,13 @@
         "macs-fan-control"
         "telegram-desktop"
         "orbstack"
-        # "vlc"
+        "vlc"
         "emacs-app"
         "zen"
-        # "betterdisplay"
+        "betterdisplay"
         "protonvpn"
         "bruno"
+        "discord"
       ];
       brews = [
         "mas"
