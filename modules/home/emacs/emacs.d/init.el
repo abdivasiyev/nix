@@ -154,11 +154,10 @@
   (("M-p" . move-text-up)
    ("M-n" . move-text-down)))
 
-;; load the best theme
-(use-package gruvbox-theme
-  :ensure t)
-
-(load-theme 'gruvbox-dark-hard t)
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-theme 'doom-molokai t))
 
 ;; ido mode
 (use-package ido-completing-read+
