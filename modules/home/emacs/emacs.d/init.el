@@ -155,9 +155,9 @@
    ("M-n" . move-text-down)))
 
 (use-package doom-themes
-  :ensure t
-  :config
-  (load-theme 'doom-molokai t))
+  :ensure t)
+
+(load-theme 'doom-molokai t)
 
 ;; ido mode
 (use-package ido-completing-read+
