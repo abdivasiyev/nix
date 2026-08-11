@@ -562,5 +562,10 @@
   :init
   (setq-default newsticker-url-list-defaults '(("kun.uz" "https://kun.uz/news/rss" nil 3600))))
 
+(use-package kubed
+  :if (executable-find "kubectl")
+  :bind ("C-c k" . kubed-prefix-map)
+  :config (setq kubed-kubectl-program "kubectl-readonly"))
+
 (provide 'init)
 ;;; init.el ends here

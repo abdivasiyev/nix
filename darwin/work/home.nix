@@ -19,6 +19,7 @@ in {
     age
     sops
     kubectl
+    kubectl-readonly
     awscli2
     inetutils
     jq
