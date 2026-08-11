@@ -7,6 +7,9 @@
         name = "Asliddin Abdivasiyev";
         email = "asliddin.abdivasiyev@gmail.com";
       };
+      github = {
+        user = "abdivasiyev";
+      };
     };
     ignores = [
       ".DS_Store"

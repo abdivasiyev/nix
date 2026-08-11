@@ -192,6 +192,11 @@
   :bind
   (("C-x g" . magit)))
 
+;; Forge
+(use-package forge
+  :ensure t
+  :after magit)
+
 ;; Highlight differences on buffer
 (use-package diff-hl
   :init
