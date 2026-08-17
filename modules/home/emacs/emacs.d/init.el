@@ -111,6 +111,15 @@
   (set-face-attribute 'fill-column-indicator nil
                       :foreground "#717C7C"
                       :background "transparent")
+
+  :custom
+  (enable-recursive-minibuffers t)
+  (completion-ignore-case t)
+  (read-buffer-completion-ignore-case t)
+  (read-file-name-completion-ignore-case t)
+  ;; hide commands irrelevant to the current mode from M-x
+  (read-extended-command-predicate #'command-completion-default-include-p)
+
   :bind
   (("s-n" . duplicate-line)
    ("M-&" . 'project-async-shell-command)
@@ -159,12 +168,35 @@
 
 (load-theme 'doom-molokai t)
 
-;; ido mode
-(use-package ido-completing-read+
+(use-package vertico
+  :ensure t
   :init
-  (ido-mode 1)
-  (ido-everywhere 1)
-  (ido-ubiquitous-mode 1))
+  (vertico-mode 1)
+  :custom
+  (vertico-cycle t)
+  (vertico-count 15))
+
+;; ido-style path editing in find-file
+(use-package vertico-directory
+  :ensure nil                ; ships inside the vertico package
+  :after vertico
+  :bind (:map vertico-map
+              ("RET"   . vertico-directory-enter)
+              ("DEL"   . vertico-directory-delete-char)
+              ("M-DEL" . vertico-directory-delete-word))
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+
+;; Out-of-order / fuzzy matching — closest thing to ido's flex matching
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
+;; Sort recently-used candidates first
+(use-package savehist
+  :ensure nil
+  :init (savehist-mode 1))
 
 ;; better M-x
 (use-package smex
