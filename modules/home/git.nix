@@ -10,6 +10,9 @@
       github = {
         user = "abdivasiyev";
       };
+      merge = {
+        conflictStyle = "diff3";
+      };
     };
     ignores = [
       ".DS_Store"
