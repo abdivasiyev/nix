@@ -32,6 +32,7 @@
         "protonvpn"
         "bruno"
         "discord"
+        "claude"
       ];
       brews = [
         "mas"

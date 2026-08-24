@@ -29,6 +29,7 @@
             "/Applications/Zen.app"
             "/Applications/Telegram Desktop.app"
             # "${pkgs.vscode}/Applications/Visual Studio Code.app"
+            "/Applications/Claude.app"
             "/Applications/Emacs.app"
             "/Applications/Bruno.app"
             "/System/Applications/Books.app"
