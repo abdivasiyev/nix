@@ -35,6 +35,7 @@ in {
     cmake
     glibtool
     asciinema
+    nodejs
 
     # golang
     go
