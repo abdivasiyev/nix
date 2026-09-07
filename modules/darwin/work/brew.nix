@@ -37,6 +37,7 @@
         "libvterm"
         "coreutils"
         "gh"
+        "mole"
       ];
       masApps = {
         # TODO: uncomment when homebrew fixes mas version
