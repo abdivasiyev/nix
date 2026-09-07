@@ -28,7 +28,6 @@
         "emacs-app"
         "zen"
         "betterdisplay"
-        "protonvpn"
         "bruno"
         "discord"
       ];
