@@ -28,12 +28,12 @@
             "/System/Cryptexes/App/System/Applications/Safari.app"
             "/Applications/Zen.app"
             "/Applications/Telegram Desktop.app"
-            # "${pkgs.vscode}/Applications/Visual Studio Code.app"
+            "/Applications/Discord.app"
             "/Applications/Claude.app"
             "/Applications/Emacs.app"
             "/Applications/Bruno.app"
             "/System/Applications/Books.app"
-            "/Applications/Blender.app"
+            "/Applications/OrbStack.app"
           ];
         };
 
@@ -59,9 +59,9 @@
           "com.apple.AdLib" = {
             allowApplePersonalizedAdvertising = false;
           };
-          "com.microsoft.VSCode" = {
-            ApplePressAndHoldEnabled = false;
-          };
+          # "com.microsoft.VSCode" = {
+          #   ApplePressAndHoldEnabled = false;
+          # };
         };
       };
     };

@@ -439,10 +439,6 @@
   :hook (dockerfile-ts-mode . lsp-deferred)
   :mode "Dockerfile\\'")
 
-;; docker-compose mode
-(use-package docker-compose-mode
-  :hook (docker-compose-mode . lsp-deferred))
-
 ;; markdown mode for .md files
 (use-package markdown-mode
   :ensure t

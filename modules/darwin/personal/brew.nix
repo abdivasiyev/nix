@@ -23,21 +23,21 @@
         "redis-insight"
         "macs-fan-control"
         "telegram-desktop"
-        "utm"
         "vlc"
         "emacs-app"
         "zen"
         "betterdisplay"
-        "blender"
-        "protonvpn"
         "bruno"
         "discord"
         "claude"
+        "orbstack"
       ];
       brews = [
         "mas"
         "libvterm"
         "coreutils"
+        "gh"
+        "mole"
       ];
       masApps = {
       };
