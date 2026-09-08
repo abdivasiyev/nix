@@ -66,6 +66,9 @@ in {
     outputs.homeModules.starship
     outputs.homeModules.emacs
     outputs.homeModules.xdg
+
+    # zen browser
+    outputs.homeModules.zen
   ];
 
   sops.secrets = {

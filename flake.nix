@@ -22,6 +22,14 @@
     # Nix Homebrew repository
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
+    # Zen browser
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     # Collection of fancy nix stuff
     # flake-utils.url = "github:numtide/flake-utils";
 

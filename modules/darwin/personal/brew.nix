@@ -25,7 +25,6 @@
         "telegram-desktop"
         "vlc"
         "emacs-app"
-        "zen"
         "betterdisplay"
         "bruno"
         "discord"

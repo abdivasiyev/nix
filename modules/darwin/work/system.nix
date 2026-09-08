@@ -1,8 +1,11 @@
 {
+  inputs,
   pkgs,
   config,
   ...
-}: {
+}: let
+  zen = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight;
+in {
   config = {
     system = {
       activationScripts.script.text = ''
@@ -33,7 +36,7 @@
             "/Applications/Redis Insight.app"
             "/Applications/Lens.app"
             "/System/Cryptexes/App/System/Applications/Safari.app"
-            "/Applications/Zen.app"
+            "${zen}/Applications/${zen.applicationName}.app"
             "/Applications/Telegram Desktop.app"
             # "${pkgs.vscode}/Applications/Visual Studio Code.app"
             "/Applications/Emacs.app"
