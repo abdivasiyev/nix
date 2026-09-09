@@ -39,6 +39,7 @@ in {
         "jid0-dsq67mf5kjjhiiju2dfb6kk8dfw@jetpack" = "turbo-download-manager";
         "{d07ccf11-c0cd-4938-a265-2a4d6ad01189}" = "view-page-archive";
         "{a9c2ad37-e940-4892-8dce-cd73c6cbbc0c}" = "feedbroreader";
+        "{f209234a-76f0-4735-9920-eb62507a54cd}" = "unpaywall";
       };
     };
 
