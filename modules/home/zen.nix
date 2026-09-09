@@ -41,6 +41,7 @@ in {
         "{a9c2ad37-e940-4892-8dce-cd73c6cbbc0c}" = "feedbroreader";
         "{f209234a-76f0-4735-9920-eb62507a54cd}" = "unpaywall";
         "button@scholar.google.com" = "google-scholar-button";
+        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = "bitwarden-password-manager";
       };
     };
 
@@ -61,6 +62,7 @@ in {
             "{a9c2ad37-e940-4892-8dce-cd73c6cbbc0c}"
             "{f209234a-76f0-4735-9920-eb62507a54cd}"
             "button@scholar.google.com"
+            "{446900e4-71c2-419f-a6a7-df9c091e268b}"
           ];
         };
 
