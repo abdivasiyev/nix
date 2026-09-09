@@ -1,5 +1,8 @@
-{inputs, pkgs, ...}:
-let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
   zen = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight;
 in {
   config = {
