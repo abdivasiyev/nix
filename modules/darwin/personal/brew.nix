@@ -30,6 +30,7 @@
         "discord"
         "claude"
         "orbstack"
+        "ollama"
       ];
       brews = [
         "mas"
