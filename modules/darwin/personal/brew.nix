@@ -31,6 +31,7 @@
         "claude"
         "orbstack"
         "ollama"
+        "element"
       ];
       brews = [
         "mas"

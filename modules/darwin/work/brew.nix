@@ -29,6 +29,7 @@
         "betterdisplay"
         "bruno"
         "discord"
+        "element"
       ];
       brews = [
         "mas"

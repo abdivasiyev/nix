@@ -38,6 +38,7 @@ in {
             "/System/Cryptexes/App/System/Applications/Safari.app"
             "${zen}/Applications/${zen.applicationName}.app"
             "/Applications/Telegram Desktop.app"
+            "/Applications/Element.app"
             # "${pkgs.vscode}/Applications/Visual Studio Code.app"
             "/Applications/Emacs.app"
             "/Applications/Bruno.app"
