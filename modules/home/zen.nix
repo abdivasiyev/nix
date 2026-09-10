@@ -28,7 +28,6 @@ in {
       DisableAppUpdate = true;
 
       ExtensionSettings = mkExtensionSettings {
-        "password-manager-firefox-extension@apple.com" = "icloud-passwords";
         "{85860b32-02a8-431a-b2b1-40fbd64c9c69}" = "github-file-icons";
         "jid1-MnnxcxisBPnSXQ@jetpack" = "privacy-badger17";
         "addons@wakatime.com" = "wakatimes";
@@ -49,7 +48,6 @@ in {
       default = {
         extensionButtons = {
           "nav-bar" = [
-            "password-manager-firefox-extension@apple.com"
             "{85860b32-02a8-431a-b2b1-40fbd64c9c69}"
             "jid1-MnnxcxisBPnSXQ@jetpack"
             "addons@wakatime.com"
