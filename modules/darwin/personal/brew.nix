@@ -32,6 +32,7 @@
         "orbstack"
         "ollama"
         "element"
+        "bitwarden"
       ];
       brews = [
         "mas"

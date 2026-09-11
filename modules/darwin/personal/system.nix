@@ -41,6 +41,7 @@ in {
             "/Applications/Bruno.app"
             "/System/Applications/Books.app"
             "/Applications/OrbStack.app"
+            "/Applications/Bitwarden.app"
           ];
         };
 
