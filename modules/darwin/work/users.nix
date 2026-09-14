@@ -13,7 +13,7 @@
           builtins.readFile (
             builtins.fetchurl {
               url = "https://github.com/abdivasiyev.keys";
-              sha256 = "11a36wbnifix917gpdxca8hyya7sxxzq8ii3n8991wsll5kj656i";
+              sha256 = "059prm6zqhpafcqcv7jhbhvx3izb98nl24yk8lgh3533jgpxwm1r";
             }
           )
         );
