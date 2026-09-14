@@ -74,6 +74,132 @@ in {
           "zen.welcome-screen.seen" = true;
         };
 
+        search = {
+          force = true;
+          default = "google";
+          privateDefault = "google";
+
+          order = [
+            "marginalia"
+            "google"
+            "nixos-packages"
+            "nixos-options"
+            "hoogle"
+            "go-symbols"
+          ];
+
+          engines = {
+            marginalia = {
+              name = "Marginalia";
+              urls = [
+                {
+                  template = "https://marginalia-search.com/search";
+                  params = [
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                    {
+                      name = "ref";
+                      value = "opensearch";
+                    }
+                  ];
+                }
+              ];
+              iconMapObj."16" = "https://marginalia-search.com/favicon.ico";
+              definedAliases = ["@m"];
+            };
+
+            hoogle = {
+              name = "Hoogle";
+              urls = [
+                {
+                  template = "https://hoogle.haskell.org/";
+                  params = [
+                    {
+                      name = "hoogle";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              iconMapObj."16" = "https://hoogle.haskell.org/favicon.png";
+              definedAliases = ["@h"];
+            };
+
+            nixos-packages = {
+              name = "NixOS Packages";
+              urls = [
+                {
+                  template = "https://search.nixos.org/packages";
+                  params = [
+                    {
+                      name = "channel";
+                      value = "25.11";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = ["@np"];
+            };
+
+            nixos-options = {
+              name = "NixOS Options";
+              urls = [
+                {
+                  template = "https://search.nixos.org/options";
+                  params = [
+                    {
+                      name = "channel";
+                      value = "25.11";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = ["@no"];
+            };
+
+            go-symbols = {
+              name = "Go Symbols";
+              urls = [
+                {
+                  template = "https://pkg.go.dev/search";
+                  params = [
+                    {
+                      name = "q";
+                      value = "{searchTerms}";
+                    }
+                    {
+                      name = "m";
+                      value = "symbol";
+                    }
+                  ];
+                }
+              ];
+              iconMapObj."16" = "https://pkg.go.dev/static/shared/icon/favicon.ico";
+              definedAliases = ["@go"];
+            };
+
+            # Built-in engines: keep Google, hide the rest
+            google.metaData.alias = "@g";
+            bing.metaData.hidden = true;
+            ddg.metaData.hidden = true;
+            ebay.metaData.hidden = true;
+            # wikipedia.metaData.hidden = true;
+            "amazondotcom-us".metaData.hidden = true;
+          };
+        };
+
         presets = {
           catppuccin = {
             enable = true;
@@ -87,53 +213,6 @@ in {
           "8039de3b-72e1-41ea-83b3-5077cf0f98d1" # Trackpad Animation
           "f4866f39-cfd6-4498-ab92-54213b8279dc" # Animations Plus+
         ];
-
-        userChrome = ''
-          /* Zen — minimal & clean. Keep the Catppuccin import as the FIRST line. */
-          @import "catppuccin/userChrome.css";
-
-          :root {
-            /* Rounder, more inset web content.
-               JS sets --zen-element-separation inline, so it needs !important.
-               --zen-webview-border-radius is unset by Zen, so it wins cleanly. */
-            --zen-element-separation: 12px !important;
-            --zen-webview-border-radius: 14px;
-
-            /* Kill the hairline border around the content area */
-            --zen-appcontent-border: none;
-
-            /* Softer float instead of a hard card edge */
-            --zen-big-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;
-          }
-
-          /* Toolbar buttons dimmed until hover */
-          #nav-bar .toolbarbutton-1,
-          #zen-appcontent-navbar-wrapper .toolbarbutton-1 {
-            opacity: 0.68;
-            transition: opacity 0.12s ease;
-          }
-
-          #nav-bar .toolbarbutton-1:hover,
-          #nav-bar .toolbarbutton-1[open],
-          #zen-appcontent-navbar-wrapper .toolbarbutton-1:hover,
-          #zen-appcontent-navbar-wrapper .toolbarbutton-1[open] {
-            opacity: 1;
-          }
-
-          /* No separator lines in the sidebar */
-          #zen-sidebar-top-buttons-separator,
-          .pinned-tabs-container-separator,
-          #tabbrowser-tabs toolbarseparator {
-            border: none !important;
-            background: transparent !important;
-            opacity: 0 !important;
-          }
-
-          /* Slimmer tab rows (Zen default is 46px when expanded) */
-          #tabbrowser-tabs {
-            --tab-min-height: 36px !important;
-          }
-        '';
       };
     };
   };
