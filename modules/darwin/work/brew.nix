@@ -30,6 +30,7 @@
         "bruno"
         "discord"
         "element"
+        "bitwarden"
       ];
       brews = [
         "mas"

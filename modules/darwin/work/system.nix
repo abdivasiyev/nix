@@ -43,6 +43,7 @@ in {
             "/Applications/Emacs.app"
             "/Applications/Bruno.app"
             "/System/Applications/Books.app"
+            "/Applications/Bitwarden.app"
           ];
         };
 
