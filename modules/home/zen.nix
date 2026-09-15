@@ -78,10 +78,11 @@ in {
 
         search = {
           force = true;
-          default = "google";
-          privateDefault = "google";
+          default = "searxng";
+          privateDefault = "searxng";
 
           order = [
+            "searxng"
             "marginalia"
             "google"
             "nixos-packages"
@@ -91,6 +92,23 @@ in {
           ];
 
           engines = {
+            searxng = {
+              name = "SearXNG";
+              urls = [
+                {
+                  template = "https://search.azizovich.uz/search";
+                  params = [
+                    {
+                      name = "q";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              iconMapObj."16" = "https://search.azizovich.uz/favicon.ico";
+              definedAliases = ["@s"];
+            };
+
             marginalia = {
               name = "Marginalia";
               urls = [
