@@ -13,6 +13,10 @@
       merge = {
         conflictStyle = "diff3";
       };
+      credential."https://git.azizovich.uz" = {
+        helper = ["" "rbw"];
+        username = "abdivasiyev";
+      };
     };
     ignores = [
       ".DS_Store"
@@ -28,13 +32,6 @@
       "*#"
       ".#*"
     ];
-
-    extraConfig = {
-      credential."https://git.azizovich.uz" = {
-        helper = ["" "rbw"];
-        username = "abdivasiyev";
-      };
-    };
   };
 
   programs.difftastic = {
