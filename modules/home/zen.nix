@@ -78,8 +78,8 @@ in {
 
         search = {
           force = true;
-          default = "searxng";
-          privateDefault = "searxng";
+          default = "google";
+          privateDefault = "google";
 
           order = [
             "searxng"

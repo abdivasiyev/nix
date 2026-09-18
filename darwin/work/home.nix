@@ -68,6 +68,7 @@ in {
     outputs.homeModules.emacs
     outputs.homeModules.xdg
     outputs.homeModules.zen
+    outputs.homeModules.rbw
   ];
 
   sops.secrets = {

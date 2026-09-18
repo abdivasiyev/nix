@@ -28,6 +28,13 @@
       "*#"
       ".#*"
     ];
+
+    extraConfig = {
+      credential."https://git.azizovich.uz" = {
+        helper = ["" "rbw"];
+        username = "abdivasiyev";
+      };
+    };
   };
 
   programs.difftastic = {

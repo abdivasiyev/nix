@@ -17,4 +17,5 @@
   emacs = import ./emacs/default.nix;
   xdg = import ./xdg.nix;
   zen = import ./zen.nix;
+  rbw = import ./rbw.nix;
 }
