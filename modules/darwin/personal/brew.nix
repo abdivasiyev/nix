@@ -30,7 +30,6 @@
         "discord"
         "claude"
         "orbstack"
-        "ollama"
         "element"
         "bitwarden"
       ];

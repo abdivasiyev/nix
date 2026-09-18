@@ -70,6 +70,7 @@ in {
 
     # zen browser
     outputs.homeModules.zen
+    outputs.homeModules.rbw
   ];
 
   sops.secrets = {
