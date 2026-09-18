@@ -60,6 +60,7 @@ in {
   imports = [
     outputs.homeModules.zsh
     outputs.homeModules.git
+    outputs.homeModules.worktree
     outputs.homeModules.eza
     outputs.homeModules.bat
     outputs.homeModules.secret

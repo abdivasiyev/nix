@@ -6,6 +6,8 @@
     syntaxHighlighting.enable = true;
     initContent = ''
       export GITHUB_TOKEN=$(cat ~/.config/nix/github_token)
+
+      source ${./worktree/shell.zsh}
     '';
     shellAliases = {
       cat = "bat";
