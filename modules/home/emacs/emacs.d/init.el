@@ -222,7 +222,27 @@
   :init
   (setq magit-auto-revert-mode t)
   :bind
-  (("C-x g" . magit)))
+  (("C-x g" . magit))
+  :config
+  ;; `% b' / `% c' default to a sibling of the *bare* repo, which would put
+  ;; worktrees in <root>/git/.  Offer <root>/worktrees/<repo>/<branch> instead,
+  ;; with slashes replaced by dashes -- matching `git wtadd'.
+  (defun my/magit-read-worktree-directory (prompt commit)
+    "Read a new worktree's directory following the <root>/worktrees/<repo>/ layout.
+The offered name is COMMIT with slashes replaced by dashes, inside the
+directory holding the current worktree.  Outside that layout, fall back to
+Magit's default sibling behaviour."
+    (let* ((top    (directory-file-name (or (magit-toplevel) default-directory)))
+           (parent (file-name-directory top))          ; .../worktrees/<repo>/
+           (grand  (file-name-nondirectory
+                    (directory-file-name
+                     (file-name-directory (directory-file-name parent))))))
+      (if (equal grand "worktrees")
+          (read-directory-name prompt parent nil nil
+                               (and commit (string-replace "/" "-" commit)))
+        (magit-read-worktree-directory-sibling prompt commit))))
+  (setq magit-read-worktree-directory-function
+        #'my/magit-read-worktree-directory))
 
 ;; Forge
 (use-package forge
