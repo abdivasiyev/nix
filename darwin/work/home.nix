@@ -45,6 +45,7 @@ in {
     localstack
     bun
     gitlogue
+    cloudflared
 
     # Haskell stuff
     hpkgs.cabal-install
