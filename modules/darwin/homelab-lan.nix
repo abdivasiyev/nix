@@ -60,12 +60,23 @@
           ;;
       esac
 
+      # On the Mac that hosts the machine, point the names at this Mac's LAN
+      # address rather than loopback: OrbStack machines resolve through the
+      # macOS resolver, so a 127.0.0.1 here means "inside the VM" there, and
+      # a service calling another by hostname (Opengist -> Forgejo) lands on
+      # a closed port.
+      ${lib.optionalString cfg.forward ''
+        lan=$(/usr/sbin/ipconfig getifaddr en0 2>/dev/null || /usr/sbin/ipconfig getifaddr en1 2>/dev/null || true)
+        [ -n "$lan" ] && hostsip=$lan
+      ''}
+      : "''${hostsip:=$ip}"
+
       block=""
       ask() { curl -fsS --max-time 3 --resolve "lan.$domain:443:$ip" "https://lan.$domain$1" 2>/dev/null; }
       if [ -n "$ip" ] && [ "$(ask /)" = homelab ] && hosts=$(ask /hosts); then
         block="${begin}
-      # home: $ip
-      $(printf '%s\n' "$hosts" git-ssh."$domain" | awk -v ip="$ip" 'NF { print ip, $1 }')
+      # home: $hostsip
+      $(printf '%s\n' "$hosts" git-ssh."$domain" | awk -v ip="$hostsip" 'NF { print ip, $1 }')
       ${end}"
       fi
 
@@ -79,7 +90,6 @@
       ${lib.optionalString cfg.forward ''
         # The home network's DNS (dnsmasq): the same names, at this Mac's
         # LAN address. Emptied while the homelab does not answer.
-        lan=$(/usr/sbin/ipconfig getifaddr en0 2>/dev/null || /usr/sbin/ipconfig getifaddr en1 2>/dev/null || true)
         dns=""
         if [ -n "$block" ] && [ -n "$lan" ]; then
           dns=$(printf '%s\n' "$hosts" | awk -v ip="$lan" 'NF { print "host-record=" $1 "," ip; print "local=/" $1 "/" }')
