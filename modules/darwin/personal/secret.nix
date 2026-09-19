@@ -9,5 +9,9 @@ in {
 
   sops = {
     age.keyFile = key;
+    # Only the age key: macOS has no /etc/ssh host keys, which sops-nix
+    # would otherwise try (and fail on) for both gnupg and age.
+    age.sshKeyPaths = [];
+    gnupg.sshKeyPaths = [];
   };
 }
