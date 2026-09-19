@@ -40,7 +40,10 @@ in {
       # sops-nix decrypts in a launchd agent it (re)starts just before; on a
       # first switch the file can lag behind this step by a few seconds.
       for _ in $(seq 1 20); do [ -s "$p12" ] && break; sleep 1; done
-      if [ -s "$p12" ] && ! /usr/bin/security find-certificate -c ${lib.escapeShellArg certName} "$keychain" >/dev/null 2>&1; then
+      # An identity (certificate *and* key), not a certificate by name:
+      # `find-certificate -c` matches by prefix, so the CA ("homelab client
+      # CA") counted as the certificate and the import never ran.
+      if [ -s "$p12" ] && ! /usr/bin/security find-identity -v | grep -q '"${certName}"'; then
         tmp=$(mktemp)
         /usr/bin/base64 -d -i "$p12" -o "$tmp"
         # The bundle's password is not a secret (the bundle is, in sops);
@@ -74,7 +77,7 @@ in {
       # Safari (and anything using the keychain) picks it without asking --
       # once the identity is actually there. A first switch can run before
       # sops-nix has written the bundle, and then there is nothing to prefer.
-      if ! /usr/bin/security find-identity -v | grep -q ${lib.escapeShellArg certName}; then
+      if ! /usr/bin/security find-identity -v | grep -q '"${certName}"'; then
         echo "homelab: no client certificate in the keychain yet; switch again once sops has run" >&2
       else
       for service in ${lib.escapeShellArgs ["*.${domain}" domain]}; do
