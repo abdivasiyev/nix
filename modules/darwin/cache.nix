@@ -32,6 +32,9 @@ in {
     customSettings = {
       extra-substituters = ["https://cache.azizovich.uz/homelab"];
       extra-trusted-public-keys = ["homelab:stmm75iPNqYy+lKg2QFvUaNcGirNCUk1ssB6nVttvZ4="];
+      # The cache is on the Mac mini: when it is off, give up on it in
+      # seconds and fall back to cache.nixos.org instead of stalling builds.
+      connect-timeout = 5;
     };
     determinateNixd.authentication.additionalNetrcSources = [netrc];
   };
