@@ -124,6 +124,25 @@ in {
       type = lib.types.str;
       default = "azizovich.uz";
     };
+    staticAddress = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      example = "192.168.1.81";
+      description = ''
+        Address this Mac claims on the home network ("DHCP with manual
+        address": the router still supplies everything else). The home
+        network's DNS points here, so it must not move -- and macOS's private
+        Wi-Fi address changes the MAC, which defeats a router reservation.
+        Use an address outside the DHCP pool, or reserved for this Mac.
+      '';
+    };
+
+    interface = lib.mkOption {
+      type = lib.types.str;
+      default = "Wi-Fi";
+      description = "Network service (as in `networksetup -listallnetworkservices`) the address is set on.";
+    };
+
     forward = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -132,6 +151,18 @@ in {
   };
 
   config = lib.mkMerge [
+    (lib.mkIf (cfg.staticAddress != null) {
+      system.activationScripts.postActivation.text = lib.mkAfter ''
+        # Pin this Mac's home-network address (see homelab.lan.staticAddress).
+        if [ "$(/usr/sbin/networksetup -getinfo ${lib.escapeShellArg cfg.interface} \
+                 | /usr/bin/awk -F': ' '/^IP address: /{print $2; exit}')" \
+             != ${lib.escapeShellArg cfg.staticAddress} ]; then
+          /usr/sbin/networksetup -setmanualwithdhcprouter ${lib.escapeShellArg cfg.interface} \
+            ${lib.escapeShellArg cfg.staticAddress} \
+            && echo "homelab: ${cfg.interface} pinned to ${cfg.staticAddress}" >&2
+        fi
+      '';
+    })
     {
       launchd.daemons.homelab-lan = {
         serviceConfig = {

@@ -29,6 +29,9 @@
   homelab.lan = {
     server = "127.0.0.1";
     forward = true;
+    # The home network's DNS address: fixed here rather than by a router
+    # reservation, which macOS's per-network private MAC keeps invalidating.
+    staticAddress = "192.168.1.81";
   };
 
   # Allow not open source packages
