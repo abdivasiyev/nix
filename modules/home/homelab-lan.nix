@@ -18,6 +18,7 @@
   # sops keeps key names in plain text (see modules/darwin/cache.nix).
   hasCert = lib.hasInfix "\nhomelabLanClientP12:" ("\n" + builtins.readFile secretsFile);
   certName = "homelab client";
+  domain = "azizovich.uz";
 in {
   programs.ssh.matchBlocks."git-ssh-home" = lib.hm.dag.entryBefore ["git-ssh.azizovich.uz"] {
     match = ''host git-ssh.azizovich.uz exec "grep -q '^# home: ' /etc/hosts"'';
@@ -35,6 +36,9 @@ in {
     lib.hm.dag.entryAfter ["writeBoundary" "sops-nix"] ''
       p12=${config.sops.secrets.homelabLanClientP12.path}
       keychain="$HOME/Library/Keychains/login.keychain-db"
+      # sops-nix decrypts in a launchd agent it (re)starts just before; on a
+      # first switch the file can lag behind this step by a few seconds.
+      for _ in $(seq 1 20); do [ -s "$p12" ] && break; sleep 1; done
       if [ -s "$p12" ] && ! /usr/bin/security find-certificate -c ${lib.escapeShellArg certName} "$keychain" >/dev/null 2>&1; then
         tmp=$(mktemp)
         /usr/bin/base64 -d -i "$p12" -o "$tmp"
@@ -44,6 +48,12 @@ in {
           -T /Applications/Safari.app -T "/Applications/Google Chrome.app" || true
         rm -f "$tmp"
       fi
+      # Safari (and anything using the keychain) picks it without asking.
+      for service in ${lib.escapeShellArgs ["*.${domain}" domain]}; do
+        if ! /usr/bin/security get-identity-preference -s "$service" -c 2>/dev/null | grep -q ${lib.escapeShellArg certName}; then
+          run /usr/bin/security set-identity-preference -c ${lib.escapeShellArg certName} -s "$service" || true
+        fi
+      done
     ''
   );
 }

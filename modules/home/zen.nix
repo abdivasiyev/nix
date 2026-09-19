@@ -74,6 +74,10 @@ in {
           "zen.view.use-single-toolbar" = false;
           "zen.urlbar.behavior" = "float";
           "zen.welcome-screen.seen" = true;
+          # The homelab asks for a client certificate at home (homelab-lan.nix):
+          # use the macOS keychain's, and send it without asking.
+          "security.osclientcerts.autoload" = true;
+          "security.default_personal_cert" = "Select Automatically";
         };
 
         search = {
