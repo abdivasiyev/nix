@@ -15,6 +15,7 @@
     outputs.darwinPersonalModules.users
     outputs.darwinPersonalModules.system
     outputs.darwinPersonalModules.secret
+    outputs.darwinPersonalModules.cache
   ];
 
   nix = {

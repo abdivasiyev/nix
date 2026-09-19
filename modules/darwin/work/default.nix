@@ -9,4 +9,5 @@
   brew = import ./brew.nix;
   system = import ./system.nix;
   secret = import ./secret.nix;
+  cache = import ../cache.nix;
 }

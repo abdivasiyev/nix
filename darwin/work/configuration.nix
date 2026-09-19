@@ -15,6 +15,7 @@
     outputs.darwinWorkModules.users
     outputs.darwinWorkModules.system
     outputs.darwinWorkModules.secret
+    outputs.darwinWorkModules.cache
 
     # Services
   ];

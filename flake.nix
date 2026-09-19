@@ -33,6 +33,9 @@
     # Collection of fancy nix stuff
     # flake-utils.url = "github:numtide/flake-utils";
 
+    # Determinate Nix's nix-darwin module (Nix settings, netrc sources)
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
+
     # Sops encryption manager
     sops-nix = {
       url = "github:Mic92/sops-nix";
