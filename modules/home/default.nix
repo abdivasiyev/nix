@@ -19,5 +19,6 @@
   zen = import ./zen.nix;
   rbw = import ./rbw.nix;
   ssh = import ./ssh.nix;
+  homelab = import ./homelab;
   worktree = import ./worktree;
 }
