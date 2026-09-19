@@ -36,7 +36,9 @@ in {
   home.activation.homelabLanClientCert = lib.mkIf hasCert (
     lib.hm.dag.entryAfter ["writeBoundary" "sops-nix"] ''
       p12=${config.sops.secrets.homelabLanClientP12.path}
-      keychain="$HOME/Library/Keychains/login.keychain-db"
+      # The default keychain, whatever it is called on this Mac: hard-coding
+      # login.keychain-db silently did nothing on one that has no such file.
+      keychain=$(/usr/bin/security default-keychain | tr -d ' "')
       # sops-nix decrypts in a launchd agent it (re)starts just before; on a
       # first switch the file can lag behind this step by a few seconds.
       for _ in $(seq 1 20); do [ -s "$p12" ] && break; sleep 1; done
