@@ -72,6 +72,7 @@ in {
     outputs.homeModules.zen
     outputs.homeModules.rbw
     outputs.homeModules.ssh
+    outputs.homeModules.homelabLan
     outputs.homeModules.homelab
   ];
 

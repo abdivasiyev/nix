@@ -20,5 +20,6 @@
   rbw = import ./rbw.nix;
   ssh = import ./ssh.nix;
   homelab = import ./homelab;
+  homelabLan = import ./homelab-lan.nix;
   worktree = import ./worktree;
 }

@@ -16,11 +16,19 @@
     outputs.darwinPersonalModules.system
     outputs.darwinPersonalModules.secret
     outputs.darwinPersonalModules.cache
+    outputs.darwinPersonalModules.homelabLan
     outputs.darwinPersonalModules.cachePush
   ];
 
   nix = {
     enable = false;
+  };
+
+  # This Mac runs the homelab (OrbStack): reach it on loopback, and open its
+  # home entrances to the LAN for the other Macs.
+  homelab.lan = {
+    server = "127.0.0.1";
+    forward = true;
   };
 
   # Allow not open source packages

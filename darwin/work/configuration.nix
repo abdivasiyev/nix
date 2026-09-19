@@ -16,6 +16,7 @@
     outputs.darwinWorkModules.system
     outputs.darwinWorkModules.secret
     outputs.darwinWorkModules.cache
+    outputs.darwinWorkModules.homelabLan
 
     # Services
   ];
@@ -23,6 +24,9 @@
   nix = {
     enable = false;
   };
+
+  # At home, reach the homelab on the Mac mini directly (found over mDNS).
+  homelab.lan.server = "Asliddins-Mac-mini.local";
 
   # Allow not open source packages
   # E.g: google-chrome, jetbrains

@@ -48,6 +48,10 @@ in {
         RunAtLoad = true;
         KeepAlive = true;
         ThrottleInterval = 30;
+        # Watching /nix/store holds a descriptor per entry (kqueue); launchd's
+        # default of 256 ended in "Too many open files" and no pushes at all.
+        SoftResourceLimits.NumberOfFiles = 61440;
+        HardResourceLimits.NumberOfFiles = 61440;
         ProcessType = "Background";
         LowPriorityIO = true;
         Nice = 10;
