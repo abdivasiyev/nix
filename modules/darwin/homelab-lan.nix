@@ -14,6 +14,12 @@
 # :443 (the homelab's home HTTPS site, 127.0.0.1:8443) and :22222 (Forgejo
 # SSH). OrbStack's own "expose machine ports to LAN" stays off, so nothing
 # else of the homelab is reachable from the network.
+#
+# Phones and other devices can't switch a hosts file, so the Mac mini also
+# answers DNS for the home network (dnsmasq on :53): the app hostnames with
+# its own LAN address, everything else forwarded to 1.1.1.1. The router's
+# DHCP hands it out as the DNS server (set by hand, with 1.1.1.1 second, so
+# a Mac mini that is down only means going through Cloudflare again).
 {
   config,
   lib,
@@ -23,6 +29,23 @@
   cfg = config.homelab.lan;
   begin = "# >>> homelab-lan (managed by nix-darwin; do not edit)";
   end = "# <<< homelab-lan";
+
+  # One host-record + local= per app name: the LAN address for A, and no
+  # AAAA at all (instead of forwarding it and handing out Cloudflare's IPv6,
+  # which phones prefer). Other names under the domain (MX, ...) forward.
+  lanConf = "/var/lib/homelab-lan/dnsmasq.d/apps.conf";
+  dnsmasqConf = pkgs.writeText "homelab-lan-dnsmasq.conf" ''
+    port=53
+    # Never answer from /etc/hosts: its homelab block says 127.0.0.1.
+    no-hosts
+    conf-dir=${dirOf lanConf},*.conf
+    no-resolv
+    server=1.1.1.1
+    server=1.0.0.1
+    domain-needed
+    bogus-priv
+    cache-size=2000
+  '';
 
   check = pkgs.writeShellApplication {
     name = "homelab-lan-check";
@@ -53,6 +76,21 @@
       else
         wanted=$rest
       fi
+      ${lib.optionalString cfg.forward ''
+        # The home network's DNS (dnsmasq): the same names, at this Mac's
+        # LAN address. Emptied while the homelab does not answer.
+        lan=$(/usr/sbin/ipconfig getifaddr en0 2>/dev/null || /usr/sbin/ipconfig getifaddr en1 2>/dev/null || true)
+        dns=""
+        if [ -n "$block" ] && [ -n "$lan" ]; then
+          dns=$(printf '%s\n' "$hosts" | awk -v ip="$lan" 'NF { print "host-record=" $1 "," ip; print "local=/" $1 "/" }')
+        fi
+        mkdir -p ${dirOf lanConf}
+        if [ "$dns" != "$(cat ${lanConf} 2>/dev/null)" ]; then
+          printf '%s\n' "$dns" > ${lanConf}
+          /bin/launchctl kickstart -k system/org.nixos.homelab-lan-dns 2>/dev/null || true
+          echo "home DNS: app names -> ''${lan:-nothing}"
+        fi
+      ''}
       if [ "$wanted" != "$current" ]; then
         printf '%s\n' "$wanted" > /etc/hosts.homelab-lan
         mv /etc/hosts.homelab-lan /etc/hosts
@@ -112,6 +150,20 @@ in {
       launchd.daemons.homelab-lan-https = forwarder 443 8443;
       # OrbStack itself holds 127.0.0.1:2222, hence another port outside.
       launchd.daemons.homelab-lan-ssh = forwarder 22222 2222;
+
+      system.activationScripts.preActivation.text = ''
+        mkdir -p ${dirOf lanConf}
+      '';
+      launchd.daemons.homelab-lan-dns.serviceConfig = {
+        ProgramArguments = [
+          "${pkgs.dnsmasq}/bin/dnsmasq"
+          "--keep-in-foreground"
+          "--conf-file=${dnsmasqConf}"
+        ];
+        RunAtLoad = true;
+        KeepAlive = true;
+        StandardErrorPath = "/var/log/homelab-lan-dns.log";
+      };
 
       # OrbStack would otherwise publish every port the homelab listens on to
       # the LAN, Access apps included; the forwarders above are the only

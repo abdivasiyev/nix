@@ -18,6 +18,25 @@ SECRETS=$NIX/secrets/secrets.yaml
 export SOPS_AGE_KEY_FILE=${SOPS_AGE_KEY_FILE:-$HOME/.config/sops/age/keys.txt}
 
 [ -f "$SECRETS" ] || { echo "no $SECRETS" >&2; exit 1; }
+
+# --export: the existing client certificate as a file for a phone or tablet
+# (AirDrop it to an iPhone; on Android: Settings > Security > Install a
+# certificate > VPN & app user certificate), under a password you choose.
+# Delete the file once it is installed.
+if [ "${1:-}" = "--export" ]; then
+  grep -q '^homelabLanClientP12:' "$SECRETS" || { echo "no client certificate yet; run homelab-lan-cert first" >&2; exit 1; }
+  out=$HOME/Desktop/homelab-client.p12
+  printf 'Password for the exported file: ' >&2; stty -echo; read -r pw1; stty echo; echo >&2
+  printf 'Again: ' >&2; stty -echo; read -r pw2; stty echo; echo >&2
+  [ -n "$pw1" ] && [ "$pw1" = "$pw2" ] || { echo "passwords empty or different" >&2; exit 1; }
+  work=$(mktemp -d); trap 'rm -rf "$work"' EXIT; umask 077
+  sops decrypt --extract '["homelabLanClientP12"]' "$SECRETS" | base64 -d > "$work/in.p12"
+  openssl pkcs12 -legacy -in "$work/in.p12" -passin pass:homelab -nodes -out "$work/all.pem" 2>/dev/null
+  PW=$pw1 openssl pkcs12 -export -legacy -in "$work/all.pem" -name "homelab client" \
+    -passout env:PW -out "$out"
+  echo "wrote $out -- install it on the device, then delete it here"
+  exit 0
+fi
 [ -d "$HOMELAB" ] || { echo "no homelab repo at $HOMELAB" >&2; exit 1; }
 
 work=$(mktemp -d)
