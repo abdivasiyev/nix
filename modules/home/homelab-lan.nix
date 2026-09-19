@@ -60,6 +60,17 @@ in {
           rm -f "$tmp"
         fi
       done
+      # Safari only offers valid identities, and this one is signed by the
+      # homelab's own CA: trust that CA in the login keychain (macOS asks
+      # for the password once, the first time).
+      if [ -s "$p12" ] && ! /usr/bin/security dump-trust-settings 2>/dev/null | grep -q 'homelab client CA'; then
+        tmp=$(mktemp -d)
+        /usr/bin/base64 -d -i "$p12" -o "$tmp/c.p12"
+        ${pkgs.openssl}/bin/openssl pkcs12 -legacy -in "$tmp/c.p12" -passin pass:homelab -cacerts -nokeys 2>/dev/null \
+          | ${pkgs.openssl}/bin/openssl x509 -out "$tmp/ca.pem"
+        run /usr/bin/security add-trusted-cert -r trustRoot -p ssl -p basic -k "$keychain" "$tmp/ca.pem" || true
+        rm -rf "$tmp"
+      fi
       # Safari (and anything using the keychain) picks it without asking.
       for service in ${lib.escapeShellArgs ["*.${domain}" domain]}; do
         if ! /usr/bin/security get-identity-preference -s "$service" -c 2>/dev/null | grep -q ${lib.escapeShellArg certName}; then
