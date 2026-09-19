@@ -10,4 +10,5 @@
   system = import ./system.nix;
   secret = import ./secret.nix;
   cache = import ../cache.nix;
+  cachePush = import ../cache-push.nix;
 }
