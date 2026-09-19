@@ -71,6 +71,7 @@ in {
     outputs.homeModules.xdg
     outputs.homeModules.zen
     outputs.homeModules.rbw
+    outputs.homeModules.ssh
   ];
 
   sops.secrets = {

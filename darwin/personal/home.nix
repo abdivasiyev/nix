@@ -71,6 +71,7 @@ in {
     # zen browser
     outputs.homeModules.zen
     outputs.homeModules.rbw
+    outputs.homeModules.ssh
   ];
 
   sops.secrets = {

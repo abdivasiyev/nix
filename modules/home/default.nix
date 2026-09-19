@@ -18,5 +18,6 @@
   xdg = import ./xdg.nix;
   zen = import ./zen.nix;
   rbw = import ./rbw.nix;
+  ssh = import ./ssh.nix;
   worktree = import ./worktree;
 }
