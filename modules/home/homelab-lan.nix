@@ -12,6 +12,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   secretsFile = ../../secrets/secrets.yaml;
@@ -48,6 +49,17 @@ in {
           -T /Applications/Safari.app -T "/Applications/Google Chrome.app" || true
         rm -f "$tmp"
       fi
+      # Zen (Firefox) keeps its own certificate store per profile.
+      for db in "$HOME/Library/Application Support/zen/Profiles"/*/cert9.db; do
+        [ -s "$p12" ] && [ -f "$db" ] || continue
+        dir=$(dirname "$db")
+        if ! ${pkgs.nss.tools}/bin/certutil -L -d "sql:$dir" 2>/dev/null | grep -q ${lib.escapeShellArg certName}; then
+          tmp=$(mktemp)
+          /usr/bin/base64 -d -i "$p12" -o "$tmp"
+          run ${pkgs.nss.tools}/bin/pk12util -i "$tmp" -d "sql:$dir" -W homelab || true
+          rm -f "$tmp"
+        fi
+      done
       # Safari (and anything using the keychain) picks it without asking.
       for service in ${lib.escapeShellArgs ["*.${domain}" domain]}; do
         if ! /usr/bin/security get-identity-preference -s "$service" -c 2>/dev/null | grep -q ${lib.escapeShellArg certName}; then
