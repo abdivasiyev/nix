@@ -71,12 +71,18 @@ in {
         run /usr/bin/security add-trusted-cert -r trustRoot -p ssl -p basic -k "$keychain" "$tmp/ca.pem" || true
         rm -rf "$tmp"
       fi
-      # Safari (and anything using the keychain) picks it without asking.
+      # Safari (and anything using the keychain) picks it without asking --
+      # once the identity is actually there. A first switch can run before
+      # sops-nix has written the bundle, and then there is nothing to prefer.
+      if ! /usr/bin/security find-identity -v | grep -q ${lib.escapeShellArg certName}; then
+        echo "homelab: no client certificate in the keychain yet; switch again once sops has run" >&2
+      else
       for service in ${lib.escapeShellArgs ["*.${domain}" domain]}; do
         if ! /usr/bin/security get-identity-preference -s "$service" -c 2>/dev/null | grep -q ${lib.escapeShellArg certName}; then
           run /usr/bin/security set-identity-preference -c ${lib.escapeShellArg certName} -s "$service" || true
         fi
       done
+      fi
     ''
   );
 }
