@@ -17,6 +17,7 @@
     outputs.darwinWorkModules.secret
     outputs.darwinWorkModules.cache
     outputs.darwinWorkModules.homelabLan
+    outputs.darwinWorkModules.vpn
 
     # Services
   ];

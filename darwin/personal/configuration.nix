@@ -17,6 +17,7 @@
     outputs.darwinPersonalModules.secret
     outputs.darwinPersonalModules.cache
     outputs.darwinPersonalModules.homelabLan
+    outputs.darwinPersonalModules.vpn
     outputs.darwinPersonalModules.cachePush
   ];
 
