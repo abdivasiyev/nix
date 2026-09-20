@@ -11,4 +11,5 @@
   secret = import ./secret.nix;
   cache = import ../cache.nix;
   homelabLan = import ../homelab-lan.nix;
+  vpn = import ../vpn.nix;
 }
