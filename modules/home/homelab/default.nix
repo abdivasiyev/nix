@@ -23,13 +23,8 @@
     ];
     text = builtins.readFile ./bootstrap.sh;
   };
-  lanCert = pkgs.writeShellApplication {
-    name = "homelab-lan-cert";
-    runtimeInputs = with pkgs; [coreutils gnugrep jq openssl sops];
-    text = builtins.readFile ./lan-cert.sh;
-  };
 in {
-  home.packages = [bootstrap lanCert];
+  home.packages = [bootstrap];
 
   # Cheap on every shell: two stat calls until the question has been settled.
   programs.zsh.initContent = lib.mkAfter ''
