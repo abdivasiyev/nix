@@ -17,6 +17,9 @@
         helper = ["" "rbw"];
         username = "abdivasiyev";
       };
+      url."ssh://git@github.com/" = {
+        insteadOf = "https://github.com/";
+      };
     };
     ignores = [
       ".DS_Store"
