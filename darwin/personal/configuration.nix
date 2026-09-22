@@ -17,6 +17,7 @@
     outputs.darwinPersonalModules.secret
     outputs.darwinPersonalModules.cache
     outputs.darwinPersonalModules.homelabLan
+    outputs.darwinPersonalModules.homelabMachine
     outputs.darwinPersonalModules.cachePush
   ];
 
@@ -32,6 +33,18 @@
     # The home network's DNS address: fixed here rather than by a router
     # reservation, which macOS's per-network private MAC keeps invalidating.
     staticAddress = "192.168.1.81";
+  };
+
+  # OrbStack restores the machine a minute after login and gives up if the
+  # external disk has not mounted yet -- which is what kept the homelab down
+  # for six hours after the 22 September power cut. Wait for the disk, then
+  # start it.
+  homelab.machine = {
+    enable = true;
+    requires = [
+      "/Volumes/Asliddin/Media"
+      "/Volumes/Asliddin/Backups"
+    ];
   };
 
   # Allow not open source packages
