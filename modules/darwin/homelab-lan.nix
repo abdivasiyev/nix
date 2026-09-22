@@ -47,6 +47,32 @@
     cache-size=2000
   '';
 
+  # The entrances this Mac is responsible for on the home network. Named here
+  # rather than at the daemons below so the check and the forwarders cannot
+  # drift apart -- a check watching a port nothing listens on is worse than no
+  # check at all.
+  entrances = [
+    {
+      port = 53;
+      daemon = "homelab-lan-dns";
+      what = "home DNS";
+    }
+    {
+      port = 443;
+      target = 8443;
+      daemon = "homelab-lan-https";
+      what = "home HTTPS";
+    }
+    {
+      # OrbStack itself holds 127.0.0.1:2222, hence another port outside.
+      port = 22222;
+      target = 2222;
+      daemon = "homelab-lan-ssh";
+      what = "Forgejo SSH";
+    }
+  ];
+  entrance = name: lib.findFirst (e: e.daemon == name) null entrances;
+
   check = pkgs.writeShellApplication {
     name = "homelab-lan-check";
     runtimeInputs = with pkgs; [curl coreutils gnused gawk diffutils];
@@ -108,16 +134,53 @@
         /usr/bin/killall -HUP mDNSResponder 2>/dev/null || true
         if [ -n "$block" ]; then echo "home network: homelab at $ip"; else echo "away: through Cloudflare"; fi
       fi
+
+      ${lib.optionalString cfg.forward ''
+        # Is anything actually listening?
+        #
+        # These three daemons can go missing without a word. On 21 September
+        # all of them did -- booted out and left as `spawn scheduled` -- and
+        # nothing noticed until the power cut the next day took the Mac down
+        # and the whole house stopped resolving names. `darwin-rebuild switch`
+        # did not bring them back either, because activation only reloads a
+        # daemon whose plist changed.
+        #
+        # A port with no listener is the one symptom common to every way that
+        # can happen, so watch the ports rather than the daemons, and kickstart
+        # whatever is not answering. Silent while everything is up.
+        #
+        # This cannot rescue itself: if the check daemon is the one that dies,
+        # nothing here runs at all.
+        ${lib.concatMapStrings (e: ''
+          if ! /usr/bin/nc -z -G 2 -w 2 127.0.0.1 ${toString e.port} 2>/dev/null; then
+            echo "${e.what} (:${toString e.port}) has no listener; restarting ${e.daemon}"
+            /bin/launchctl kickstart -k system/org.nixos.${e.daemon} 2>/dev/null || true
+          fi
+        '') entrances}
+      ''}
     '';
   };
 
+  # Every daemon here is declared with `script`, not with
+  # ProgramArguments = [/nix/store/...], and that is load-bearing: nix-darwin
+  # turns `script` into `/bin/sh -c '/bin/wait4path /nix/store && exec ...'`,
+  # while ProgramArguments is handed to launchd as-is.
+  #
+  # /nix is a separate APFS volume mounted by a daemon at boot. A job whose
+  # *program* lives there cannot be exec'd until that mount exists: it dies
+  # with EX_CONFIG, is left as `spawn scheduled`, and is never retried. All
+  # four of these sat in that state from 21 September -- which is why the house
+  # lost DNS when the power came back on the 22nd, and why `darwin-rebuild
+  # switch` did not bring them back (their plists had not changed, so
+  # activation skipped them). wait4path is the guard; do not opt out of it.
+
   forwarder = listen: target: {
+    script = ''
+      exec ${lib.getExe pkgs.socat} \
+        TCP-LISTEN:${toString listen},fork,reuseaddr \
+        TCP:127.0.0.1:${toString target}
+    '';
     serviceConfig = {
-      ProgramArguments = [
-        (lib.getExe pkgs.socat)
-        "TCP-LISTEN:${toString listen},fork,reuseaddr"
-        "TCP:127.0.0.1:${toString target}"
-      ];
       RunAtLoad = true;
       KeepAlive = true;
       ThrottleInterval = 10;
@@ -175,8 +238,8 @@ in {
     })
     {
       launchd.daemons.homelab-lan = {
+        script = "exec ${lib.getExe check}";
         serviceConfig = {
-          ProgramArguments = [(lib.getExe check)];
           RunAtLoad = true;
           StartInterval = 60;
           # Network changes rewrite these.
@@ -188,22 +251,25 @@ in {
       environment.systemPackages = [check];
     }
     (lib.mkIf cfg.forward {
-      launchd.daemons.homelab-lan-https = forwarder 443 8443;
-      # OrbStack itself holds 127.0.0.1:2222, hence another port outside.
-      launchd.daemons.homelab-lan-ssh = forwarder 22222 2222;
+      launchd.daemons.homelab-lan-https =
+        forwarder (entrance "homelab-lan-https").port (entrance "homelab-lan-https").target;
+      launchd.daemons.homelab-lan-ssh =
+        forwarder (entrance "homelab-lan-ssh").port (entrance "homelab-lan-ssh").target;
 
       system.activationScripts.preActivation.text = ''
         mkdir -p ${dirOf lanConf}
       '';
-      launchd.daemons.homelab-lan-dns.serviceConfig = {
-        ProgramArguments = [
-          "${pkgs.dnsmasq}/bin/dnsmasq"
-          "--keep-in-foreground"
-          "--conf-file=${dnsmasqConf}"
-        ];
-        RunAtLoad = true;
-        KeepAlive = true;
-        StandardErrorPath = "/var/log/homelab-lan-dns.log";
+      launchd.daemons.homelab-lan-dns = {
+        script = ''
+          exec ${pkgs.dnsmasq}/bin/dnsmasq \
+            --keep-in-foreground \
+            --conf-file=${dnsmasqConf}
+        '';
+        serviceConfig = {
+          RunAtLoad = true;
+          KeepAlive = true;
+          StandardErrorPath = "/var/log/homelab-lan-dns.log";
+        };
       };
 
       # OrbStack would otherwise publish every port the homelab listens on to

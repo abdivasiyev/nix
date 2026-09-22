@@ -125,8 +125,14 @@ in {
 
   config = lib.mkIf cfg.enable {
     launchd.daemons.homelab-machine = {
+      # `script`, not ProgramArguments = [store path]: nix-darwin wraps the
+      # former in `/bin/wait4path /nix/store && exec ...`, and without that a
+      # daemon whose program lives on the /nix volume loses the race against
+      # its mount at boot, dies with EX_CONFIG and is never retried. That is
+      # how the homelab-lan daemons went missing on 21 September. A daemon
+      # that only runs at boot cannot afford to lose that race.
+      script = "exec ${lib.getExe start}";
       serviceConfig = {
-        ProgramArguments = [(lib.getExe start)];
         RunAtLoad = true;
         StandardOutPath = "/var/log/homelab-machine.log";
         StandardErrorPath = "/var/log/homelab-machine.log";
