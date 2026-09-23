@@ -76,7 +76,7 @@
       default = import ./shell.nix {pkgs = nixpkgs.legacyPackages.${system};};
     });
 
-    overlays = overlays;
+    overlays.default = nixpkgs.lib.composeManyExtensions overlays;
 
     # Reusable darwin modules you might want to export
     # These are usually stuff you would upstream into nix-darwin
