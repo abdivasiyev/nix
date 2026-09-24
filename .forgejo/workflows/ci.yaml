@@ -3,7 +3,7 @@ name: Ci
 on: [push, pull_request]
 
 jobs:
-  test-flake:
+  check-flake:
     runs-on: native
 
     steps:
@@ -12,3 +12,24 @@ jobs:
 
       - name: Check flake
         run: nix flake check -L --show-trace
+
+  build-personal:
+    runs-on: native
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Build
+        run: nix build .#darwinConfigurations.personal.config.system.build.topLevel --show-trace
+
+
+  build-work:
+    runs-on: native
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Build
+        run: nix build .#darwinConfigurations.work.config.system.build.topLevel --show-trace
