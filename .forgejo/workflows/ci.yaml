@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Build
-        run: nix build .#darwinConfigurations.personal.config.system.build.topLevel --show-trace
+        run: nix build .#darwinConfigurations.personal.config.system.build.toplevel --show-trace
 
 
   build-work:
@@ -32,4 +32,4 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Build
-        run: nix build .#darwinConfigurations.work.config.system.build.topLevel --show-trace
+        run: nix build .#darwinConfigurations.work.config.system.build.toplevel --show-trace
