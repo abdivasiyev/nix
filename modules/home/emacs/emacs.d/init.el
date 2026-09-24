@@ -489,6 +489,7 @@ With a prefix argument, open its Magit status buffer instead."
   :hook (haskell-mode . lsp-deferred)
   :hook (literate-haskell-mode . lsp-deferred)
   :hook (interactive-haskell-mode . lsp-deferred)
+  :hook (haskell-cabal-mode . lsp-deferred)
   :mode (("\\.hs\\'" . haskell-mode)
          ("\\.lhs\\'" . haskell-literate-mode)
          ("\\.cabal\\'" . haskell-cabal-mode)))

@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   outputs,
+  overlays,
   ...
 }: {
   # Import your modules here
@@ -54,7 +55,7 @@
       allowUnfree = true;
       allowBroken = true;
     };
-    overlays = outputs.overlays;
+    overlays = overlays;
   };
 
   fonts.packages = with pkgs; [
