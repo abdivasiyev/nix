@@ -28,7 +28,6 @@
         "betterdisplay"
         "bruno"
         "discord"
-        "claude"
         "orbstack"
         "element"
         "bitwarden"

@@ -36,7 +36,6 @@ in {
             "/Applications/Telegram Desktop.app"
             "/Applications/Element.app"
             "/Applications/Discord.app"
-            "/Applications/Claude.app"
             "/Applications/Emacs.app"
             "/Applications/Bruno.app"
             "/System/Applications/Books.app"
