@@ -50,6 +50,8 @@ in {
             AppleInterfaceStyle = "Dark";
 
             WebKitDeveloperExtras = true;
+
+            "com.apple.swipescrolldirection" = false; # True for "natural" scrolling direction
           };
 
           "com.apple.finder" = {

@@ -152,11 +152,12 @@
         # This cannot rescue itself: if the check daemon is the one that dies,
         # nothing here runs at all.
         ${lib.concatMapStrings (e: ''
-          if ! /usr/bin/nc -z -G 2 -w 2 127.0.0.1 ${toString e.port} 2>/dev/null; then
-            echo "${e.what} (:${toString e.port}) has no listener; restarting ${e.daemon}"
-            /bin/launchctl kickstart -k system/org.nixos.${e.daemon} 2>/dev/null || true
-          fi
-        '') entrances}
+            if ! /usr/bin/nc -z -G 2 -w 2 127.0.0.1 ${toString e.port} 2>/dev/null; then
+              echo "${e.what} (:${toString e.port}) has no listener; restarting ${e.daemon}"
+              /bin/launchctl kickstart -k system/org.nixos.${e.daemon} 2>/dev/null || true
+            fi
+          '')
+          entrances}
       ''}
     '';
   };
