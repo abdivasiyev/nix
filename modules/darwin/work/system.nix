@@ -42,7 +42,6 @@ in {
             # "${pkgs.vscode}/Applications/Visual Studio Code.app"
             "/Applications/Emacs.app"
             "/Applications/Bruno.app"
-            "/System/Applications/Books.app"
             "/Applications/Bitwarden.app"
           ];
         };

@@ -38,7 +38,6 @@ in {
             "/Applications/Discord.app"
             "/Applications/Emacs.app"
             "/Applications/Bruno.app"
-            "/System/Applications/Books.app"
             "/Applications/OrbStack.app"
             "/Applications/Bitwarden.app"
           ];
