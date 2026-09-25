@@ -40,6 +40,7 @@ in {
             "/Applications/Bruno.app"
             "/Applications/OrbStack.app"
             "/Applications/Bitwarden.app"
+            "${pkgs.kitty}/Applications/${pkgs.kitty.applicationName}.app"
           ];
         };
 

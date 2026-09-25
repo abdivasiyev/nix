@@ -13,9 +13,6 @@
   hpkgs = pkgs.haskell.packages."ghc912";
 in {
   home.packages = with pkgs; [
-    docker_29
-    docker-compose
-    colima
     age
     sops
     kubectl
@@ -42,9 +39,6 @@ in {
     cmake
     glibtool
     nodePackages.nodejs
-    localstack
-    bun
-    gitlogue
     cloudflared
 
     # Haskell stuff
@@ -73,6 +67,9 @@ in {
     outputs.homeModules.rbw
     outputs.homeModules.ssh
     outputs.homeModules.homelabLan
+    outputs.homeModules.kitty
+    outputs.homeModules.btop
+    outputs.homeModules.tmux
   ];
 
   sops.secrets = {

@@ -28,8 +28,6 @@ in {
           persistent-apps = [
             "/System/Applications/Apps.app"
             "/System/Applications/Mail.app"
-            "/System/Applications/Photos.app"
-            "/System/Applications/Messages.app"
             "/System/Applications/Calendar.app"
             "/Applications/SSTP Connect.app"
             "/Applications/Tunnelblick.app"
@@ -43,6 +41,7 @@ in {
             "/Applications/Emacs.app"
             "/Applications/Bruno.app"
             "/Applications/Bitwarden.app"
+            "${pkgs.kitty}/Applications/kitty.app"
           ];
         };
 

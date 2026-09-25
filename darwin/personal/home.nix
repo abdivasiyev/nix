@@ -10,9 +10,6 @@
   });
 in {
   home.packages = with pkgs; [
-    docker_29
-    docker-compose
-    btop
     age
     sops
     kubectl
@@ -74,6 +71,8 @@ in {
     outputs.homeModules.ssh
     outputs.homeModules.homelabLan
     outputs.homeModules.homelab
+    outputs.homeModules.kitty
+    outputs.homeModules.btop
   ];
 
   sops.secrets = {

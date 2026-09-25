@@ -22,4 +22,6 @@
   homelab = import ./homelab;
   homelabLan = import ./homelab-lan.nix;
   worktree = import ./worktree;
+  kitty = import ./kitty.nix;
+  btop = import ./btop.nix;
 }
