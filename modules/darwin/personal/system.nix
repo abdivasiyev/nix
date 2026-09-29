@@ -1,9 +1,12 @@
 {
   inputs,
   pkgs,
+  config,
   ...
 }: let
   zen = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight;
+  programs = config.home-manager.users.abdivasiyev.programs;
+  emacs = programs.emacs.finalPackage;
 in {
   config = {
     system = {
@@ -36,7 +39,7 @@ in {
             "/Applications/Telegram Desktop.app"
             "/Applications/Element.app"
             "/Applications/Discord.app"
-            "/Applications/Emacs.app"
+            "${emacs}/Applications/Emacs.app"
             "/Applications/Bruno.app"
             "/Applications/OrbStack.app"
             "/Applications/Bitwarden.app"

@@ -4,14 +4,10 @@
   outputs,
   config,
   ...
-}: let
-  # hpkgs = pkgs.haskell.packages."ghc910";
-  migrate = pkgs.go-migrate.overrideAttrs (oldAttrs: {
-    tags = ["postgres"];
-  });
+}: {
+  targets.darwin.copyApps.enable = true;
+  targets.darwin.linkApps.enable = false;
 
-  hpkgs = pkgs.haskell.packages."ghc912";
-in {
   home.packages = with pkgs; [
     age
     sops
@@ -20,35 +16,11 @@ in {
     awscli2
     inetutils
     jq
-    go
-    gopls
-    delve
-    go-swag
-    migrate
-    nixd
-    alejandra
     ripgrep
     natscli
     werf
-    jdk25
-    shellcheck
-    python3
-    pandoc
-    yaml-language-server
-    vscode-langservers-extracted
-    cmake
     glibtool
-    nodePackages.nodejs
     cloudflared
-
-    # Haskell stuff
-    hpkgs.cabal-install
-    hpkgs.cabal-add
-    hpkgs.cabal-gild
-    hpkgs.haskell-language-server
-    hpkgs.fourmolu
-    hpkgs.ghc
-    hpkgs.ghcide
   ];
 
   # Modules

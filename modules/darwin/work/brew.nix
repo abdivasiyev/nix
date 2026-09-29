@@ -25,7 +25,6 @@
         "telegram-desktop"
         "orbstack"
         "vlc"
-        "emacs-app"
         "betterdisplay"
         "bruno"
         "discord"

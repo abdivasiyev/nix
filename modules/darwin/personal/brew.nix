@@ -24,7 +24,6 @@
         "macs-fan-control"
         "telegram-desktop"
         "vlc"
-        "emacs-app"
         "betterdisplay"
         "bruno"
         "discord"
