@@ -144,6 +144,7 @@ in {
         hl-todo
         doom-themes
         gruber-darker-theme
+        gruvbox-theme
         nerd-icons
         nerd-icons-dired
         dashboard
