@@ -67,6 +67,7 @@
 (define-key eglot-mode-map (kbd "C-c l h") #'eldoc-doc-buffer)
 (define-key eglot-mode-map (kbd "C-c l R") #'eglot-reconnect)
 (define-key eglot-mode-map (kbd "C-c l q") #'eglot-shutdown)
+(define-key eglot-mode-map (kbd "C-c l g i") #'eglot-find-implementation)
 
 ;; Eglot uses Flymake for diagnostics. Enabling it in programming buffers also
 ;; preserves diagnostics from any non-Eglot Flymake backend.
