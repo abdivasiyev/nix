@@ -20,7 +20,7 @@ pkgs.stdenv.mkDerivation {
     just
 
     # LSP Server
-    nixd
+    nil
 
     # Linter
     statix
