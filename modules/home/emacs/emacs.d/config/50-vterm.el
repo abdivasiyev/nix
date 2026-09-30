@@ -11,7 +11,8 @@
 
 (add-hook 'vterm-mode-hook #'my/vterm-setup)
 
-(setq vterm-toggle-scope 'project)
+(setq vterm-toggle-scope 'project
+      vterm-shell "/bin/zsh")
 (autoload 'vterm-toggle "vterm-toggle" nil t)
 (global-set-key (kbd "C-c t") #'vterm-toggle)
 
