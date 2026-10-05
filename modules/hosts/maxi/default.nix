@@ -4,16 +4,6 @@
   };
 
   den.aspects.maxi = {
-    darwin = {
-      homebrew = {
-        enable = true;
-        onActivation = {
-          cleanup = "zap";
-          autoUpdate = true;
-          upgrade = true;
-        };
-      };
-    };
     includes = [
       den.aspects.profiles.work
     ];

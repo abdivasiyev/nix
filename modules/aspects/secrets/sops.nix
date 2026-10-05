@@ -1,10 +1,10 @@
 {inputs, ...}: {
-  den.aspects.secrets.sops = {home, ...}: {
+  den.aspects.secrets.sops = {
     darwin = {config, ...}: {
       imports = [inputs.sops-nix.darwinModules.sops];
 
       sops = {
-        age.keyFile = "${home}/.config/sops/age/keys.txt";
+        age.keyFile = "${config.users.users.abdivasiyev.home}/.config/sops/age/keys.txt";
         # Only the age key: macOS has no /etc/ssh host keys, which sops-nix
         # would otherwise try (and fail on) for both gnupg and age.
         age.sshKeyPaths = [];
@@ -14,10 +14,10 @@
       };
     };
 
-    homeManager = {
+    homeManager = {config, ...}: {
       imports = [inputs.sops-nix.homeManagerModules.sops];
       sops = {
-        age.keyFile = "${home}/.config/sops/age/keys.txt";
+        age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
         # Only the age key: macOS has no /etc/ssh host keys, which sops-nix
         # would otherwise try (and fail on) for both gnupg and age.
         age.sshKeyPaths = [];
@@ -26,10 +26,6 @@
         defaultSopsFormat = "yaml";
       };
     };
-
-    os.home-manager.sharedModules = [
-      inputs.sops-nix.homeManagerModules.sops
-    ];
   };
   flake-file.inputs = {
     sops-nix = {

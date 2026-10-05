@@ -46,7 +46,7 @@
         };
         initContent = lib.mkMerge [
           (lib.mkAfter ''
-            export GITHUB_TOKEN=${config.sops.placeholder.githubToken}
+            export GITHUB_TOKEN=$(cat ${config.sops.secrets.githubToken.path})
             source ${./git/plugins/shell.zsh}
           '')
 

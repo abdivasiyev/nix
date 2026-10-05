@@ -1,6 +1,10 @@
 {...}: {
   den.aspects.editors.emacs = {
-    homeManager = {pkgs, ...}: let
+    homeManager = {
+      pkgs,
+      lib,
+      ...
+    }: let
       hpkgs = pkgs.haskell.packages."ghc912";
 
       migrate = pkgs.go-migrate.overrideAttrs (oldAttrs: {
@@ -57,8 +61,7 @@
         shellcheck
         # Haskell
         hpkgs.ghc
-        hpkgs.ghcide
-        hpkgs.cabal-install
+        (lib.hiPrio hpkgs.cabal-install)
         hpkgs.cabal-add
         hpkgs.cabal-gild
         hpkgs.hoogle
@@ -78,7 +81,7 @@
         # Python3
         python3
         # NodeJS
-        nodePackages.nodejs
+        nodejs
       ];
 
       toolsPath = pkgs.lib.makeBinPath tools;
