@@ -1,5 +1,9 @@
-{
+{den, ...}: {
   den.aspects.development.direnv = {
+    includes = [
+      den.aspects.overlays.direnv
+    ];
+
     homeManager = {
       programs.direnv = {
         enable = true;

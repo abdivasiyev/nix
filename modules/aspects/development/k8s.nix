@@ -1,5 +1,9 @@
-{
+{den, ...}: {
   den.aspects.development.k8s = {
+    includes = [
+      den.aspects.overlays.kubectl-readonly
+    ];
+
     darwin.homebrew.casks = ["lens"];
     os = {
       pkgs,

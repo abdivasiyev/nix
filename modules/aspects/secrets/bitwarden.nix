@@ -1,5 +1,9 @@
-{...}: {
+{den, ...}: {
   den.aspects.secrets.bitwarden = {
+    includes = [
+      den.aspects.overlays.rbw
+    ];
+
     darwin.homebrew.casks = ["bitwarden"];
 
     homeManager = {pkgs, ...}: {

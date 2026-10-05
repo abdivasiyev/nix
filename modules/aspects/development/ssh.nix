@@ -1,5 +1,11 @@
 {
   den.aspects.development.ssh = {
+    darwin = {
+      services.openssh = {
+        enable = true;
+      };
+    };
+
     homeManager = {
       pkgs,
       config,

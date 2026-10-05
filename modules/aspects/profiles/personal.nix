@@ -38,6 +38,7 @@
       www.zen
       # desktop
       desktop.darwin
+      desktop.fonts
     ];
 
     # Darwin dock setup
