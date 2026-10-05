@@ -5,7 +5,7 @@
 }: {
   den.default.darwin.system.stateVersion = 7;
   den.default.os.home-manager = {
-    useGlobalPkgs = true;
+    # useGlobalPkgs = true;
     useUserPackages = true;
   };
   den.default.homeManager = {

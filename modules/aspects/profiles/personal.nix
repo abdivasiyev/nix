@@ -1,21 +1,39 @@
 {den, ...}: {
   den.aspects.profiles.personal = {
-    includes = [
+    includes = with den.aspects; [
       # global packages
-      den.aspects.packages.homebrew
-      den.aspects.packages.system
+      packages.homebrew
+      packages.system
 
       # secret management
-      den.aspects.secrets.sops
-      den.aspects.secrets.bitwarden
+      secrets.sops
+      secrets.bitwarden
 
       # editors
-      den.aspects.editors.emacs
+      editors.emacs
 
       # chat
-      den.aspects.chat.telegram
-      den.aspects.chat.discord
-      den.aspects.chat.element
+      chat.telegram
+      chat.discord
+      chat.element
+
+      # development environment
+      development.bat
+      development.btop
+      development.direnv
+      development.eza
+      development.git
+      development.kitty
+      development.nix
+      development.nur
+      development.ssh
+      development.tmux
+      development.zsh
+
+      # www
+      www.zen
+      # desktop
+      desktop.darwin
     ];
   };
 }

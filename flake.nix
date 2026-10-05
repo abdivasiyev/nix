@@ -21,6 +21,10 @@
     };
     import-tree.url = "github:denful/import-tree";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     self.submodules = true;
     sops-nix = {
       url = "github:Mic92/sops-nix";

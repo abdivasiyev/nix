@@ -9,6 +9,7 @@
         # would otherwise try (and fail on) for both gnupg and age.
         age.sshKeyPaths = [];
         gnupg.sshKeyPaths = [];
+        defaultSopsFile = ../../secrets/secrets.yaml;
       };
     };
 
@@ -21,6 +22,7 @@
         # would otherwise try (and fail on) for both gnupg and age.
         age.sshKeyPaths = [];
         gnupg.sshKeyPaths = [];
+        defaultSopsFile = ../../secrets/secrets.yaml;
       };
     };
 
