@@ -1,6 +1,19 @@
 {
   den.aspects.development.ssh = {
-    homeManager = {pkgs, ...}: {
+    homeManager = {
+      pkgs,
+      config,
+      ...
+    }: {
+      sops = {
+        # setup secrets
+        secrets = {
+          sshPrivateKey = {
+            path = "${config.home.homeDirectory}/.ssh/id_ed25519";
+            mode = "0600";
+          };
+        };
+      };
       programs.ssh = {
         enable = true;
         # No home-manager defaults: only what is written here.

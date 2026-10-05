@@ -25,6 +25,8 @@ in {
     };
 
     darwin = {
+      system.primaryUser = user;
+
       users = {
         knownUsers = [user];
         users.${user} = {

@@ -1,4 +1,6 @@
 {
+  inputs,
+  outputs,
   lib,
   den,
   ...
@@ -7,6 +9,10 @@
   den.default.os.home-manager = {
     # useGlobalPkgs = true;
     useUserPackages = true;
+
+    extraSpecialArgs = {
+      inherit inputs outputs;
+    };
   };
   den.default.homeManager = {
     targets.darwin.copyApps.enable = true;

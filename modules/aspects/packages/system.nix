@@ -1,4 +1,4 @@
-{den, ...}: {
+{
   den.aspects.packages.system = {
     os = {pkgs, ...}: {
       environment.systemPackages = with pkgs; [
