@@ -21,7 +21,6 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:denful/import-tree";
     den.url = "github:denful/den";

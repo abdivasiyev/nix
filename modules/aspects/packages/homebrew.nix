@@ -1,19 +1,6 @@
 {
   den.aspects.packages.homebrew = {
-    nix-homebrew = {
-      enable = true;
-      enableRosetta = true;
-      autoMigrate = true;
-      enableZshIntegration = true;
-    };
-
     homebrew = {
-      enable = true;
-      onActivation = {
-        cleanup = "zap";
-        autoUpdate = true;
-        upgrade = true;
-      };
       taps = [
       ];
       casks = [

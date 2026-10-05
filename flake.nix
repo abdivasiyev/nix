@@ -19,7 +19,6 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     import-tree.url = "github:denful/import-tree";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
     self.submodules = true;
