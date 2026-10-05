@@ -4,7 +4,7 @@
       imports = [inputs.sops-nix.darwinModules.sops];
 
       sops = {
-        age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+        age.keyFile = "${config.users.users.abdivasiyev.home}/.config/sops/age/keys.txt";
         # Only the age key: macOS has no /etc/ssh host keys, which sops-nix
         # would otherwise try (and fail on) for both gnupg and age.
         age.sshKeyPaths = [];
