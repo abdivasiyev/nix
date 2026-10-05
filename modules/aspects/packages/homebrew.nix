@@ -14,7 +14,6 @@
         "discord"
         "orbstack"
         "element"
-        "bitwarden"
       ];
       brews = [
         "mas"
