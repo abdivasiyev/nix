@@ -1,28 +1,29 @@
 {inputs, ...}: {
-  den.aspects.secrets.sops = {
+  den.aspects.secrets.sops = {home, ...}: {
     darwin = {config, ...}: {
       imports = [inputs.sops-nix.darwinModules.sops];
 
       sops = {
-        age.keyFile = "${config.users.users.abdivasiyev.home}/.config/sops/age/keys.txt";
+        age.keyFile = "${home}/.config/sops/age/keys.txt";
         # Only the age key: macOS has no /etc/ssh host keys, which sops-nix
         # would otherwise try (and fail on) for both gnupg and age.
         age.sshKeyPaths = [];
         gnupg.sshKeyPaths = [];
-        defaultSopsFile = ../../secrets/secrets.yaml;
+        defaultSopsFile = ../../../secrets/secrets.yaml;
+        defaultSopsFormat = "yaml";
       };
     };
 
-    homeManager = {config, ...}: {
+    homeManager = {
       imports = [inputs.sops-nix.homeManagerModules.sops];
-
       sops = {
-        age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+        age.keyFile = "${home}/.config/sops/age/keys.txt";
         # Only the age key: macOS has no /etc/ssh host keys, which sops-nix
         # would otherwise try (and fail on) for both gnupg and age.
         age.sshKeyPaths = [];
         gnupg.sshKeyPaths = [];
-        defaultSopsFile = ../../secrets/secrets.yaml;
+        defaultSopsFile = ../../../secrets/secrets.yaml;
+        defaultSopsFormat = "yaml";
       };
     };
 

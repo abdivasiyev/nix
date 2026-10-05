@@ -1,5 +1,5 @@
 {den, ...}: {
-  den.aspects.development.k8s = {
+  den.aspects.development.k8s = {home, ...}: {
     includes = [
       den.aspects.overlays.kubectl-readonly
     ];
@@ -13,15 +13,15 @@
       sops = {
         secrets = {
           kubeconfig = {
-            path = "${config.home.homeDirectory}/.kube/config";
+            path = "${home}/.kube/config";
             mode = "0400";
           };
           awsConfig = {
-            path = "${config.home.homeDirectory}/.aws/config";
+            path = "${home}/.aws/config";
             mode = "0400";
           };
           awsCredentials = {
-            path = "${config.home.homeDirectory}/.aws/credentials";
+            path = "${home}/.aws/credentials";
             mode = "0400";
           };
         };

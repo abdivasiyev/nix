@@ -1,5 +1,5 @@
 {
-  den.aspects.development.ssh = {
+  den.aspects.development.ssh = {home, ...}: {
     darwin = {
       services.openssh = {
         enable = true;
@@ -15,7 +15,7 @@
         # setup secrets
         secrets = {
           sshPrivateKey = {
-            path = "${config.home.homeDirectory}/.ssh/id_ed25519";
+            path = "${home}/.ssh/id_ed25519";
             mode = "0600";
           };
         };

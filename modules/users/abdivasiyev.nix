@@ -30,6 +30,7 @@ in {
       users = {
         knownUsers = [user];
         users.${user} = {
+          uid = 501;
           home = "/Users/${user}";
           isHidden = false;
           name = user;
