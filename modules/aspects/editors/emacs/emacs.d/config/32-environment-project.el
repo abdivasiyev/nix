@@ -18,3 +18,5 @@
 
 (setq shell-file-name "/bin/sh"
       shell-command-switch "-c")
+
+(require 'trust-manager)

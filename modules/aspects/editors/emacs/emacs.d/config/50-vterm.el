@@ -2,6 +2,8 @@
 ;; Terminal
 ;; ---------------------------------------------------------------------------
 
+(require 'vterm)
+
 (setq vterm-max-scrollback 1000000)
 
 (defun my/vterm-setup ()
