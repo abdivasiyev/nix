@@ -1,6 +1,0 @@
-[
-    {
-        "key": "alt+tab",
-        "command": "workbench.action.switchWindow"
-    }
-]

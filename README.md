@@ -1,35 +1,40 @@
-# Install nix
+# Nix based host configurations
+
+Configurations are written using [den](https://den.denful.dev)
+
+Inspired by [aeshakhzod](https://codeberg.org/aeshakhzod/blazingly-fast/)
+
+Installation
+
+1. Install nix or determinate nix
 
 ```bash
 sh <(curl -L https://nixos.org/nix/install)
+
+# determinate nix installation
+curl -fsSL https://install.determinate.systems/nix | sh -s -- install
 ```
 
-# Init nix-darwin
+2. Install nix-darwin's darwin-rebuild command
 
-```bash
-nix flake init -t nix-darwin/master --experimental-features 'nix-command flakes'
 ```
-
-# Install darwin-rebuild
-
-```bash
 sudo nix run nix-darwin/master#darwin-rebuild --experimental-features 'nix-command flakes' -- switch --flake .#personal
 ```
 
-# Switch to specific profile
+3. Copy sops secret key
 
 ```bash
-sudo darwin-rebuild switch --flake .#personal
+cp ~/Documents/keys/sops/age/keys.txt ~/.config/sops/age/keys.txt
 ```
 
-# Check flake
+4. Switch to specific host (available `maxi` and `mini`)
 
-```bash
-sudo darwin-rebuild check --flake .#personal
+```
+sudo darwin-rebuild switch --flake .#maxi
 ```
 
-# Add new secret into secrets.yaml
+5. Editing secrets
 
-```bash
-EDITOR=vim SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops --age -e secrets/secrets.yaml
+```
+EDITOR=vim sops -e secrets/secrets.yaml
 ```
