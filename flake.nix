@@ -1,104 +1,38 @@
+# DO-NOT-EDIT. This file was auto-generated using github:denful/flake-file.
+# Use `nix run .#write-flake` to regenerate it.
 {
-  description = "My nix system flake for darwin systems";
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
-    # If your configurations are only for darwin system
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
-
-    # Nix Darwin
-    # Keep version same as your nixpkgs as much as possible
-    nix-darwin = {
-      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
+    darwin = {
+      url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Home Manager
-    # Keep version same as nixpkgs
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Nix Homebrew repository
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-
-    # Zen browser
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
-    # Collection of fancy nix stuff
-    # flake-utils.url = "github:numtide/flake-utils";
-
-    # Determinate Nix's nix-darwin module (Nix settings, netrc sources)
+    den.url = "github:denful/den";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
-
-    # Sops encryption manager
+    flake-file.url = "github:denful/flake-file";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    import-tree.url = "github:denful/import-tree";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    self.submodules = true;
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
-
-  outputs = {
-    self,
-    nix-darwin,
-    nixpkgs,
-    sops-nix,
-    ...
-  } @ inputs: let
-    # Self reference
-    # For configurations
-    outputs = self;
-
-    # Simple manual forEach
-    # If you want something fancy:
-    # https://github.com/orzklv/nix/blob/master/flake.nix#L83-L96
-    systems = [
-      # Add more if you need
-      "aarch64-darwin"
-    ];
-
-    # Overlays for some packages
-    overlays = import ./overlays;
-
-    # For every system... generate attributes...
-    forAllSystems = nixpkgs.lib.genAttrs systems;
-  in {
-    # Project's preferred formatter
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-
-    # Development environment
-    devShells = forAllSystems (system: {
-      default = import ./shell.nix {pkgs = nixpkgs.legacyPackages.${system};};
-    });
-
-    # Reusable darwin modules you might want to export
-    # These are usually stuff you would upstream into nix-darwin
-    darwinPersonalModules = import ./modules/darwin/personal;
-    darwinWorkModules = import ./modules/darwin/work;
-
-    # Reusable home-manager modules you might want to export
-    # These are usually stuff you would upstream into home-manager
-    homeModules = import ./modules/home;
-
-    # Darwin configuration
-    darwinConfigurations = {
-      personal = nix-darwin.lib.darwinSystem {
-        modules = [
-          ./darwin/personal/configuration.nix
-        ];
-        specialArgs = {inherit inputs outputs overlays;};
-      };
-      work = nix-darwin.lib.darwinSystem {
-        modules = [
-          ./darwin/work/configuration.nix
-        ];
-        specialArgs = {inherit inputs outputs overlays;};
-      };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }
