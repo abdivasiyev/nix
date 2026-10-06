@@ -38,6 +38,7 @@
       www.zen
       # desktop
       desktop.darwin
+      desktop.dock
       desktop.fonts
     ];
 

@@ -1,24 +1,24 @@
 {
-  den.aspects.development.tunnelblick = {home, ...}: {
+  den.aspects.development.tunnelblick = {
     darwin.homebrew.casks = ["tunnelblick"];
     homeManager = {config, ...}: {
       sops.secrets = {
         mobiTunnelblick = {
-          path = "${home}/.config/tunnelblick/mobi.ovpn";
+          path = "${config.home.homeDirectory}/.config/tunnelblick/mobi.ovpn";
           mode = "0400";
         };
       };
     };
   };
 
-  den.aspects.development.sstp = {home, ...}: {
+  den.aspects.development.sstp = {
     darwin.homebrew.masApps = {
       "SSTP Connect" = 1543667909;
     };
     homeManager = {config, ...}: {
       sops.secrets = {
         mobiVpn = {
-          path = "${home}/.config/sstp/mobi.vpn";
+          path = "${config.home.homeDirectory}/.config/sstp/mobi.vpn";
           mode = "0400";
         };
       };

@@ -1,11 +1,12 @@
 {den, ...}: {
-  den.aspects.development.k8s = {home, ...}: {
+  den.aspects.development.k8s = {
     includes = [
       den.aspects.overlays.kubectl-readonly
     ];
 
     darwin.homebrew.casks = ["lens"];
-    os = {
+
+    homeManager = {
       pkgs,
       config,
       ...
@@ -13,24 +14,26 @@
       sops = {
         secrets = {
           kubeconfig = {
-            path = "${home}/.kube/config";
+            path = "${config.home.homeDirectory}/.kube/config";
             mode = "0400";
           };
           awsConfig = {
-            path = "${home}/.aws/config";
+            path = "${config.home.homeDirectory}/.aws/config";
             mode = "0400";
           };
           awsCredentials = {
-            path = "${home}/.aws/credentials";
+            path = "${config.home.homeDirectory}/.aws/credentials";
             mode = "0400";
           };
         };
       };
 
-      environment.systemPackages = with pkgs; [
+      home.packages = with pkgs; [
         awscli2
         kubectl
-        werf
+        (pkgs.werf.overrideAttrs (oldAttrs: {
+          doCheck = false;
+        }))
       ];
     };
   };

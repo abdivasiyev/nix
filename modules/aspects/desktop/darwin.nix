@@ -1,14 +1,6 @@
-{den, ...}: {
+{
   den.aspects.desktop.darwin = {
-    includes = [
-      den.aspects.desktop.dock
-    ];
-
     darwin = {
-      pkgs,
-      config,
-      ...
-    }: {
       system = {
         keyboard = {
           enableKeyMapping = true;
