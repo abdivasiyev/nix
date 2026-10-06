@@ -167,6 +167,7 @@
             envrc
             inheritenv
             dired-toggle
+            trust-manager
 
             # Snippets / activity tracking.
             yasnippet

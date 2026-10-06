@@ -21,8 +21,8 @@
     imports = [
       #      (inputs.home-manager.homeModules.home-manager or {})
     ];
-    targets.darwin.copyApps.enable = true;
-    targets.darwin.linkApps.enable = false;
+    # targets.darwin.copyApps.enable = true;
+    # targets.darwin.linkApps.enable = false;
 
     home.stateVersion = "26.05";
   };

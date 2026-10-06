@@ -31,5 +31,7 @@
           (lambda ()
             (setq gc-cons-threshold (* 50 1024 1024))))
 
+(add-hook 'after-init-hook 'server-start t)
+
 (provide 'early-init)
 ;;; early-init.el ends here

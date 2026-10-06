@@ -42,7 +42,6 @@
       www.zen
       # desktop
       desktop.darwin
-      desktop.dock
       desktop.fonts
     ];
 
@@ -52,28 +51,28 @@
       config,
       ...
     }: {
-      local.dock.entries = let
+      system.defaults.dock.persistent-apps = let
         zen = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight;
         programs = config.home-manager.users.abdivasiyev.programs;
         emacs = programs.emacs.finalPackage;
       in [
-        {path = "/System/Applications/Apps.app";}
-        {path = "/System/Applications/Mail.app";}
-        {path = "/System/Applications/Messages.app";}
-        {path = "/System/Applications/Calendar.app";}
-        {path = "/Applications/SSTP Connect.app";}
-        {path = "/Applications/Tunnelblick.app";}
-        {path = "/Applications/Lens.app";}
-        {path = "/Applications/Redis Insight.app";}
-        {path = "/System/Cryptexes/App/System/Applications/Safari.app";}
-        {path = "${zen}/Applications/${zen.applicationName}.app";}
-        {path = "/Applications/Telegram Desktop.app";}
-        {path = "/Applications/Element.app";}
-        {path = "${emacs}/Applications/Emacs.app";}
-        {path = "/Applications/Bruno.app";}
-        {path = "/Applications/OrbStack.app";}
-        {path = "/Applications/Bitwarden.app";}
-        {path = "${pkgs.kitty}/Applications/kitty.app";}
+        "/System/Applications/Apps.app"
+        "/System/Applications/Mail.app"
+        "/System/Applications/Messages.app"
+        "/System/Applications/Calendar.app"
+        "/Applications/SSTP Connect.app"
+        "/Applications/Tunnelblick.app"
+        "/Applications/Lens.app"
+        "/Applications/Redis Insight.app"
+        "/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app"
+        "${zen}/Applications/${zen.applicationName}.app"
+        "/Applications/Telegram Desktop.app"
+        "/Applications/Element.app"
+        "${emacs}/Applications/Emacs.app"
+        "/Applications/Bruno.app"
+        "/Applications/OrbStack.app"
+        "/Applications/Bitwarden.app"
+        "${pkgs.kitty}/Applications/kitty.app"
       ];
     };
   };
