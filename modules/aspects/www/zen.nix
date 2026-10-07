@@ -1,10 +1,14 @@
 {inputs, ...}: {
   den.aspects.www.zen = {
-    darwin = {pkgs, ...}: {
+    darwin = {
+      config,
+      pkgs,
+      ...
+    }: {
       system.defaults.dock.persistent-apps = let
         zen = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight;
       in [
-        "${zen}/Applications/${zen.applicationName}.app"
+        "${config.users.users.abdivasiyev.home}/Applications/Home Manager Apps/${zen.applicationName}.app"
       ];
     };
 
