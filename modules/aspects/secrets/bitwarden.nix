@@ -5,6 +5,7 @@
     ];
 
     darwin.homebrew.casks = ["bitwarden"];
+    darwin.system.defaults.dock.persistent-apps = ["/Applications/Bitwarden.app"];
 
     homeManager = {pkgs, ...}: {
       programs.rbw = {

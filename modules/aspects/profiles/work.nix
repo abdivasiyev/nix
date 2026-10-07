@@ -23,15 +23,19 @@
 
       # development environment
       development.bat
+      development.bruno
       development.btop
       development.direnv
       development.eza
       development.git
+      development.jetbrains-toolbox
       development.k8s
       development.kitty
       development.nats
       development.nix
       development.nur
+      development.orbstack
+      development.redis
       development.ssh
       development.tmux
       development.tunnelblick
@@ -43,41 +47,12 @@
       # desktop
       desktop.darwin
       desktop.fonts
+      desktop.better-display
+      desktop.macs-fan-control
+      desktop.vlc
 
       # llm
       llm.claude
     ];
-
-    # Darwin dock setup
-    darwin = {
-      pkgs,
-      config,
-      ...
-    }: {
-      system.defaults.dock.persistent-apps = let
-        zen = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight;
-        programs = config.home-manager.users.abdivasiyev.programs;
-        emacs = programs.emacs.finalPackage;
-      in [
-        "/System/Applications/Apps.app"
-        "/System/Applications/Mail.app"
-        "/System/Applications/Messages.app"
-        "/System/Applications/Calendar.app"
-        "/Applications/SSTP Connect.app"
-        "/Applications/Tunnelblick.app"
-        "/Applications/Lens.app"
-        "/Applications/Redis Insight.app"
-        "/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app"
-        "${zen}/Applications/${zen.applicationName}.app"
-        "/Applications/Telegram Desktop.app"
-        "/Applications/Element.app"
-        "${emacs}/Applications/Emacs.app"
-        "/Applications/Claude.app"
-        "/Applications/Bruno.app"
-        "/Applications/OrbStack.app"
-        "/Applications/Bitwarden.app"
-        "${pkgs.kitty}/Applications/kitty.app"
-      ];
-    };
   };
 }

@@ -1,5 +1,15 @@
 {...}: {
   den.aspects.editors.emacs = {
+    darwin = {config, ...}: let
+      programs = config.home-manager.users.abdivasiyev.programs;
+      emacs = programs.emacs.finalPackage;
+    in {
+      system.defaults.dock.persistent-apps = [
+        "${emacs}/Applications/Emacs.app"
+      ];
+      homebrew.brews = ["libvterm"];
+    };
+
     homeManager = {
       pkgs,
       lib,

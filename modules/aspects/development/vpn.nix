@@ -1,6 +1,10 @@
 {
   den.aspects.development.tunnelblick = {
     darwin.homebrew.casks = ["tunnelblick"];
+    darwin.system.defaults.dock.persistent-apps = [
+      "/Applications/Tunnelblick.app"
+    ];
+
     homeManager = {config, ...}: {
       sops.secrets = {
         mobiTunnelblick = {
@@ -15,6 +19,9 @@
     darwin.homebrew.masApps = {
       "SSTP Connect" = 1543667909;
     };
+    darwin.system.defaults.dock.persistent-apps = [
+      "/Applications/SSTP Connect.app"
+    ];
     homeManager = {config, ...}: {
       sops.secrets = {
         mobiVpn = {

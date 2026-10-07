@@ -1,5 +1,7 @@
 {
   den.aspects.development.git = {
+    darwin.homebrew.brews = ["gh"];
+
     homeManager = {
       pkgs,
       lib,

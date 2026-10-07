@@ -1,5 +1,13 @@
 {inputs, ...}: {
   den.aspects.www.zen = {
+    darwin = {pkgs, ...}: {
+      system.defaults.dock.persistent-apps = let
+        zen = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight;
+      in [
+        "${zen}/Applications/${zen.applicationName}.app"
+      ];
+    };
+
     homeManager = {pkgs, ...}: let
       mkExtensionSettings = builtins.mapAttrs (_: pluginId: {
         install_url = "https://addons.mozilla.org/firefox/downloads/latest/${pluginId}/latest.xpi";

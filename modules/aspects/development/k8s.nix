@@ -5,6 +5,9 @@
     ];
 
     darwin.homebrew.casks = ["lens"];
+    darwin.system.defaults.dock.persistent-apps = [
+      "/Applications/Lens.app"
+    ];
 
     homeManager = {
       pkgs,

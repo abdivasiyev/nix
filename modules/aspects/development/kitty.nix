@@ -1,5 +1,11 @@
 {
   den.aspects.development.kitty = {
+    darwin = {pkgs, ...}: {
+      system.defaults.dock.persistent-apps = [
+        "${pkgs.kitty}/Applications/kitty.app"
+      ];
+    };
+
     homeManager = {pkgs, ...}: {
       # terminal emulator
       programs.kitty = {
