@@ -1,32 +1,47 @@
-{
-  den.aspects.packages.homebrew = {
-    homebrew = {
-      enable = true;
-      onActivation = {
-        cleanup = "zap";
-        autoUpdate = true;
-        upgrade = true;
+{inputs, ...}: {
+  den.aspects.packages.homebrew = {user, ...}: {
+    darwin = {
+      imports = [
+        (inputs.nix-homebrew.darwinModules.nix-homebrew or {})
+      ];
+
+      nix-homebrew = {
+        user = user.name;
+        enable = true;
+        enableRosetta = true;
+        mutableTaps = false;
       };
-      taps = [
-      ];
-      casks = [
-        "jetbrains-toolbox"
-        "redis-insight"
-        "macs-fan-control"
-        "vlc"
-        "betterdisplay"
-        "bruno"
-        "orbstack"
-      ];
-      brews = [
-        "mas"
-        "libvterm"
-        "coreutils"
-        "gh"
-        "mole"
-      ];
-      masApps = {
+      homebrew = {
+        enable = true;
+        onActivation = {
+          cleanup = "zap";
+          autoUpdate = true;
+          upgrade = true;
+        };
+
+        taps = [
+        ];
+        casks = [
+          "jetbrains-toolbox"
+          "redis-insight"
+          "macs-fan-control"
+          "vlc"
+          "betterdisplay"
+          "bruno"
+          "orbstack"
+        ];
+        brews = [
+          "mas"
+          "libvterm"
+          "coreutils"
+          "gh"
+          "mole"
+        ];
+        masApps = {
+        };
       };
     };
   };
+
+  flake-file.inputs.nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 }

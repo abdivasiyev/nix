@@ -9,6 +9,7 @@
   den.default.darwin.imports = [
     (inputs.home-manager.darwinModules.home-manager or {})
   ];
+
   den.default.os.home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -34,6 +35,8 @@
     den.batteries.hostname
     den.batteries.host-aspects
   ];
+
   den.schema.user.classes = lib.mkDefault ["homeManager"];
+
   flake-file.inputs.self.submodules = true;
 }

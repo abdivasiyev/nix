@@ -43,6 +43,9 @@
       # desktop
       desktop.darwin
       desktop.fonts
+
+      # llm
+      llm.claude
     ];
 
     # Darwin dock setup
@@ -69,6 +72,7 @@
         "/Applications/Telegram Desktop.app"
         "/Applications/Element.app"
         "${emacs}/Applications/Emacs.app"
+        "/Applications/Claude.app"
         "/Applications/Bruno.app"
         "/Applications/OrbStack.app"
         "/Applications/Bitwarden.app"
