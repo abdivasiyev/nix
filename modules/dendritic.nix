@@ -13,6 +13,7 @@
 
   flake-file.inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
+    nixpkgs-nixos.url = "github:NixOS/nixpkgs/nixos-26.05";
     darwin = lib.mkForce {
       url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs";

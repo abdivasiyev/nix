@@ -75,6 +75,7 @@ in {
 
     homeManager = {
       pkgs,
+      lib,
       config,
       ...
     }: {
@@ -86,7 +87,8 @@ in {
       };
 
       nix = {
-        package = pkgs.nix;
+        # NixOS' home-manager module already sets this from the system nix
+        package = lib.mkDefault pkgs.nix;
         extraOptions = ''
           !include ${config.sops.templates."nix/nix.conf".path}
         '';

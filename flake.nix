@@ -22,6 +22,7 @@
     import-tree.url = "github:denful/import-tree";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
+    nixpkgs-nixos.url = "github:NixOS/nixpkgs/nixos-26.05";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
