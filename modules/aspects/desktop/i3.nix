@@ -159,6 +159,15 @@
             "Return" = "mode default";
             "${mod}+r" = "mode default";
           };
+          # No borders or title bars; the focused window is the one with the cursor.
+          window = {
+            border = 0;
+            titlebar = false;
+          };
+          floating = {
+            border = 0;
+            titlebar = false;
+          };
           colors.focused = {
             border = "#d79921";
             background = "#d79921";
