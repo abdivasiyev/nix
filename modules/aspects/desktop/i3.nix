@@ -21,6 +21,11 @@
       # Sharing sends Cmd as Alt and Option+letter as ∂-style characters.)
       mod = "Mod4";
 
+      # UI scale: 120 = 1.25x. TigerVNC on macOS isn't Retina-aware, so the
+      # display stays 2560x1440 and only text/UI size changes. Xvnc reports it
+      # to X clients; Xft.dpi covers GTK apps (Zen), kitty and i3.
+      dpi = 120;
+
       block = name: runtimeInputs: text:
         lib.getExe (pkgs.writeShellApplication {
           name = "i3blocks-${name}";
@@ -29,13 +34,14 @@
 
       session = pkgs.writeShellApplication {
         name = "i3-vnc-session";
-        runtimeInputs = [pkgs.tigervnc pkgs.dbus config.xsession.windowManager.i3.package];
+        runtimeInputs = [pkgs.tigervnc pkgs.dbus pkgs.xrdb config.xsession.windowManager.i3.package];
         # -RawKeyboard: use the client's physical key codes instead of its
         # layout's characters, so TigerVNC's Option arrives as Alt (not ∂).
         text = ''
-          Xvnc :1 -geometry 2560x1440 -depth 24 -dpi 96 -rfbport 5901 -RawKeyboard=1 \
+          Xvnc :1 -geometry 2560x1440 -depth 24 -dpi ${toString dpi} -rfbport 5901 -RawKeyboard=1 \
             -SecurityTypes VncAuth -rfbauth "$XDG_RUNTIME_DIR/vncpasswd" &
           while [ ! -e /tmp/.X11-unix/X1 ]; do sleep 0.1; done
+          DISPLAY=:1 xrdb -merge ${config.home.homeDirectory}/.Xresources
           DISPLAY=:1 exec dbus-run-session i3
         '';
       };
@@ -66,6 +72,8 @@
       };
     in {
       sops.secrets.vncPassword = {};
+
+      xresources.properties."Xft.dpi" = dpi;
 
       systemd.user.services.clipboard-sync = {
         Unit = {
@@ -160,8 +168,8 @@
           };
           bars = [
             {
-              position = "top";
-              statusCommand = "${lib.getExe pkgs.i3blocks} -c ${config.xdg.configHome}/i3blocks/top";
+              position = "bottom";
+              statusCommand = "${lib.getExe pkgs.i3blocks} -c ${config.xdg.configHome}/i3blocks/bottom";
               fonts = {
                 names = ["JetBrainsMono Nerd Font"];
                 size = 10.0;
@@ -178,7 +186,7 @@
 
       programs.i3blocks = {
         enable = true;
-        bars.top = {
+        bars.bottom = {
           load = {
             command = block "load" [pkgs.coreutils] ''
               read -r one _ < /proc/loadavg
