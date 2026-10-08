@@ -64,11 +64,20 @@ orb -m midi bash -c 'mkdir -p ~/.config/sops/age && install -m 600 /Users/abdiva
 orb -m midi sudo nixos-rebuild switch --flake /Users/abdivasiyev/Development/git.azizovich.uz/abdivasiyev/worktrees/nix/master#midi
 ```
 
-5. Open i3 (modifier is Option, `Option+Return` opens kitty)
+5. Connect with TigerVNC Viewer (installed by the `orbstack` aspect) to the guest's IP,
+port 5901. macOS Screen Sharing doesn't work: it sends Option+letter as composed
+characters (Option+D = ∂).
 
 ```bash
-open vnc://midi.orb.local:5901
+orb -m midi ip -4 -o addr show eth0
 ```
+
+Keys inside the VM (Xvnc runs with `-RawKeyboard`, so keys arrive as on the Mac):
+
+- Cmd is the i3 modifier: Cmd+Return kitty, Cmd+D dmenu, Cmd+B Zen,
+  Cmd+H/J/K/L focus, Cmd+Shift+H/J/K/L move, Cmd+G / Cmd+V split, Cmd+R resize
+- Option is Meta in Emacs, as on macOS
+- The clipboard is synced with the Mac through OrbStack's `mac pbcopy`/`pbpaste`
 
 `modules/hosts/midi/_orbstack/` holds OrbStack's generated NixOS config. If OrbStack
 regenerates `/etc/nixos/orbstack.nix` after an update, copy the new version there.

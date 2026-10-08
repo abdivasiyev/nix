@@ -16,9 +16,10 @@
       config,
       ...
     }: let
-      # macOS Screen Sharing sends Cmd as Alt, so Cmd is the i3 key. Option+letter
-      # arrives as a composed character (Option+D = ∂) and can't be bound.
-      mod = "Mod1";
+      # Cmd (Super) with TigerVNC Viewer, which sends Option as Alt and Cmd as
+      # Super. Option stays free for Emacs Meta, as on macOS. (macOS Screen
+      # Sharing sends Cmd as Alt and Option+letter as ∂-style characters.)
+      mod = "Mod4";
 
       block = name: runtimeInputs: text:
         lib.getExe (pkgs.writeShellApplication {
@@ -29,8 +30,10 @@
       session = pkgs.writeShellApplication {
         name = "i3-vnc-session";
         runtimeInputs = [pkgs.tigervnc pkgs.dbus config.xsession.windowManager.i3.package];
+        # -RawKeyboard: use the client's physical key codes instead of its
+        # layout's characters, so TigerVNC's Option arrives as Alt (not ∂).
         text = ''
-          Xvnc :1 -geometry 2560x1440 -depth 24 -dpi 96 -rfbport 5901 \
+          Xvnc :1 -geometry 2560x1440 -depth 24 -dpi 96 -rfbport 5901 -RawKeyboard=1 \
             -SecurityTypes VncAuth -rfbauth "$XDG_RUNTIME_DIR/vncpasswd" &
           while [ ! -e /tmp/.X11-unix/X1 ]; do sleep 0.1; done
           DISPLAY=:1 exec dbus-run-session i3
