@@ -46,6 +46,9 @@
       desktop.better-display
       desktop.macs-fan-control
       desktop.vlc
+
+      # llm
+      llm.claude
     ];
   };
 }
