@@ -15,6 +15,7 @@
 
       # editors
       editors.emacs
+      editors.blender
 
       # chat
       chat.telegram
