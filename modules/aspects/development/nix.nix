@@ -1,12 +1,12 @@
 {inputs, ...}: let
   extraSubstituters = [
-    "https://cache.azizovich.uz?priority=4"
-    "https://cache.xinux.uz?priority=3"
-    "https://cache.nixos.org?priority=3"
+    "https://cache.nixos.org?priority=1"
     "https://nix-community.cachix.org?priority=2"
-    "https://numtide.cachix.org?priority=2"
-    "https://mirror.sjtu.edu.cn/nix-channels/store?priority=1"
-    "https://mirrors.ustc.edu.cn/nix-channels/store?priority=1"
+    "https://cache.xinux.uz?priority=3"
+    "https://numtide.cachix.org?priority=4"
+    "https://cache.azizovich.uz?priority=4"
+    "https://mirror.sjtu.edu.cn/nix-channels/store?priority=4"
+    "https://mirrors.ustc.edu.cn/nix-channels/store?priority=4"
   ];
 
   extraTrustedPublicKeys = [
