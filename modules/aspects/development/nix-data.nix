@@ -2,7 +2,7 @@
   den.aspects.development.nix-data = {
     homeManager = {
       imports = [
-        inputs.nix-data.homeManagerModules.nix-data
+        inputs.nix-data.nixosModules.nix-data
       ];
 
       programs.nix-data = {
