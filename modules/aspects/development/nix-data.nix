@@ -7,7 +7,7 @@
 
       programs.nix-data = {
         enable = true;
-        systemConfig = "/etc/nixos/configuration.nix";
+        systemconfig = "/etc/nixos/configuration.nix";
         flake = "/home/abdivasiyev/Development/git.azizovich.uz/abdivasiyev/worktrees/nix/master/flake.nix";
         flakearg = "midi";
       };
