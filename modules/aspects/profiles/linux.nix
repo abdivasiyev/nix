@@ -22,6 +22,7 @@
       development.ssh
       development.tmux
       development.zsh
+      development.nix-data
 
       # www
       www.zen
