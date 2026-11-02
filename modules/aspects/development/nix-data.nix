@@ -1,6 +1,6 @@
 {inputs, ...}: {
   den.aspects.development.nix-data = {
-    homeManager = {
+    nixos = {
       imports = [
         inputs.nix-data.nixosModules.nix-data
       ];
