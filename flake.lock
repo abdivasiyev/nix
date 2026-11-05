@@ -706,6 +706,7 @@
         "nixpkgs-nixos": "nixpkgs-nixos",
         "nur": "nur",
         "sops-nix": "sops-nix",
+        "usta": "usta",
         "zen-browser": "zen-browser"
       }
     },
@@ -781,6 +782,27 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "usta": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793883891,
+        "narHash": "sha256-46DF1csfhuC2RNo96/5/8NcP9dtIUN23848Yx9+4IKY=",
+        "owner": "abdivasiyev",
+        "repo": "usta",
+        "rev": "e1d3630bd543cf2bfe57971977078ab57812ff3d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "abdivasiyev",
+        "ref": "v0.1.0",
+        "repo": "usta",
         "type": "github"
       }
     },

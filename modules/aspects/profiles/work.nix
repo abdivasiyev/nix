@@ -42,6 +42,7 @@
       development.tunnelblick
       development.sstp
       development.zsh
+      development.usta
 
       # www
       www.zen
