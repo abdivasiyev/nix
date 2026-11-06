@@ -15,7 +15,7 @@
 
         settings = {
           interval = "5m";
-          theme = "light";
+          theme = "system";
           checkUpdates = false;
         };
       };
