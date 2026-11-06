@@ -37,7 +37,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     usta = {
-      url = "github:abdivasiyev/usta/v0.1.0";
+      url = "github:abdivasiyev/usta";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {

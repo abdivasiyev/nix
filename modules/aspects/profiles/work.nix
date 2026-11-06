@@ -43,6 +43,7 @@
       development.sstp
       development.zsh
       development.usta
+      development.linear
 
       # www
       www.zen

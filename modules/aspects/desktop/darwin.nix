@@ -16,9 +16,7 @@
             persistent-apps = [
               "/System/Applications/Apps.app"
               "/System/Applications/Mail.app"
-              "/System/Applications/Messages.app"
               "/System/Applications/Calendar.app"
-              "/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app"
             ];
           };
 

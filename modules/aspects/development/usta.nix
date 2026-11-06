@@ -23,7 +23,7 @@
   };
 
   flake-file.inputs.usta = {
-    url = "github:abdivasiyev/usta/v0.1.0";
+    url = "github:abdivasiyev/usta";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 }
