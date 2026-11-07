@@ -34,7 +34,8 @@
       completion-ignore-case t
       read-buffer-completion-ignore-case t
       read-file-name-completion-ignore-case t
-      read-extended-command-predicate #'command-completion-default-include-p)
+      read-extended-command-predicate #'command-completion-default-include-p
+      browse-url-browser-function #'xwidget-webkit-browse-url)
 
 (make-directory (expand-file-name "backups" user-emacs-directory) t)
 (make-directory (expand-file-name "auto-saves" user-emacs-directory) t)
@@ -67,4 +68,4 @@
 (global-set-key (kbd "M-&") #'project-async-shell-command)
 (global-set-key (kbd "M-!") #'project-shell-command)
 (global-set-key (kbd "C-x c") #'project-compile)
-
+(global-set-key (kbd "s-b") #'browse-url)
