@@ -63,6 +63,8 @@
         pandoc
         # Time tracking
         wakatime-cli
+        # Security
+        gnupg
 
         # Language / LSP / formatter / debugger
         # Golang
