@@ -53,7 +53,6 @@
 (add-hook 'prog-mode-hook #'auto-composition-mode)
 (global-auto-composition-mode -1)
 (global-auto-revert-mode 1)
-(desktop-save-mode 1)
 (global-hl-line-mode 1)
 (column-number-mode 1)
 
