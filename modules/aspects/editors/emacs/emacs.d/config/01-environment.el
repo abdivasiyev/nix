@@ -19,4 +19,5 @@
          exec-path)))
 
 (setq epg-pinentry-mode 'loopback
-      auth-sources '("~/.authinfo.gpg"))
+      auth-sources '("~/.authinfo.gpg")
+      epa-file-encrypt-to '("asliddin.abdivasiyev@gmail.com"))

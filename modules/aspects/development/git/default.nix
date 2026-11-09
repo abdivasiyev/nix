@@ -43,6 +43,10 @@
             wtc = "wtclone";
             wta = "wtadd";
           };
+
+          github = {
+            user = "abdivasiyev";
+          };
         };
         ignores = [
           ".DS_Store"
