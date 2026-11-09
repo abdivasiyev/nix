@@ -2,11 +2,27 @@
 ;; Languages
 ;; ---------------------------------------------------------------------------
 
+;; Keybindings for flymake
+(with-eval-after-load 'flymake
+  (define-key flymake-mode-map (kbd "C-c ! l") #'flymake-show-buffer-diagnostics)  ; list
+  (define-key flymake-mode-map (kbd "C-c ! P") #'flymake-show-project-diagnostics) ; project list
+  (define-key flymake-mode-map (kbd "C-c ! n") #'flymake-goto-next-error)
+  (define-key flymake-mode-map (kbd "C-c ! p") #'flymake-goto-prev-error))
+
+;; flymake — below it on the right
+(add-to-list 'display-buffer-alist
+             '("\\*Flymake diagnostics"
+               (display-buffer-in-side-window)
+               (side . bottom)
+               (window-height . 0.3)
+               (slot . 0)))
+
 ;; golangci flymake
 (require 'flymake-golangci)
 (setq flymake-golangci-container nil)
 
 (add-to-list 'auto-mode-alist '("\\.el\\'" . emacs-lisp-mode))
+(add-hook 'emacs-lisp-mode #'flymake-mode)
 
 (autoload 'go-mode "go-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))

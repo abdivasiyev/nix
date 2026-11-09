@@ -110,6 +110,7 @@
         ./emacs.d/config/02-ligatures.el
         ./emacs.d/config/03-core.el
         ./emacs.d/config/04-navigation.el
+        ./emacs.d/config/05-browser.el
 
         ./emacs.d/config/10-move-text.el
         ./emacs.d/config/20-theme.el
