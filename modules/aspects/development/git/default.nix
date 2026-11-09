@@ -59,6 +59,12 @@
           ".#*"
           ".dir-locals.el"
         ];
+
+        signing = {
+          key = "38AF 580B 77E0 95D1 291E  47F5 BE58 9690 0CC3 4C14";
+          format = "openpgp";
+          signByDefault = true;
+        };
       };
 
       programs.difftastic = {

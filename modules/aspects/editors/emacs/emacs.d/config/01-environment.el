@@ -17,3 +17,6 @@
         (append
          (parse-colon-path my/nix-tool-path)
          exec-path)))
+
+(setq epg-pinentry-mode 'loopback
+      auth-sources '("~/.authinfo.gpg"))

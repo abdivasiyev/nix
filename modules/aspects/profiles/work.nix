@@ -12,6 +12,7 @@
       # secret management
       secrets.sops
       secrets.bitwarden
+      secrets.gpg
 
       # editors
       editors.emacs
