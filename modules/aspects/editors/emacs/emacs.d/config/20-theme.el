@@ -12,9 +12,16 @@
 
 ;; (load-theme 'gruber-darker t)
 
+;; (when-let ((theme-file
+;;             (locate-library "gruvbox-theme")))
+;;   (add-to-list 'custom-theme-load-path
+;;                (file-name-directory theme-file)))
+
+;; (load-theme 'gruvbox-dark-hard)
+
 (when-let ((theme-file
-            (locate-library "gruvbox-theme")))
+            (locate-library "fluffy-theme")))
   (add-to-list 'custom-theme-load-path
                (file-name-directory theme-file)))
 
-(load-theme 'gruvbox-dark-hard)
+(load-theme 'fluffy-dark)
