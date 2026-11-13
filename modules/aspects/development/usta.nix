@@ -1,8 +1,8 @@
 {inputs, ...}: {
-  den.aspects.development.usta = {
+  den.aspects.development.usta = {user, ...}: {
     darwin = {config, ...}: {
       system.defaults.dock.persistent-apps = [
-        "${config.users.users.abdivasiyev.home}/Applications/Home Manager Apps/usta.app"
+        "/Users/${user.name}/Applications/Home Manager Apps/usta.app"
       ];
     };
     homeManager = {

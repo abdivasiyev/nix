@@ -1,8 +1,8 @@
 {...}: {
-  den.aspects.editors.emacs = {
+  den.aspects.editors.emacs = {user, ...}: {
     darwin = {config, ...}: {
       system.defaults.dock.persistent-apps = [
-        "${config.users.users.abdivasiyev.home}/Applications/Home Manager Apps/Emacs.app"
+        "/Users/${user.name}/Applications/Home Manager Apps/Emacs.app"
       ];
       homebrew.brews = ["libvterm"];
     };

@@ -1,8 +1,8 @@
 {
-  den.aspects.development.kitty = {
+  den.aspects.development.kitty = {user, ...}: {
     darwin = {config, ...}: {
       system.defaults.dock.persistent-apps = [
-        "${config.users.users.abdivasiyev.home}/Applications/Home Manager Apps/kitty.app"
+        "/Users/${user.name}/Applications/Home Manager Apps/kitty.app"
       ];
     };
 
