@@ -47,7 +47,6 @@
         initContent = lib.mkMerge [
           (lib.mkAfter ''
             export GITHUB_TOKEN=$(cat ${config.sops.secrets.githubToken.path})
-            source ${./git/plugins/shell.zsh}
           '')
 
           (lib.optionalString (host.class == "darwin") ''

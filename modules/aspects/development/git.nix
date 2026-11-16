@@ -6,19 +6,7 @@
       pkgs,
       lib,
       ...
-    }: let
-      mkScript = name: file:
-        pkgs.writeScriptBin name ''
-          #!${pkgs.zsh}/bin/zsh
-          export PATH=${lib.makeBinPath [pkgs.git pkgs.jq pkgs.curl]}:$PATH
-          ${builtins.readFile file}
-        '';
-    in {
-      home.packages = [
-        (mkScript "git-wtclone" ./plugins/git-wtclone.zsh)
-        (mkScript "git-wtadd" ./plugins/git-wtadd.zsh)
-      ];
-
+    }: {
       programs.git = {
         enable = true;
         package = pkgs.git;
@@ -38,11 +26,6 @@
           pull.rebase = true;
           rebase.autoStash = true;
           push.autoSetupRemote = true;
-
-          alias = {
-            wtc = "wtclone";
-            wta = "wtadd";
-          };
 
           github = {
             user = "abdivasiyev";
@@ -68,14 +51,6 @@
           key = "38AF 580B 77E0 95D1 291E  47F5 BE58 9690 0CC3 4C14";
           format = "openpgp";
           signByDefault = true;
-        };
-      };
-
-      programs.difftastic = {
-        enable = true;
-        git = {
-          enable = true;
-          diffToolMode = true;
         };
       };
     };
