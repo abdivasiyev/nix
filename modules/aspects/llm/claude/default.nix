@@ -1,0 +1,104 @@
+{
+  den.aspects.llm.claude = {
+    homeManager = {
+      pkgs,
+      lib,
+      config,
+      ...
+    }: let
+      # Cloudflare Access credentials shared by every mcp.azizovich.uz server.
+      cfAccessEnv = {
+        CF_ID.file = config.sops.secrets.cfAccessClientId.path;
+        CF_SECRET.file = config.sops.secrets.cfAccessClientSecret.path;
+      };
+
+      # mcp-remote expands ${CF_ID} / ${CF_SECRET} from the environment, so the
+      # header arguments stay free of credentials in the nix store.
+      behindCfAccess = path: {
+        command = "npx";
+        args = [
+          "-y"
+          "mcp-remote"
+          "https://mcp.azizovich.uz/${path}/mcp"
+          "--header"
+          "CF-Access-Client-Id:\${CF_ID}"
+          "--header"
+          "CF-Access-Client-Secret:\${CF_SECRET}"
+        ];
+        env = cfAccessEnv;
+      };
+    in {
+      sops.secrets = {
+        cfAccessClientId = {};
+        cfAccessClientSecret = {};
+        sentryAccessToken = {};
+        githubToken = {};
+      };
+
+      home.packages = with pkgs; [
+        nodejs
+        github-mcp-server
+      ];
+
+      programs.claude-code = {
+        enable = true;
+        enableMcpIntegration = true;
+
+        # ~/.claude/CLAUDE.md -- loaded into every session.
+        context = ./CLAUDE.md;
+
+        # ~/.claude/agents/<name>.md -- invoked explicitly or picked by description.
+        agents = {
+          nix-reviewer = ./agents/nix-reviewer.md;
+          go-reviewer = ./agents/go-reviewer.md;
+          haskell-reviewer = ./agents/haskell-reviewer.md;
+          k8s-debugger = ./agents/k8s-debugger.md;
+          homelab-ops = ./agents/homelab-ops.md;
+        };
+
+        # Output styles replace part of the built-in system prompt.
+        # Switch at runtime with /output-style.
+        outputStyles.grounded = ./output-styles/grounded.md;
+
+        settings = {
+          outputStyle = "grounded";
+          includeCoAuthoredBy = false;
+        };
+      };
+
+      programs.mcp = {
+        enable = true;
+
+        servers = {
+          voicelab = behindCfAccess "voicelab";
+          Anima2d-mcp = behindCfAccess "anima2d";
+          code-graph-mcp = behindCfAccess "code-graph";
+          forgejo = behindCfAccess "forgejo";
+          knowledge = behindCfAccess "knowledge";
+          dev-docs = behindCfAccess "docs";
+
+          sentry = {
+            command = "npx";
+            args = [
+              "-y"
+              "@sentry/mcp-server@latest"
+              "--disable-skills=seer"
+            ];
+            env = {
+              SENTRY_HOST = "sentry.k8s.alifnasiya.uz";
+              SENTRY_AUTH_TOKEN.file = config.sops.secrets.sentryAccessToken.path;
+            };
+          };
+
+          github = {
+            command = lib.getExe pkgs.github-mcp-server;
+            args = ["stdio"];
+            env = {
+              GITHUB_PERSONAL_ACCESS_TOKEN.file = config.sops.secrets.githubToken.path;
+            };
+          };
+        };
+      };
+    };
+  };
+}
