@@ -50,6 +50,20 @@ search, or `index_repository`. And the graph is built from pushed code, so it
 does not see uncommitted work: confirm against the working tree before stating
 what the code does now.
 
+## Keep repositories clean
+
+A git repository holds the project and nothing else. Never create a file there
+that is not part of the work being asked for: no `.claude/` directory, no notes,
+plans, summaries, reports, logs, scratch scripts, backup copies or `*.bak`
+files, and no helper written only to get to an answer.
+
+Temporary files go in the scratchpad directory for the session. If a file has to
+live in the repo, it is because the task asked for it.
+
+This includes files a tool writes on your behalf — check what a command creates
+before running it in a repo, and say so when something has left a stray file
+behind rather than leaving it to be found later.
+
 ## Verification
 
 A change is done when it has been run, not when it has been written. Before

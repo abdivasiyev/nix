@@ -27,6 +27,15 @@
         ];
         env = cfAccessEnv;
       };
+
+      version = "2.1.326";
+
+      claude-code = pkgs.claude-code.override {
+        manifest = pkgs.lib.importJSON (builtins.fetchurl {
+          url = "https://downloads.claude.ai/claude-code-releases/${version}/manifest.json";
+          sha256 = "07pbidmqn4hg8fv38r5j8r7fs5a45rlhvjfd4m14x8yl0lxiagl8";
+        });
+      };
     in {
       sops.secrets = {
         cfAccessClientId = {};
@@ -40,8 +49,13 @@
         github-mcp-server
       ];
 
+      # The pinned nixpkgs claude-code wrapper only sets CLAUDE_CODE_CERT_STORE=system,
+      # which fails TLS verification on darwin; point it at the system CA bundle.
+      home.sessionVariables.NODE_EXTRA_CA_CERTS = "/etc/ssl/certs/ca-certificates.crt";
+
       programs.claude-code = {
         enable = true;
+        package = claude-code;
         enableMcpIntegration = true;
 
         # ~/.claude/CLAUDE.md -- loaded into every session.
@@ -63,6 +77,15 @@
         settings = {
           outputStyle = "grounded";
           includeCoAuthoredBy = false;
+
+          # Applied to every session, whether started from a shell or from
+          # claude-code-ide in Emacs.
+          env = {
+            DISABLE_TELEMETRY = "1";
+            DISABLE_ERROR_REPORTING = "1";
+            CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY = "1";
+            CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1";
+          };
         };
       };
 
