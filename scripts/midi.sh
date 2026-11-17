@@ -3,8 +3,9 @@ set -euo pipefail
 
 name=midi
 iso="$HOME/Downloads/latest-nixos-minimal-aarch64-linux.iso"
-share="$HOME/Development"
 key="$HOME/.config/sops/age/keys.txt"
+app="$HOME/Applications/Home Manager Apps/UTM.app"
+utmctl="$app/Contents/MacOS/utmctl"
 
 install="sudo sh -c 'parted -s /dev/vda -- mklabel gpt mkpart ESP fat32 1MiB 1GiB set 1 esp on mkpart root ext4 1GiB 100% \
 && mkfs.fat -F 32 -n boot /dev/vda1 && mkfs.ext4 -F -L nixos /dev/vda2 && udevadm settle \
@@ -15,28 +16,30 @@ install="sudo sh -c 'parted -s /dev/vda -- mklabel gpt mkpart ESP fat32 1MiB 1Gi
 
 [ -f "$iso" ] || curl -fL -o "$iso" https://channels.nixos.org/nixos-26.05/latest-nixos-minimal-aarch64-linux.iso
 
-osascript - "$name" "$iso" "$share" <<'EOF'
+osascript - "$app" "$name" "$iso" <<'EOF'
 on run argv
-  tell application "UTM"
-    set iso to POSIX file (item 2 of argv)
-    set share to POSIX file (item 3 of argv)
-    set vm to make new virtual machine with properties {backend:qemu, configuration:{name:(item 1 of argv), architecture:"aarch64", memory:8192, cpu cores:4, directory share mode:VirtFS, displays:{{hardware:"virtio-gpu-gl-pci", native resolution:true}}, drives:{{removable:true, source:iso}, {interface:VirtIO, guest size:65536}}}}
-    update registry vm with {share}
+  set iso to POSIX file (item 3 of argv)
+  using terms from application "UTM"
+  tell application (item 1 of argv)
+    set vm to make new virtual machine with properties {backend:qemu, configuration:{name:(item 2 of argv), architecture:"aarch64", memory:8192, cpu cores:4, displays:{{hardware:"virtio-gpu-gl-pci", native resolution:true}}, drives:{{interface:USB, raw:true, source:iso}, {interface:VirtIO, guest size:65536}}}}
   end tell
+  end using terms from
 end run
 EOF
 
-utmctl start "$name"
+"$utmctl" start "$name"
 sleep 90
 
-osascript - "$name" "$install" <<'EOF'
+osascript - "$app" "$name" "$install" <<'EOF'
 on run argv
-  tell application "UTM" to input keystroke virtual machine (item 1 of argv) text (item 2 of argv)
+  using terms from application "UTM"
+  tell application (item 1 of argv) to input keystroke virtual machine (item 2 of argv) text (item 3 of argv)
+  end using terms from
 end run
 EOF
 
 echo "Set the password in the $name window. Waiting for the installed system..."
-until ip=$(utmctl ip-address "$name" 2>/dev/null | grep -m1 -E '^[0-9.]+$') &&
+until ip=$("$utmctl" ip-address "$name" 2>/dev/null | grep -m1 -E '^[0-9.]+$') &&
   ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new "abdivasiyev@$ip" true 2>/dev/null; do
   sleep 10
 done

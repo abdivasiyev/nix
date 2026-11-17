@@ -1,5 +1,16 @@
-{...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [./hardware-configuration.nix];
+
+  home-manager.users.abdivasiyev.programs.kitty.package = lib.mkForce (pkgs.symlinkJoin {
+    name = "kitty";
+    paths = [pkgs.kitty];
+    nativeBuildInputs = [pkgs.makeWrapper];
+    postBuild = "wrapProgram $out/bin/kitty --set LIBGL_ALWAYS_SOFTWARE 1";
+  });
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

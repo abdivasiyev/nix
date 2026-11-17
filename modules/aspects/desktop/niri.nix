@@ -31,10 +31,14 @@
                     layout "us"
                 }
             }
+            mouse {
+                natural-scroll
+            }
             focus-follows-mouse
         }
 
         output "Virtual-1" {
+            mode custom=true "3024x1890@60"
             scale 2
         }
 

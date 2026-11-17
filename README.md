@@ -47,4 +47,4 @@ Push the config first: the VM installs from `github:abdivasiyev/nix#midi`.
 ./scripts/midi.sh
 ```
 
-Type the password in the VM window when asked. `~/Development` is shared at `~/share`.
+Type the password in the VM window when asked.
