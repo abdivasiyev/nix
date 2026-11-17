@@ -16,7 +16,7 @@
         onActivation = {
           cleanup = "zap";
           autoUpdate = true;
-          upgrade = true;
+          upgrade = false;
         };
         brews = [
           "mas"

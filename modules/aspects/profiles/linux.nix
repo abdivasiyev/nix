@@ -29,7 +29,7 @@
 
       # desktop
       desktop.fonts
-      desktop.i3
+      desktop.niri
     ];
   };
 }

@@ -40,6 +40,7 @@
       development.redis
       development.ssh
       development.tmux
+      development.utm
       development.tunnelblick
       development.sstp
       development.zsh

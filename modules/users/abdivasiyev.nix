@@ -51,7 +51,7 @@ in {
       users.users.${user} = {
         isNormalUser = true;
         description = name;
-        # start user services (e.g. the i3 VNC session) at boot
+        # start user services at boot, before anyone logs in
         linger = true;
         extraGroups = [
           "docker"

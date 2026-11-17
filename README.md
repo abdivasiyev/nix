@@ -39,45 +39,12 @@ sudo darwin-rebuild switch --flake .#maxi
 EDITOR=vim SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops --age -e secrets/secrets.yaml
 ```
 
-## NixOS VM `midi` (OrbStack)
+## NixOS VM `midi` (UTM)
 
-An aarch64 NixOS machine in OrbStack for building Linux-only projects. i3 runs on a
-virtual X server (TigerVNC) because OrbStack machines have no display.
-
-1. Create the machine (OrbStack mounts `/Users` inside it)
+Push the config first: the VM installs from `github:abdivasiyev/nix#midi`.
 
 ```bash
-orb create nixos midi
+./scripts/midi.sh
 ```
 
-2. Copy the sops age key into the guest
-
-```bash
-orb -m midi bash -c 'mkdir -p ~/.config/sops/age && install -m 600 /Users/abdivasiyev/.config/sops/age/keys.txt ~/.config/sops/age/'
-```
-
-3. Make sure `vncPassword` exists in `secrets/secrets.yaml` (VNC uses only the first 8 characters)
-
-4. Switch, from the repo path as seen inside the guest
-
-```bash
-orb -m midi sudo nixos-rebuild switch --flake /Users/abdivasiyev/Development/git.azizovich.uz/abdivasiyev/worktrees/nix/master#midi
-```
-
-5. Connect with TigerVNC Viewer (installed by the `orbstack` aspect) to the guest's IP,
-port 5901. macOS Screen Sharing doesn't work: it sends Option+letter as composed
-characters (Option+D = ∂).
-
-```bash
-orb -m midi ip -4 -o addr show eth0
-```
-
-Keys inside the VM (Xvnc runs with `-RawKeyboard`, so keys arrive as on the Mac):
-
-- Cmd is the i3 modifier: Cmd+Return kitty, Cmd+D dmenu, Cmd+B Zen,
-  Cmd+H/J/K/L focus, Cmd+Shift+H/J/K/L move, Cmd+G / Cmd+V split, Cmd+R resize
-- Option is Meta in Emacs, as on macOS
-- The clipboard is synced with the Mac through OrbStack's `mac pbcopy`/`pbpaste`
-
-`modules/hosts/midi/_orbstack/` holds OrbStack's generated NixOS config. If OrbStack
-regenerates `/etc/nixos/orbstack.nix` after an update, copy the new version there.
+Type the password in the VM window when asked. `~/Development` is shared at `~/share`.

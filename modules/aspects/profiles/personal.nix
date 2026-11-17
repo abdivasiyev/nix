@@ -37,6 +37,7 @@
       development.redis
       development.ssh
       development.tmux
+      development.utm
       development.zsh
 
       # www

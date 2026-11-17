@@ -15,7 +15,7 @@ affected host and say which command you ran:
 nix eval --raw .#darwinConfigurations.<host>.config.system.build.toplevel.drvPath
 ```
 
-Hosts: `maxi` (work, darwin), `mini` (personal, darwin), `midi` (linux/orbstack).
+Hosts: `maxi` (work, darwin), `mini` (personal, darwin), `midi` (linux, UTM VM).
 Profiles live in `modules/aspects/profiles/`; a host picks one.
 
 ## Structure
