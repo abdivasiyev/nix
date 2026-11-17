@@ -215,7 +215,7 @@ GPG / auth-source.
 #+begin_src emacs-lisp
 (set-face-attribute 'default nil
                     :font "JetBrainsMono Nerd Font"
-                    :height 160)
+                    :height (if (eq system-type 'darwin) 160 120))
 (set-face-attribute 'fill-column-indicator nil
                     :foreground "#717C7C"
                     :background "transparent")
@@ -267,7 +267,8 @@ Window movement with =M-h/j/k/l=, and pulse feedback after jumps and copies.
 Browse inside Emacs with xwidget-webkit, shown in a right side window.
 
 #+begin_src emacs-lisp
-(setq browse-url-browser-function #'xwidget-webkit-browse-url)
+(when (featurep 'xwidget-internal)
+  (setq browse-url-browser-function #'xwidget-webkit-browse-url))
 
 (define-advice xwidget-webkit-goto-url
     (:around (orig &rest args) my/xwidget-side-window)
@@ -759,7 +760,7 @@ rustfmt, and diagnostics use clippy (see =eglot-workspace-configuration=).
 (add-hook 'vterm-mode-hook #'my/vterm-setup)
 
 (setq vterm-toggle-scope 'project
-      vterm-shell "/bin/zsh")
+      vterm-shell (or (executable-find "zsh") "/bin/zsh"))
 (autoload 'vterm-toggle "vterm-toggle" nil t)
 (global-set-key (kbd "C-c t") #'vterm-toggle)
 #+end_src

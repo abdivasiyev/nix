@@ -31,6 +31,9 @@
       # desktop
       desktop.fonts
       desktop.niri
+
+      # llm
+      llm.claude
     ];
   };
 }

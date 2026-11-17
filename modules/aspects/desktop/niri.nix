@@ -15,7 +15,11 @@
       ];
     };
 
-    homeManager = {lib, ...}: let
+    homeManager = {
+      lib,
+      pkgs,
+      ...
+    }: let
       workspaces = lib.range 1 9;
       workspaceBinds =
         lib.concatMapStrings (n: ''
@@ -42,6 +46,11 @@
             scale 2
         }
 
+        layer-rule {
+            match namespace="^wallpaper$"
+            place-within-backdrop true
+        }
+
         prefer-no-csd
 
         hotkey-overlay {
@@ -51,6 +60,7 @@
         screenshot-path "~/Pictures/Screenshots/%Y-%m-%d %H-%M-%S.png"
 
         layout {
+            background-color "transparent"
             gaps 8
             center-focused-column "never"
             default-column-width { proportion 0.5; }
@@ -97,6 +107,19 @@
             Mod+Shift+E { quit; }
         }
       '';
+
+      systemd.user.services.swaybg = {
+        Unit = {
+          PartOf = ["graphical-session.target"];
+          After = ["graphical-session.target"];
+          ConditionEnvironment = "WAYLAND_DISPLAY";
+        };
+        Service = {
+          ExecStart = "${lib.getExe pkgs.swaybg} -m fill -c '#282828' -i %h/Pictures/wallpaper";
+          Restart = "on-failure";
+        };
+        Install.WantedBy = ["graphical-session.target"];
+      };
 
       programs.fuzzel.enable = true;
       services.mako.enable = true;

@@ -13,13 +13,19 @@
       config,
       ...
     }: let
+      emacs =
+        if pkgs.stdenv.isLinux
+        then pkgs.emacs-pgtk
+        else pkgs.emacs;
+      emacsPackages = pkgs.emacsPackagesFor emacs;
+
       hpkgs = pkgs.haskell.packages."ghc912";
 
       migrate = pkgs.go-migrate.overrideAttrs (oldAttrs: {
         tags = ["postgres"];
       });
 
-      gruber-darker-theme = pkgs.emacsPackages.melpaBuild {
+      gruber-darker-theme = emacsPackages.melpaBuild {
         pname = "gruber-darker-theme";
         version = "0.6";
         src = pkgs.fetchFromGitHub {
@@ -32,7 +38,7 @@
         packageRequires = [];
       };
 
-      fluffy-theme = pkgs.emacsPackages.trivialBuild {
+      fluffy-theme = emacsPackages.trivialBuild {
         pname = "fluffy-theme";
         version = "unstable";
 
@@ -43,7 +49,7 @@
         };
       };
 
-      flymake-golangci = pkgs.emacsPackages.melpaBuild {
+      flymake-golangci = emacsPackages.melpaBuild {
         pname = "flymake-golangci";
         version = "1.0.2";
         src = pkgs.fetchFromGitea {
@@ -55,7 +61,7 @@
         };
       };
 
-      claude-code-ide = pkgs.emacsPackages.melpaBuild {
+      claude-code-ide = emacsPackages.melpaBuild {
         pname = "claude-code-ide";
         version = "0.0.1";
         src = pkgs.fetchFromGitHub {
@@ -64,7 +70,7 @@
           rev = "50a3d55262805d7207889ed429ff30da96fbf68b";
           hash = "sha256-u+87PjLh0Mc7C8nvDG758rdgpmjED8G/hO+FE1tj7DU=";
         };
-        packageRequires = with pkgs.emacsPackages; [
+        packageRequires = with emacsPackages; [
           websocket
           web-server
           transient
@@ -148,6 +154,7 @@
       # Emacs configurations
       programs.emacs = {
         enable = true;
+        package = emacs;
 
         extraPackages = epkgs:
           with epkgs; [

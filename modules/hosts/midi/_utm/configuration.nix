@@ -20,6 +20,9 @@
 
   users.users.abdivasiyev.extraGroups = ["video" "audio"];
 
+  environment.systemPackages = [pkgs.docker-client];
+  environment.variables.DOCKER_HOST = "ssh://abdivasiyev@192.168.64.1";
+
   services.qemuGuest.enable = true;
 
   services.openssh = {
