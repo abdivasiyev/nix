@@ -1,5 +1,9 @@
 {
   den.aspects.secrets.gpg = {
+    nixos = {pkgs, ...}: {
+      services.dbus.packages = [pkgs.gcr];
+    };
+
     homeManager = {
       pkgs,
       lib,

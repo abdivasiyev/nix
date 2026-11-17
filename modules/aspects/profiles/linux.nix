@@ -6,6 +6,7 @@
 
       # secret management
       secrets.sops
+      secrets.gpg
 
       # editors
       editors.emacs
