@@ -25,6 +25,17 @@
 
   services.qemuGuest.enable = true;
 
+  services.spice-vdagentd.enable = true;
+  systemd.user.services.spice-vdagent = {
+    wantedBy = ["graphical-session.target"];
+    partOf = ["graphical-session.target"];
+    after = ["graphical-session.target"];
+    serviceConfig = {
+      ExecStart = "${pkgs.spice-vdagent}/bin/spice-vdagent -x";
+      Restart = "on-failure";
+    };
+  };
+
   services.openssh = {
     enable = true;
     settings = {
