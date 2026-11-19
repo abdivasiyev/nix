@@ -6,6 +6,10 @@
 	<string>uz.abdivasiyev.keyboardlayout.ozbek</string>
 	<key>CFBundleName</key>
 	<string>Özbekça</string>
+	<key>CFBundleGetInfoString</key>
+	<string>Özbekça (yangi alifbo) keyboard layout by kiritish.uz — https://kiritish.uz</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Keyboard layout by kiritish.uz (https://kiritish.uz)</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>CFBundlePackageType</key>

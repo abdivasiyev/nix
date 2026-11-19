@@ -1,4 +1,5 @@
 {
+  # The Özbekça (yangi alifbo) layout is by kiritish.uz (https://kiritish.uz).
   den.aspects.desktop.keyboard = {
     darwin = {
       system.activationScripts.postActivation.text = ''
@@ -18,6 +19,11 @@
           InputSourceKind = "Keyboard Layout";
           "KeyboardLayout ID" = 19457;
           "KeyboardLayout Name" = "Russian - Phonetic";
+        }
+        {
+          InputSourceKind = "Keyboard Layout";
+          "KeyboardLayout ID" = 16300;
+          "KeyboardLayout Name" = "Dvorak";
         }
         {
           InputSourceKind = "Keyboard Layout";
