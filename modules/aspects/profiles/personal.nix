@@ -44,6 +44,7 @@
       www.zen
       # desktop
       desktop.darwin
+      desktop.keyboard
       desktop.fonts
       desktop.better-display
       desktop.macs-fan-control
