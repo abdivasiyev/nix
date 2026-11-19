@@ -538,42 +538,46 @@ defines =my/nix-llama-completion-endpoint=.  The Qwen fill-in-the-middle prompt
 is built here and sent to the plain completions endpoint.
 
 While a suggestion is shown: =M-A= accepts it, =M-a= accepts one line, =M-n= /
-=M-p= cycle, =M-e= dismisses.  =C-c m= toggles suggestions in the buffer.
+=M-p= cycle, =M-e= dismisses.
+
+Suggestions are never enabled automatically.  =C-c m= or =M-x minuet-mode=
+turns automatic suggestions on in the current buffer; pressing it again turns
+them off.
 
 #+begin_src emacs-lisp
-(when (boundp 'my/nix-llama-completion-endpoint)
-  (require 'minuet)
+  (when (boundp 'my/nix-llama-completion-endpoint)
+    (require 'minuet)
 
-  (defun my/minuet-qwen-fim-prompt (ctx)
-    "Build a Qwen2.5-Coder FIM prompt from minuet CTX."
-    (format "<|fim_prefix|>%s\n%s<|fim_suffix|>%s<|fim_middle|>"
-            (plist-get ctx :language-and-tab)
-            (plist-get ctx :before-cursor)
-            (plist-get ctx :after-cursor)))
+    (defun my/minuet-qwen-fim-prompt (ctx)
+      "Build a Qwen2.5-Coder FIM prompt from minuet CTX."
+      (format "<|fim_prefix|>%s\n%s<|fim_suffix|>%s<|fim_middle|>"
+              (plist-get ctx :language-and-tab)
+              (plist-get ctx :before-cursor)
+              (plist-get ctx :after-cursor)))
 
-  (setq minuet-provider 'openai-fim-compatible
-        minuet-n-completions 1
-        minuet-context-window 4096
-        minuet-request-timeout 3
-        minuet-auto-suggestion-debounce-delay 0.3)
+    (setq minuet-provider 'openai-fim-compatible
+          minuet-n-completions 1
+          minuet-context-window 4096
+          minuet-request-timeout 3
+          minuet-auto-suggestion-debounce-delay 0.3)
 
-  (plist-put minuet-openai-fim-compatible-options :end-point my/nix-llama-completion-endpoint)
-  (plist-put minuet-openai-fim-compatible-options :name "llama.cpp")
-  ;; llama-server needs no key; minuet only requires the variable to be set.
-  (plist-put minuet-openai-fim-compatible-options :api-key "TERM")
-  (plist-put minuet-openai-fim-compatible-options :model "qwen2.5-coder")
-  (plist-put minuet-openai-fim-compatible-options :template
-             '(:prompt my/minuet-qwen-fim-prompt :suffix nil))
-  (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 64)
+    (plist-put minuet-openai-fim-compatible-options :end-point my/nix-llama-completion-endpoint)
+    (plist-put minuet-openai-fim-compatible-options :name "llama.cpp")
+    ;; llama-server needs no key; minuet only requires the variable to be set.
+    (plist-put minuet-openai-fim-compatible-options :api-key "TERM")
+    (plist-put minuet-openai-fim-compatible-options :model "qwen2.5-coder")
+    (plist-put minuet-openai-fim-compatible-options :template
+               '(:prompt my/minuet-qwen-fim-prompt :suffix nil))
+    (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 64)
 
-  (define-key minuet-active-mode-map (kbd "M-A") #'minuet-accept-suggestion)
-  (define-key minuet-active-mode-map (kbd "M-a") #'minuet-accept-suggestion-line)
-  (define-key minuet-active-mode-map (kbd "M-n") #'minuet-next-suggestion)
-  (define-key minuet-active-mode-map (kbd "M-p") #'minuet-previous-suggestion)
-  (define-key minuet-active-mode-map (kbd "M-e") #'minuet-dismiss-suggestion)
-  (global-set-key (kbd "C-c m") #'minuet-auto-suggestion-mode)
+    (define-key minuet-active-mode-map (kbd "M-A") #'minuet-accept-suggestion)
+    (define-key minuet-active-mode-map (kbd "M-a") #'minuet-accept-suggestion-line)
+    (define-key minuet-active-mode-map (kbd "M-n") #'minuet-next-suggestion)
+    (define-key minuet-active-mode-map (kbd "M-p") #'minuet-previous-suggestion)
+    (define-key minuet-active-mode-map (kbd "M-e") #'minuet-dismiss-suggestion)
 
-  (add-hook 'prog-mode-hook #'minuet-auto-suggestion-mode))
+    (defalias 'minuet-mode #'minuet-auto-suggestion-mode)
+    (global-set-key (kbd "C-c m") #'minuet-auto-suggestion-mode))
 #+end_src
 
 * LSP (Eglot) and diagnostics (Flymake)
