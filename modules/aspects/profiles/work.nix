@@ -58,6 +58,7 @@
 
       # llm
       llm.claude
+      llm.completion
     ];
   };
 }

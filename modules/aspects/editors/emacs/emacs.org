@@ -530,6 +530,52 @@ Built into Emacs 30.
 (add-hook 'after-init-hook #'global-company-mode)
 #+end_src
 
+* Completion (local LLM)
+
+Inline ghost-text suggestions from a local llama.cpp server (Qwen2.5-Coder 3B,
+see the =llm.completion= aspect).  Only set up on hosts where that aspect
+defines =my/nix-llama-completion-endpoint=.  The Qwen fill-in-the-middle prompt
+is built here and sent to the plain completions endpoint.
+
+While a suggestion is shown: =M-A= accepts it, =M-a= accepts one line, =M-n= /
+=M-p= cycle, =M-e= dismisses.  =C-c m= toggles suggestions in the buffer.
+
+#+begin_src emacs-lisp
+(when (boundp 'my/nix-llama-completion-endpoint)
+  (require 'minuet)
+
+  (defun my/minuet-qwen-fim-prompt (ctx)
+    "Build a Qwen2.5-Coder FIM prompt from minuet CTX."
+    (format "<|fim_prefix|>%s\n%s<|fim_suffix|>%s<|fim_middle|>"
+            (plist-get ctx :language-and-tab)
+            (plist-get ctx :before-cursor)
+            (plist-get ctx :after-cursor)))
+
+  (setq minuet-provider 'openai-fim-compatible
+        minuet-n-completions 1
+        minuet-context-window 4096
+        minuet-request-timeout 3
+        minuet-auto-suggestion-debounce-delay 0.3)
+
+  (plist-put minuet-openai-fim-compatible-options :end-point my/nix-llama-completion-endpoint)
+  (plist-put minuet-openai-fim-compatible-options :name "llama.cpp")
+  ;; llama-server needs no key; minuet only requires the variable to be set.
+  (plist-put minuet-openai-fim-compatible-options :api-key "TERM")
+  (plist-put minuet-openai-fim-compatible-options :model "qwen2.5-coder")
+  (plist-put minuet-openai-fim-compatible-options :template
+             '(:prompt my/minuet-qwen-fim-prompt :suffix nil))
+  (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 64)
+
+  (define-key minuet-active-mode-map (kbd "M-A") #'minuet-accept-suggestion)
+  (define-key minuet-active-mode-map (kbd "M-a") #'minuet-accept-suggestion-line)
+  (define-key minuet-active-mode-map (kbd "M-n") #'minuet-next-suggestion)
+  (define-key minuet-active-mode-map (kbd "M-p") #'minuet-previous-suggestion)
+  (define-key minuet-active-mode-map (kbd "M-e") #'minuet-dismiss-suggestion)
+  (global-set-key (kbd "C-c m") #'minuet-auto-suggestion-mode)
+
+  (add-hook 'prog-mode-hook #'minuet-auto-suggestion-mode))
+#+end_src
+
 * LSP (Eglot) and diagnostics (Flymake)
 
 ** Eglot
@@ -763,33 +809,6 @@ rustfmt, and diagnostics use clippy (see =eglot-workspace-configuration=).
       vterm-shell (or (executable-find "zsh") "/bin/zsh"))
 (autoload 'vterm-toggle "vterm-toggle" nil t)
 (global-set-key (kbd "C-c t") #'vterm-toggle)
-#+end_src
-
-* Claude Code
-
-The Claude Code CLI in a Vterm buffer, one session per project, connected to
-Emacs over MCP.  =C-c C= opens the transient menu, =claude-code-ide= starts a
-session and =claude-code-ide-send-prompt= sends a prompt.  (=C-c c= is
-=org-capture=.)
-
-=claude-code-ide-cli-path= points at the Nix-wrapped binary, so a session
-started here gets the MCP servers and agents from =modules/aspects/llm/claude=.
-Emacs launched from the Dock does not read the login shell, so the plain
-=claude= is not on its =PATH=.
-
-The same goes for =NODE_EXTRA_CA_CERTS=: without it the CLI fails TLS
-verification, so it is set here from the value Home Manager exports to shells.
-
-#+begin_src emacs-lisp
-  (when (boundp 'my/nix-claude)
-    (setq claude-code-ide-cli-path my/nix-claude))
-  (when (and (boundp 'my/nix-ca-certs)
-             (not (getenv "NODE_EXTRA_CA_CERTS")))
-    (setenv "NODE_EXTRA_CA_CERTS" my/nix-ca-certs))
-  (require 'claude-code-ide)
-  (with-eval-after-load 'claude-code-ide
-    (claude-code-ide-emacs-tools-setup)
-    (global-set-key (kbd "C-c C") #'claude-code-ide-menu))
 #+end_src
 
 * TODO highlighting

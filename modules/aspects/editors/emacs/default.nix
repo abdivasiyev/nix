@@ -61,22 +61,6 @@
         };
       };
 
-      claude-code-ide = emacsPackages.melpaBuild {
-        pname = "claude-code-ide";
-        version = "0.0.1";
-        src = pkgs.fetchFromGitHub {
-          owner = "manzaltu";
-          repo = "claude-code-ide.el";
-          rev = "50a3d55262805d7207889ed429ff30da96fbf68b";
-          hash = "sha256-u+87PjLh0Mc7C8nvDG758rdgpmjED8G/hO+FE1tj7DU=";
-        };
-        packageRequires = with emacsPackages; [
-          websocket
-          web-server
-          transient
-        ];
-      };
-
       tools = with pkgs; [
         # Common
         coreutils
@@ -177,6 +161,7 @@
             orderless
             smex
             company
+            minuet
 
             # Git.
             magit
@@ -208,9 +193,6 @@
             vterm
             vterm-toggle
 
-            # Claude Code (runs the CLI in a vterm buffer).
-            claude-code-ide
-
             # Org extensions.
             verb
             impostman
@@ -237,11 +219,9 @@
           (defconst my/nix-wakatime-cli "${pkgs.wakatime-cli}/bin/wakatime-cli")
           (defconst my/nix-rust-src-path "${pkgs.rustPlatform.rustLibSrc}")
         ''
-        + lib.optionalString config.programs.claude-code.enable ''
-          (defconst my/nix-claude "${config.programs.claude-code.finalPackage}/bin/claude")
-        ''
-        + lib.optionalString (config.home.sessionVariables ? NODE_EXTRA_CA_CERTS) ''
-          (defconst my/nix-ca-certs "${config.home.sessionVariables.NODE_EXTRA_CA_CERTS}")
+        # Set by the llm.completion aspect; the port matches its llama-server.
+        + lib.optionalString (config.launchd.agents.llama-completion.enable or false) ''
+          (defconst my/nix-llama-completion-endpoint "http://127.0.0.1:8012/v1/completions")
         '';
       # Both files are tangled from ./emacs.org.
       home.file.".emacs.d/early-init.el".source = "${emacsConfig}/early-init.el";

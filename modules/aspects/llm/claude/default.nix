@@ -78,8 +78,7 @@
           outputStyle = "grounded";
           includeCoAuthoredBy = false;
 
-          # Applied to every session, whether started from a shell or from
-          # claude-code-ide in Emacs.
+          # Applied to every session.
           env = {
             DISABLE_TELEMETRY = "1";
             DISABLE_ERROR_REPORTING = "1";
