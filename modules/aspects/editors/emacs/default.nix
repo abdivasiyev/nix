@@ -61,6 +61,21 @@
         };
       };
 
+      datamacs = emacsPackages.trivialBuild rec {
+        pname = "datamacs";
+        version = "0.0.1";
+        src = pkgs.fetchFromGitHub {
+          owner = "abdivasiyev";
+          repo = "datamacs";
+          rev = "v${version}";
+          hash = "sha256-b0RKXkUEpZfAIKtt8pYozdiFkE1k8blYKTMJzpczpDc=";
+        };
+        sourceRoot = "source/lisp";
+        packageRequires = [
+          emacsPackages.pg
+        ];
+      };
+
       tools = with pkgs; [
         # Common
         coreutils
@@ -197,6 +212,9 @@
             verb
             impostman
             org-modern
+
+            # Database client
+            datamacs
 
             # Grammars used by built-in tree-sitter major modes.
             (treesit-grammars.with-grammars (grammars:

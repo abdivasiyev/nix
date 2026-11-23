@@ -903,6 +903,11 @@ rustfmt, and diagnostics use clippy (see =eglot-workspace-configuration=).
 
 =impostman= is installed by Nix and autoloads its interactive commands.
 
+** Datamacs (universal database client)
+
+#+begin_src emacs-lisp
+  (require 'datamacs)
+#+end_src
 * End
 
 #+begin_src emacs-lisp
