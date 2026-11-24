@@ -68,7 +68,7 @@
           owner = "abdivasiyev";
           repo = "datamacs";
           rev = "v${version}";
-          hash = "sha256-b0RKXkUEpZfAIKtt8pYozdiFkE1k8blYKTMJzpczpDc=";
+          hash = "sha256-lK/aXJ3W8hA8m9fZjuXZHiHHSy17zjgZXfK+aA52TGY=";
         };
         sourceRoot = "source/lisp";
         packageRequires = [

@@ -382,12 +382,27 @@ Installed themes: =doom-themes=, =gruber-darker-theme=, =gruvbox-theme=,
 =custom-theme-load-path= the same way fluffy does).
 
 #+begin_src emacs-lisp
-(when-let ((theme-file
-            (locate-library "fluffy-theme")))
+  (when-let ((theme-file
+              (locate-library "fluffy-theme")))
+    (add-to-list 'custom-theme-load-path
+                 (file-name-directory theme-file)))
+
+  (when-let ((theme-file
+            (locate-library "gruber-darker-theme")))
   (add-to-list 'custom-theme-load-path
                (file-name-directory theme-file)))
 
-(load-theme 'fluffy-dark)
+  (when-let ((theme-file
+            (locate-library "gruvbox-theme")))
+  (add-to-list 'custom-theme-load-path
+               (file-name-directory theme-file)))
+
+  (when-let ((theme-file
+            (locate-library "doom-themes")))
+  (add-to-list 'custom-theme-load-path
+               (file-name-directory theme-file)))
+
+  (load-theme 'gruber-darker)
 #+end_src
 
 * Minibuffer completion
