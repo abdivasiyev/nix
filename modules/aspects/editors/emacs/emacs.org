@@ -82,22 +82,14 @@ server once init is done.
 
 * Environment
 
-Put Nix-managed tools at the front of =PATH= used by child processes and
-Emacs' own executable lookup.
-
 #+begin_src emacs-lisp
-(when (boundp 'my/nix-tool-path)
-  (setenv
-   "PATH"
-   (concat
-    my/nix-tool-path
-    path-separator
-    (or (getenv "PATH") "")))
-
-  (setq exec-path
-        (append
-         (parse-colon-path my/nix-tool-path)
-         exec-path)))
+(let ((dirs (delete-dups
+             (append
+              (parse-colon-path (bound-and-true-p my/nix-tool-path))
+              (parse-colon-path (bound-and-true-p my/nix-system-path))
+              (parse-colon-path (getenv "PATH"))))))
+  (setenv "PATH" (string-join (mapcar #'directory-file-name dirs) path-separator))
+  (setq exec-path (append dirs (list exec-directory))))
 #+end_src
 
 GPG / auth-source.
@@ -812,7 +804,8 @@ rustfmt, and diagnostics use clippy (see =eglot-workspace-configuration=).
 (add-to-list 'auto-mode-alist '("\\.toml\\'" . toml-ts-mode))
 #+end_src
 
-* Terminal (vterm)
+* Terminal
+** Vterm
 
 #+begin_src emacs-lisp
 (require 'vterm)
@@ -830,6 +823,38 @@ rustfmt, and diagnostics use clippy (see =eglot-workspace-configuration=).
       vterm-shell (or (executable-find "zsh") "/bin/zsh"))
 (autoload 'vterm-toggle "vterm-toggle" nil t)
 (global-set-key (kbd "C-c t") #'vterm-toggle)
+#+end_src
+
+** EShell
+
+#+begin_src emacs-lisp
+  (require 'eshell)
+  (require 'eat)
+
+  (setq eshell-history-size 1000000
+        eshell-hist-ignoredups t
+        eshell-scroll-to-bottom-on-input 'this
+        eshell-kill-processes-on-exit t
+
+        eat-kill-buffer-on-exit t
+        eat-enable-yank-to-terminal t)
+
+  (defun my/eshell-setup ()
+    "Setup eshell like terminal"
+    (display-fill-column-indicator-mode -1)
+    (setq-local show-trailing-whitespace nil)
+    (setenv "PAGER" "cat"))
+
+  (add-hook 'eshell-mode-hook #'my/eshell-setup)
+
+  (add-to-list 'display-buffer-alist
+             '("\\*.*eshell\\*"
+               (display-buffer-reuse-window display-buffer-in-side-window)
+               (side . right)
+               (window-width . 0.6)))
+
+  (eat-eshell-mode 1)
+  (eat-eshell-visual-command-mode 1)
 #+end_src
 
 * TODO highlighting
