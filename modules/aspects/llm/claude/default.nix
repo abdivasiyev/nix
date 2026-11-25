@@ -47,6 +47,8 @@
       home.packages = with pkgs; [
         nodejs
         github-mcp-server
+        # Structural code search for Claude (see "Finding code" in CLAUDE.md).
+        ast-grep
       ];
 
       # The pinned nixpkgs claude-code wrapper only sets CLAUDE_CODE_CERT_STORE=system,
@@ -57,6 +59,61 @@
         enable = true;
         package = claude-code;
         enableMcpIntegration = true;
+
+        # Bundled into the generated HM plugin as .lsp.json and loaded via
+        # --plugin-dir, giving Claude diagnostics and go-to-definition.
+        # Absolute store paths so it does not depend on PATH.
+        lspServers = let
+          hpkgs = pkgs.haskell.packages."ghc912";
+        in {
+          go = {
+            command = lib.getExe pkgs.gopls;
+            args = ["serve"];
+            extensionToLanguage.".go" = "go";
+          };
+          nix = {
+            command = lib.getExe pkgs.nil;
+            extensionToLanguage.".nix" = "nix";
+          };
+          haskell = {
+            command = "${hpkgs.haskell-language-server}/bin/haskell-language-server";
+            args = ["--lsp"];
+            extensionToLanguage = {
+              ".hs" = "haskell";
+              ".lhs" = "haskell";
+            };
+          };
+          rust = {
+            command = lib.getExe pkgs.rust-analyzer;
+            extensionToLanguage.".rs" = "rust";
+          };
+          # Falls back to its bundled tsserver when the project has none.
+          typescript = {
+            command = lib.getExe pkgs.typescript-language-server;
+            args = ["--stdio"];
+            extensionToLanguage = {
+              ".ts" = "typescript";
+              ".tsx" = "typescriptreact";
+              ".mts" = "typescript";
+              ".cts" = "typescript";
+              ".js" = "javascript";
+              ".jsx" = "javascriptreact";
+              ".mjs" = "javascript";
+              ".cjs" = "javascript";
+            };
+          };
+          python = {
+            command = "${pkgs.pyright}/bin/pyright-langserver";
+            args = ["--stdio"];
+            extensionToLanguage.".py" = "python";
+          };
+          # phpactor rather than intelephense, which is unfree.
+          php = {
+            command = lib.getExe pkgs.phpactor;
+            args = ["language-server"];
+            extensionToLanguage.".php" = "php";
+          };
+        };
 
         # ~/.claude/CLAUDE.md -- loaded into every session.
         context = ./CLAUDE.md;
@@ -98,6 +155,8 @@
           forgejo = behindCfAccess "forgejo";
           knowledge = behindCfAccess "knowledge";
           dev-docs = behindCfAccess "docs";
+          k8s = behindCfAccess "k8s";
+          logs = behindCfAccess "logs";
 
           sentry = {
             command = "npx";

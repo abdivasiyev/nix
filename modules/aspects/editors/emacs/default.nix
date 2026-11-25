@@ -148,6 +148,15 @@
         ++ ["/usr/local/bin"]
       );
 
+      # home.sessionVariables only reach programs started from a login shell
+      # (hm-session-vars.sh).  Emacs launched from the Dock never sources it,
+      # so eshell and other child processes miss them.  Forward the literal
+      # ones; values with shell expansions ($VAR, ''${VAR:+...}) are skipped.
+      elispString = s: "\"" + lib.escape ["\\" "\""] s + "\"";
+      sessionVariables =
+        lib.filterAttrs (_: v: !(lib.hasInfix "$" (toString v)))
+        config.home.sessionVariables;
+
       # Tangle emacs.org into early-init.el and init.el at build time.
       emacsConfig =
         pkgs.runCommand "emacs-config" {
@@ -254,6 +263,8 @@
           (defconst my/nix-coreutils-ls "${pkgs.coreutils}/bin/ls")
           (defconst my/nix-wakatime-cli "${pkgs.wakatime-cli}/bin/wakatime-cli")
           (defconst my/nix-rust-src-path "${pkgs.rustPlatform.rustLibSrc}")
+          (defconst my/nix-session-variables
+            '(${lib.concatStrings (lib.mapAttrsToList (n: v: "\n    (${elispString n} . ${elispString (toString v)})") sessionVariables)}))
         ''
         # Set by the llm.completion aspect; the port matches its llama-server.
         + lib.optionalString (config.launchd.agents.llama-completion.enable or false) ''
