@@ -600,10 +600,12 @@ them off.
 ** Eglot
 
 #+begin_src emacs-lisp
-(require 'eglot)
+  (require 'eglot)
 
-(setq eglot-autoshutdown t
-      eglot-events-buffer-config '(:size 0 :format full))
+  (setq eglot-autoshutdown t
+        eglot-events-buffer-config '(:size 0 :format short)
+        eglot-report-progress nil
+        eglot-sync-connect nil)
 #+end_src
 
 =eglot-workspace-configuration= is a directory-local variable: =setq-default=
