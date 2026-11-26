@@ -80,7 +80,7 @@
 
             Mod+Return { spawn "kitty"; }
             Mod+D { spawn "fuzzel"; }
-            Mod+B { spawn "zen-twilight"; }
+            Mod+B { spawn "floorp"; }
             Mod+Shift+Q { close-window; }
 
             Mod+H { focus-column-left; }

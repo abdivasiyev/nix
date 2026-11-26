@@ -27,7 +27,7 @@
       development.nix-data
 
       # www
-      www.zen
+      www.floorp
 
       # desktop
       desktop.fonts

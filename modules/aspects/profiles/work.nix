@@ -49,7 +49,7 @@
       development.linear
 
       # www
-      www.zen
+      www.floorp
       # desktop
       desktop.darwin
       desktop.keyboard

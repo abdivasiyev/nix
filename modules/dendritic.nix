@@ -26,12 +26,6 @@
     import-tree.url = "github:denful/import-tree";
     den.url = "github:denful/den";
     flake-file.url = "github:denful/flake-file";
-    zen-browser = lib.mkForce {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
   };
 }

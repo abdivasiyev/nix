@@ -42,7 +42,7 @@
       development.zsh
 
       # www
-      www.zen
+      www.floorp
       # desktop
       desktop.darwin
       desktop.keyboard
