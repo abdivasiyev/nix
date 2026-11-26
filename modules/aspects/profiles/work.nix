@@ -44,6 +44,7 @@
       development.tunnelblick
       development.sstp
       development.zsh
+      development.wakatime
       development.usta
       development.linear
 

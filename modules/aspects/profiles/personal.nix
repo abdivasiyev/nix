@@ -38,6 +38,7 @@
       development.ssh
       development.tmux
       development.utm
+      development.wakatime
       development.zsh
 
       # www

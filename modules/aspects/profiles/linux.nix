@@ -23,6 +23,7 @@
       development.ssh
       development.tmux
       development.zsh
+      development.wakatime
       development.nix-data
 
       # www
