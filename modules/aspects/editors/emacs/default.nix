@@ -38,17 +38,6 @@
         packageRequires = [];
       };
 
-      fluffy-theme = emacsPackages.trivialBuild {
-        pname = "fluffy-theme";
-        version = "unstable";
-
-        src = pkgs.fetchfossil {
-          url = "https://fossil.avalos.me/fluffy.el";
-          rev = "trunk";
-          hash = "sha256-v7Edn++AX58wRMhbRLjRWUtnYcwWzoTD7IurUzBNRQk=";
-        };
-      };
-
       flymake-golangci = emacsPackages.melpaBuild {
         pname = "flymake-golangci";
         version = "1.0.2";
@@ -198,7 +187,6 @@
             hl-todo
             doom-themes
             gruber-darker-theme
-            fluffy-theme
             gruvbox-theme
             nerd-icons
             nerd-icons-dired

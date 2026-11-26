@@ -391,18 +391,13 @@ Keymap under =C-c w=:
 
 * Theme
 
-Installed themes: =doom-themes=, =gruber-darker-theme=, =gruvbox-theme=,
-=fluffy-theme=.  Swap the active one by changing the block below, e.g.
+Installed themes: =doom-themes=, =gruber-darker-theme=, =gruvbox-theme=.
+Swap the active one by changing the block below, e.g.
 =(load-theme 'doom-molokai t)=, =(load-theme 'gruber-darker t)= or
 =(load-theme 'gruvbox-dark-hard t)= (the last two may need their directory on
-=custom-theme-load-path= the same way fluffy does).
+=custom-theme-load-path= the same way gruber-darker does).
 
 #+begin_src emacs-lisp
-  (when-let ((theme-file
-              (locate-library "fluffy-theme")))
-    (add-to-list 'custom-theme-load-path
-                 (file-name-directory theme-file)))
-
   (when-let ((theme-file
             (locate-library "gruber-darker-theme")))
   (add-to-list 'custom-theme-load-path
