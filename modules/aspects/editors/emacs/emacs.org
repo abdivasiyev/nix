@@ -471,6 +471,11 @@ diff-hl in the fringe, kept in sync with magit.
 (diff-hl-flydiff-mode 1)
 #+end_src
 
+enable compilation minor mode for magit process buffer
+#+begin_src emacs-lisp
+  (add-hook 'magit-process-mode-hook 'compilation-minor-mode)
+#+end_src
+
 * Project environment
 
 direnv via envrc, EditorConfig (built into Emacs 30), shell, trust-manager.
