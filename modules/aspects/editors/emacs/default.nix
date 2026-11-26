@@ -157,6 +157,12 @@
         lib.filterAttrs (_: v: !(lib.hasInfix "$" (toString v)))
         config.home.sessionVariables;
 
+      # Secrets exported to Emacs and its child processes.  Only the sops
+      # paths reach the store; init.el reads the files at startup.
+      secretVariables = {
+        GITHUB_TOKEN = config.sops.secrets.githubToken.path;
+      };
+
       # Tangle emacs.org into early-init.el and init.el at build time.
       emacsConfig =
         pkgs.runCommand "emacs-config" {
@@ -170,6 +176,10 @@
           cp early-init.el init.el $out/
         '';
     in {
+      sops.secrets = {
+        githubToken = {};
+      };
+
       # Home manager installation
       home.packages = tools;
 
@@ -265,6 +275,8 @@
           (defconst my/nix-rust-src-path "${pkgs.rustPlatform.rustLibSrc}")
           (defconst my/nix-session-variables
             '(${lib.concatStrings (lib.mapAttrsToList (n: v: "\n    (${elispString n} . ${elispString (toString v)})") sessionVariables)}))
+          (defconst my/nix-secret-variables
+            '(${lib.concatStrings (lib.mapAttrsToList (n: v: "\n    (${elispString n} . ${elispString v})") secretVariables)}))
         ''
         # Set by the llm.completion aspect; the port matches its llama-server.
         + lib.optionalString (config.launchd.agents.llama-completion.enable or false) ''
