@@ -870,6 +870,7 @@ rustfmt, and diagnostics use clippy (see =eglot-workspace-configuration=).
     (setenv "PAGER" "cat"))
 
   (add-hook 'eshell-mode-hook #'my/eshell-setup)
+  (add-hook 'eshell-mode-hook #'compilation-shell-minor-mode)
 
   (add-to-list 'display-buffer-alist
              '("\\*.*eshell\\*"
